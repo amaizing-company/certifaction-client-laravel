@@ -1,0 +1,25 @@
+<?php
+
+use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create(DatabaseHelper::getTableName('signature_transactions_documents'), function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table
+                ->foreignUlid('signature_transaction_id')
+                ->constrained(DatabaseHelper::getTableName('signature_transactions'))
+                ->cascadeOnDelete();
+            $table
+                ->foreignUlid('document_id')
+                ->constrained(DatabaseHelper::getTableName('documents'))
+                ->cascadeOnDelete();
+            $table->timestamps();
+        });
+    }
+};
