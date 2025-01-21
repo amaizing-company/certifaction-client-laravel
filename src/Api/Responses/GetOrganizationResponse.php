@@ -7,11 +7,11 @@ use AmaizingCompany\CertifactionClient\Api\RoleItem;
 use AmaizingCompany\CertifactionClient\Api\TeamspaceItem;
 use AmaizingCompany\CertifactionClient\Api\UserItem;
 use Illuminate\Support\Collection;
-use Psr\Http\Message\MessageInterface;
 
 class GetOrganizationResponse extends BaseResponse implements CertifactionResponse
 {
     protected Collection $roles;
+
     protected Collection $users;
 
     protected function boot(): void
@@ -105,7 +105,7 @@ class GetOrganizationResponse extends BaseResponse implements CertifactionRespon
             $user = Collection::make($userItems->get('user'));
             $roles = Collection::make($userItems->get('roles'));
             $teamspaces = Collection::make($userItems->get('teamspaces'));
-            $item = new UserItem();
+            $item = new UserItem;
 
             $this->parseUserItemUser($item, $user, $userItems);
             $this->parseUserItemInviter($item, $inviter);
@@ -147,7 +147,7 @@ class GetOrganizationResponse extends BaseResponse implements CertifactionRespon
             'createdAt' => $inviter->get('created_at'),
         ];
 
-        $inviterItem = new UserItem();
+        $inviterItem = new UserItem;
 
         return $userItem->inviter($this->processParamsFromMap($inviterItemParamsMap, $inviterItem));
     }
@@ -179,7 +179,7 @@ class GetOrganizationResponse extends BaseResponse implements CertifactionRespon
                 $roleItem->admin();
             }
 
-           $userItem->addRole($roleItem);
+            $userItem->addRole($roleItem);
         }
 
         return $userItem;

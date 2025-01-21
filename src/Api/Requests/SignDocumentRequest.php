@@ -42,11 +42,10 @@ final class SignDocumentRequest implements Request
 
     public static function make(string $fileContents): static
     {
-        return new static($fileContents);
+        return new self($fileContents);
     }
 
     /**
-     * @return PdfFileResponse|CertifactionResponse
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
@@ -59,7 +58,7 @@ final class SignDocumentRequest implements Request
                 'application/pdf'
             );
 
-        if (!empty($this->getAcceptLanguage())) {
+        if (! empty($this->getAcceptLanguage())) {
             $request->withHeader('Accept-Language', $this->getAcceptLanguage()->value);
         }
 

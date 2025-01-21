@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 pest()->group('api');
 
-it ('can initiate instance', function (int $status, array $headers, array $body) {
+it('can initiate instance', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
 
     expect(new CheckSignatureStatusResponse($response))
@@ -27,22 +27,22 @@ it ('can initiate instance', function (int $status, array $headers, array $body)
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
+            'email' => 'test@example.com',
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get request url', function (int $status, array $headers, array $body) {
+it('can get request url', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
     expect($checkSignatureStatusResponse)
-        ->when($checkSignatureStatusResponse->successful(), fn($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestUrl()->toBeString()->toBe('https://test.example'))
-        ->when($checkSignatureStatusResponse->successful() === false, fn($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestUrl()->toBeNull());
+        ->when($checkSignatureStatusResponse->successful(), fn ($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestUrl()->toBeString()->toBe('https://test.example'))
+        ->when($checkSignatureStatusResponse->successful() === false, fn ($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestUrl()->toBeNull());
 
 })->with([
     [200, [], [
@@ -59,22 +59,22 @@ it ('can get request url', function (int $status, array $headers, array $body) {
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
+            'email' => 'test@example.com',
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get request id', function (int $status, array $headers, array $body) {
+it('can get request id', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
     expect($checkSignatureStatusResponse)
-        ->when($checkSignatureStatusResponse->successful(), fn($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestId()->toBeString()->toBe('test_id'))
-        ->when($checkSignatureStatusResponse->successful() === false, fn($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestId()->toBeNull());
+        ->when($checkSignatureStatusResponse->successful(), fn ($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestId()->toBeString()->toBe('test_id'))
+        ->when($checkSignatureStatusResponse->successful() === false, fn ($signatureStatusResponse) => $signatureStatusResponse->getSignatureRequestId()->toBeNull());
 
 })->with([
     [200, [], [
@@ -91,27 +91,26 @@ it ('can get request id', function (int $status, array $headers, array $body) {
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
+            'email' => 'test@example.com',
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get created at', function (int $status, array $headers, array $body) {
+it('can get created at', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
     expect($checkSignatureStatusResponse)
         ->when(
             $checkSignatureStatusResponse->successful(),
-            fn($signatureStatusResponse) =>
-                $signatureStatusResponse->getCreatedAt()->toBeInstanceOf(Carbon::class))
+            fn ($signatureStatusResponse) => $signatureStatusResponse->getCreatedAt()->toBeInstanceOf(Carbon::class))
         ->when(
             $checkSignatureStatusResponse->successful() === false,
-            fn($signatureStatusResponse) => $signatureStatusResponse->getCreatedAt()->toBeNull()
+            fn ($signatureStatusResponse) => $signatureStatusResponse->getCreatedAt()->toBeNull()
         );
 })->with([
     [200, [], [
@@ -128,27 +127,26 @@ it ('can get created at', function (int $status, array $headers, array $body) {
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
+            'email' => 'test@example.com',
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get get cancellation status', function (int $status, array $headers, array $body) {
+it('can get get cancellation status', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
     expect($checkSignatureStatusResponse)
         ->when(
             $checkSignatureStatusResponse->successful(),
-            fn($signatureStatusResponse) =>
-            $signatureStatusResponse->isCancelled()->toBeBool()->toBeFalse())
+            fn ($signatureStatusResponse) => $signatureStatusResponse->isCancelled()->toBeBool()->toBeFalse())
         ->when(
             $checkSignatureStatusResponse->successful() === false,
-            fn($signatureStatusResponse) => $signatureStatusResponse->isCancelled()->toBeNull()
+            fn ($signatureStatusResponse) => $signatureStatusResponse->isCancelled()->toBeNull()
         );
 })->with([
     [200, [], [
@@ -165,16 +163,16 @@ it ('can get get cancellation status', function (int $status, array $headers, ar
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
+            'email' => 'test@example.com',
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get get cancellation status when request was cancelled', function (int $status, array $headers, array $body) {
+it('can get get cancellation status when request was cancelled', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
@@ -196,15 +194,15 @@ it ('can get get cancellation status when request was cancelled', function (int 
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
+            'email' => 'test@example.com',
+        ],
     ]],
 ]);
 
-it ('can get handle envelope items', function (int $status, array $headers, array $body) {
+it('can get handle envelope items', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
@@ -244,15 +242,15 @@ it ('can get handle envelope items', function (int $status, array $headers, arra
                 'file_url' => 'https://test.example',
                 'file_id' => 'file_id',
                 'comments' => [],
-            ]
+            ],
         ],
         'signer' => [
-            'email' => 'test@example.com'
-        ]
-    ]]
+            'email' => 'test@example.com',
+        ],
+    ]],
 ]);
 
-it ('can get handle envelope items on bad response', function (int $status, array $headers, array $body) {
+it('can get handle envelope items on bad response', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $checkSignatureStatusResponse = new CheckSignatureStatusResponse($response);
 
@@ -260,5 +258,5 @@ it ('can get handle envelope items on bad response', function (int $status, arra
         ->toBeInstanceOf(Collection::class)
         ->toBeEmpty();
 })->with([
-    [500, [], []]
+    [500, [], []],
 ]);

@@ -10,12 +10,12 @@ beforeEach(function () {
     $this->prepareDocumentRequest = new PrepareDocumentRequest($this->getPdfFileContents(), DocumentPrepareScope::SIGN);
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->prepareDocumentRequest)
         ->toBeInstanceOf(PrepareDocumentRequest::class);
 });
 
-it ('can handle scope', function () {
+it('can handle scope', function () {
     expect($this->prepareDocumentRequest->getScope())
         ->toBeInstanceOf(DocumentPrepareScope::class)
         ->toBe(DocumentPrepareScope::SIGN)
@@ -23,7 +23,7 @@ it ('can handle scope', function () {
         ->toBe(DocumentPrepareScope::CERTIFY);
 });
 
-it ('can handle upload option', function () {
+it('can handle upload option', function () {
     expect($this->prepareDocumentRequest->isUpload())
         ->toBeBool()
         ->toBeFalse()
@@ -33,7 +33,7 @@ it ('can handle upload option', function () {
         ->toBeFalse();
 });
 
-it ('can handle accept language', function () {
+it('can handle accept language', function () {
     expect($this->prepareDocumentRequest->getAcceptLanguage())
         ->toBeNull()
         ->and($this->prepareDocumentRequest->acceptLanguage(Language::DE)->getAcceptLanguage())
@@ -41,7 +41,7 @@ it ('can handle accept language', function () {
         ->toBe(Language::DE);
 });
 
-it ('can handle additional page for signature', function () {
+it('can handle additional page for signature', function () {
     expect($this->prepareDocumentRequest->hasAdditionalPageForSignature())
         ->toBeBool()
         ->toBeTrue()
@@ -51,7 +51,7 @@ it ('can handle additional page for signature', function () {
         ->toBeTrue();
 });
 
-it ('can handle digital twin', function () {
+it('can handle digital twin', function () {
     expect($this->prepareDocumentRequest->hasDigitalTwin())
         ->toBeBool()
         ->toBeFalse()
@@ -61,7 +61,7 @@ it ('can handle digital twin', function () {
         ->toBeFalse();
 });
 
-it ('can handle digital twin qr code page number', function () {
+it('can handle digital twin qr code page number', function () {
     expect($this->prepareDocumentRequest->getDigitalTwinPageNumber())
         ->toBeNull()
         ->and($this->prepareDocumentRequest->digitalTwinQrPageNumber(1)->getDigitalTwinPageNumber())
@@ -69,12 +69,12 @@ it ('can handle digital twin qr code page number', function () {
         ->toBe(1);
 });
 
-it ('can handle digital twin qr code position', function () {
+it('can handle digital twin qr code position', function () {
     expect($this->prepareDocumentRequest->getDigitalTwinQrPositionX())
         ->toBeNull()
         ->and($this->prepareDocumentRequest->getDigitalTwinQrPositionY())
         ->toBeNull()
-        ->and($this->prepareDocumentRequest->digitalTwinQrPosition(1,2)->getDigitalTwinQrPositionX())
+        ->and($this->prepareDocumentRequest->digitalTwinQrPosition(1, 2)->getDigitalTwinQrPositionX())
         ->toBeInt()
         ->toBe(1)
         ->and($this->prepareDocumentRequest->getDigitalTwinQrPositionY())
@@ -88,7 +88,7 @@ it ('can handle digital twin qr code position', function () {
         ->toBe(2.1);
 });
 
-it ('can handle pdf-a', function () {
+it('can handle pdf-a', function () {
     expect($this->prepareDocumentRequest->isPdfA())
         ->toBeBool()
         ->toBeFalse()

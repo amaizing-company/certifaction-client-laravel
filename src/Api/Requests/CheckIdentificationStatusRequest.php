@@ -21,7 +21,7 @@ final class CheckIdentificationStatusRequest implements Request
 
     public function make(string $identificationId): static
     {
-        return new static($identificationId);
+        return new self($identificationId);
     }
 
     public function identificationId(string $id): static
@@ -44,7 +44,7 @@ final class CheckIdentificationStatusRequest implements Request
     {
         $response = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
             ->acceptJson()
-            ->get('/identity/' . $this->getIdentificationId() . '/status');
+            ->get('/identity/'.$this->getIdentificationId().'/status');
 
         return new IdentificationStatusResponse($response->toPsrResponse());
     }

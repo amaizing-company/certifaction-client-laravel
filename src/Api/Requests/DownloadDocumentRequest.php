@@ -10,7 +10,6 @@ use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Arr;
 
 final class DownloadDocumentRequest implements Request
@@ -24,7 +23,7 @@ final class DownloadDocumentRequest implements Request
 
     public static function make(string $fileUrl): static
     {
-        return new static($fileUrl);
+        return new self($fileUrl);
     }
 
     public function fileUrl(string $url): static

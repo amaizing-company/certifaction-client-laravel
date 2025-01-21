@@ -15,14 +15,14 @@ beforeEach(function () {
     $this->badOrganizationResponse = new GetOrganizationResponse($badResponse);
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->validOrganizationResponse)
         ->toBeInstanceOf(GetOrganizationResponse::class)
         ->and($this->badOrganizationResponse)
         ->toBeInstanceOf(GetOrganizationResponse::class);
 });
 
-it ('can get credit type', function () {
+it('can get credit type', function () {
     expect($this->validOrganizationResponse->getCreditType())
         ->toBeString()
         ->toBe('flat_rate')
@@ -30,7 +30,7 @@ it ('can get credit type', function () {
         ->toBeNull();
 });
 
-it ('can get id', function () {
+it('can get id', function () {
     expect($this->validOrganizationResponse->getId())
         ->toBeString()
         ->toBe('test_org_id')
@@ -38,7 +38,7 @@ it ('can get id', function () {
         ->toBeNull();
 });
 
-it ('can check if has legacy credits', function () {
+it('can check if has legacy credits', function () {
     expect($this->validOrganizationResponse->hasLegacyCredits())
         ->toBeBool()
         ->toBeTrue()
@@ -47,7 +47,7 @@ it ('can check if has legacy credits', function () {
         ->toBeFalse();
 });
 
-it ('can get name', function () {
+it('can get name', function () {
     expect($this->validOrganizationResponse->getName())
         ->toBeString()
         ->toBe('test org name')
@@ -55,7 +55,7 @@ it ('can get name', function () {
         ->toBeNull();
 });
 
-it ('can check if has name verified', function () {
+it('can check if has name verified', function () {
     expect($this->validOrganizationResponse->isNameVerified())
         ->toBeBool()
         ->toBeTrue()
@@ -64,7 +64,7 @@ it ('can check if has name verified', function () {
         ->toBeFalse();
 });
 
-it ('can get quota', function () {
+it('can get quota', function () {
     expect($this->validOrganizationResponse->getQuota())
         ->toBeInt()
         ->toBe(0)
@@ -72,7 +72,7 @@ it ('can get quota', function () {
         ->toBeNull();
 });
 
-it ('can get roles', function () {
+it('can get roles', function () {
     expect($this->validOrganizationResponse->getRoles())
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
@@ -81,7 +81,7 @@ it ('can get roles', function () {
         ->toBeEmpty();
 });
 
-it ('can parse roles', function () {
+it('can parse roles', function () {
     $role = $this->validOrganizationResponse->getRoles()->first();
     expect($role->getId())
         ->toBe('test_admin_role_id')
@@ -93,7 +93,7 @@ it ('can parse roles', function () {
         ->toBeTrue();
 });
 
-it ('can get users', function () {
+it('can get users', function () {
     expect($this->validOrganizationResponse->getUsers())
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(2)
@@ -102,7 +102,7 @@ it ('can get users', function () {
         ->toBeEmpty();
 });
 
-it ('can parse users', function () {
+it('can parse users', function () {
     /**
      * @var UserItem $user
      */
@@ -141,5 +141,3 @@ it ('can parse users', function () {
         ->and($user->isOrganization())
         ->toBeFalse();
 });
-
-

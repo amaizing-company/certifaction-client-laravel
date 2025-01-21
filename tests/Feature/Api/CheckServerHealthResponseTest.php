@@ -4,7 +4,7 @@ use AmaizingCompany\CertifactionClient\Api\Responses\CheckServerHealthResponse;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Collection;
 
-it ('can initiate instance', function (int $status, array $headers, array $body) {
+it('can initiate instance', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $serverHealthResponse = new CheckServerHealthResponse($response);
 
@@ -17,12 +17,12 @@ it ('can initiate instance', function (int $status, array $headers, array $body)
             'description' => 'description',
             'service_name' => 'database',
             'status' => 'UP',
-        ]
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get services', function (int $status, array $headers, array $body) {
+it('can get services', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $serverHealthResponse = new CheckServerHealthResponse($response);
 
@@ -36,12 +36,12 @@ it ('can get services', function (int $status, array $headers, array $body) {
             'description' => 'description',
             'service_name' => 'database',
             'status' => 'UP',
-        ]
+        ],
     ]],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get healthy services when all services healthy', function () {
+it('can get healthy services when all services healthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'UP'],
@@ -55,7 +55,7 @@ it ('can get healthy services when all services healthy', function () {
         ->toHaveCount(2);
 });
 
-it ('can get healthy services when some service unhealthy', function () {
+it('can get healthy services when some service unhealthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -69,7 +69,7 @@ it ('can get healthy services when some service unhealthy', function () {
         ->toHaveCount(1);
 });
 
-it ('can get healthy services when all services are unhealthy', function () {
+it('can get healthy services when all services are unhealthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'DOWN'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -83,7 +83,7 @@ it ('can get healthy services when all services are unhealthy', function () {
         ->toBeEmpty();
 });
 
-it ('can get healthy services on bad response', function () {
+it('can get healthy services on bad response', function () {
     $response = new Response(500, [], null);
     $serverHealthResponse = new CheckServerHealthResponse($response);
 
@@ -92,7 +92,7 @@ it ('can get healthy services on bad response', function () {
         ->toBeEmpty();
 });
 
-it ('can get unhealthy services when all services are unhealthy', function () {
+it('can get unhealthy services when all services are unhealthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'DOWN'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -106,7 +106,7 @@ it ('can get unhealthy services when all services are unhealthy', function () {
         ->toHaveCount(2);
 });
 
-it ('can get unhealthy services when some services are healthy', function () {
+it('can get unhealthy services when some services are healthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -120,7 +120,7 @@ it ('can get unhealthy services when some services are healthy', function () {
         ->toHaveCount(1);
 });
 
-it ('can get unhealthy services when all services are healthy', function () {
+it('can get unhealthy services when all services are healthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'UP'],
@@ -134,7 +134,7 @@ it ('can get unhealthy services when all services are healthy', function () {
         ->toBeEmpty();
 });
 
-it ('can get unhealthy services on bad response', function () {
+it('can get unhealthy services on bad response', function () {
     $response = new Response(500, [], null);
     $serverHealthResponse = new CheckServerHealthResponse($response);
 
@@ -143,7 +143,7 @@ it ('can get unhealthy services on bad response', function () {
         ->toBeEmpty();
 });
 
-it ('can check if all services are healthy when all services are healthy', function () {
+it('can check if all services are healthy when all services are healthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'UP'],
@@ -157,7 +157,7 @@ it ('can check if all services are healthy when all services are healthy', funct
         ->toBeTrue();
 });
 
-it ('can check if all services are healthy when some services are unhealthy', function () {
+it('can check if all services are healthy when some services are unhealthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -171,7 +171,7 @@ it ('can check if all services are healthy when some services are unhealthy', fu
         ->toBeFalse();
 });
 
-it ('can check if all services are healthy when all services are unhealthy', function () {
+it('can check if all services are healthy when all services are unhealthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'DOWN'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -185,7 +185,7 @@ it ('can check if all services are healthy when all services are unhealthy', fun
         ->toBeFalse();
 });
 
-it ('can check if all services are healthy on bad response', function () {
+it('can check if all services are healthy on bad response', function () {
     $response = new Response(500, [], null);
     $serverHealthResponse = new CheckServerHealthResponse($response);
 
@@ -194,7 +194,7 @@ it ('can check if all services are healthy on bad response', function () {
         ->toBeFalse();
 });
 
-it ('can check if some services are unhealthy when all services are unhealthy', function () {
+it('can check if some services are unhealthy when all services are unhealthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'DOWN'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -208,7 +208,7 @@ it ('can check if some services are unhealthy when all services are unhealthy', 
         ->toBeTrue();
 });
 
-it ('can check if some services are unhealthy when all services are healthy', function () {
+it('can check if some services are unhealthy when all services are healthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'UP'],
@@ -222,7 +222,7 @@ it ('can check if some services are unhealthy when all services are healthy', fu
         ->toBeFalse();
 });
 
-it ('can check if some services are unhealthy when some services are healthy', function () {
+it('can check if some services are unhealthy when some services are healthy', function () {
     $body = [
         ['description' => 'description', 'service_name' => 'database', 'status' => 'UP'],
         ['description' => 'description', 'service_name' => 'ethereum', 'status' => 'DOWN'],
@@ -236,7 +236,7 @@ it ('can check if some services are unhealthy when some services are healthy', f
         ->toBeTrue();
 });
 
-it ('can check if some services are unhealthy on bad response', function () {
+it('can check if some services are unhealthy on bad response', function () {
     $response = new Response(500, [], null);
     $serverHealthResponse = new CheckServerHealthResponse($response);
 

@@ -3,7 +3,7 @@
 use AmaizingCompany\CertifactionClient\Api\Responses\InviteUserResponse;
 use GuzzleHttp\Psr7\Response;
 
-it ('can initiate instance', function ($status) {
+it('can initiate instance', function ($status) {
     $response = new Response($status, [], null);
 
     expect(new InviteUserResponse($response))

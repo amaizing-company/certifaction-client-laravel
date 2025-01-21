@@ -11,15 +11,15 @@ use Illuminate\Support\Collection;
 pest()->group('api');
 
 beforeEach(function () {
-   $this->signatureRequest = new SignatureRequest();
+    $this->signatureRequest = new SignatureRequest;
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->signatureRequest)
         ->toBeInstanceOf(SignatureRequest::class);
 });
 
-it ('can handle accept language', function () {
+it('can handle accept language', function () {
     expect($this->signatureRequest->getAcceptLanguage())
         ->toBeNull()
         ->and($this->signatureRequest->acceptLanguage(Language::DE)->getAcceptLanguage())
@@ -27,7 +27,7 @@ it ('can handle accept language', function () {
         ->toBe(Language::DE);
 });
 
-it ('can handle additional page for signature', function () {
+it('can handle additional page for signature', function () {
     expect($this->signatureRequest->hasAdditionalPageForSignature())
         ->toBeBool()
         ->toBeTrue()
@@ -37,7 +37,7 @@ it ('can handle additional page for signature', function () {
         ->toBeTrue();
 });
 
-it ('can handle digital twin', function () {
+it('can handle digital twin', function () {
     expect($this->signatureRequest->hasDigitalTwin())
         ->toBeBool()
         ->toBeFalse()
@@ -47,7 +47,7 @@ it ('can handle digital twin', function () {
         ->toBeFalse();
 });
 
-it ('can handle digital twin qr code page number', function () {
+it('can handle digital twin qr code page number', function () {
     expect($this->signatureRequest->getDigitalTwinPageNumber())
         ->toBeNull()
         ->and($this->signatureRequest->digitalTwinQrPageNumber(1)->getDigitalTwinPageNumber())
@@ -55,12 +55,12 @@ it ('can handle digital twin qr code page number', function () {
         ->toBe(1);
 });
 
-it ('can handle digital twin qr code position', function () {
+it('can handle digital twin qr code position', function () {
     expect($this->signatureRequest->getDigitalTwinQrPositionX())
         ->toBeNull()
         ->and($this->signatureRequest->getDigitalTwinQrPositionY())
         ->toBeNull()
-        ->and($this->signatureRequest->digitalTwinQrPosition(1,2)->getDigitalTwinQrPositionX())
+        ->and($this->signatureRequest->digitalTwinQrPosition(1, 2)->getDigitalTwinQrPositionX())
         ->toBeInt()
         ->toBe(1)
         ->and($this->signatureRequest->getDigitalTwinQrPositionY())
@@ -74,7 +74,7 @@ it ('can handle digital twin qr code position', function () {
         ->toBe(2.1);
 });
 
-it ('can handle hash', function () {
+it('can handle hash', function () {
     expect($this->signatureRequest->getHash())
         ->toBeNull()
         ->and($this->signatureRequest->withHash('TEST')->getHash())
@@ -82,7 +82,7 @@ it ('can handle hash', function () {
         ->toBe('TEST');
 });
 
-it ('can handle note', function () {
+it('can handle note', function () {
     expect($this->signatureRequest->getNote())
         ->toBeNull()
         ->and($this->signatureRequest->note('TEST')->getNote())
@@ -90,7 +90,7 @@ it ('can handle note', function () {
         ->toBe('TEST');
 });
 
-it ('can handle pdf-a', function () {
+it('can handle pdf-a', function () {
     expect($this->signatureRequest->isPdfA())
         ->toBeBool()
         ->toBeFalse()
@@ -100,13 +100,13 @@ it ('can handle pdf-a', function () {
         ->toBeFalse();
 });
 
-it ('can get query params', function () {
+it('can get query params', function () {
     expect($this->signatureRequest->getQueryParams())
         ->toBeArray()
         ->toBeEmpty();
 });
 
-it ('can handle jurisdiction', function () {
+it('can handle jurisdiction', function () {
     expect($this->signatureRequest->getJurisdiction())
         ->toBeNull()
         ->and($this->signatureRequest->jurisdiction(Jurisdiction::EIDAS)->getJurisdiction())
@@ -114,7 +114,7 @@ it ('can handle jurisdiction', function () {
         ->toBe(Jurisdiction::EIDAS);
 });
 
-it ('can handle prepare option', function () {
+it('can handle prepare option', function () {
     expect($this->signatureRequest->isPrepared())
         ->toBeBool()
         ->toBeTrue()
@@ -124,7 +124,7 @@ it ('can handle prepare option', function () {
         ->toBeTrue();
 });
 
-it ('can handle signature height', function () {
+it('can handle signature height', function () {
     expect($this->signatureRequest->getSignatureHeight())
         ->toBeNull()
         ->and($this->signatureRequest->signatureHeight(100)->getSignatureHeight())
@@ -132,7 +132,7 @@ it ('can handle signature height', function () {
         ->toBe(100);
 });
 
-it ('can handle signature page number', function () {
+it('can handle signature page number', function () {
     expect($this->signatureRequest->getSignaturePageNumber())
         ->toBeNull()
         ->and($this->signatureRequest->signaturePageNumber(1)->getSignaturePageNumber())
@@ -140,7 +140,7 @@ it ('can handle signature page number', function () {
         ->toBe(1);
 });
 
-it ('can handle signature position', function () {
+it('can handle signature position', function () {
     expect($this->signatureRequest->getSignaturePositionX())
         ->toBeNull()
         ->and($this->signatureRequest->getSignaturePositionY())
@@ -159,7 +159,7 @@ it ('can handle signature position', function () {
         ->toBe(2.1);
 });
 
-it ('can handle signature type', function () {
+it('can handle signature type', function () {
     expect($this->signatureRequest->getSignatureType())
         ->toBeNull()
         ->and($this->signatureRequest->signatureType(SignatureType::SES)->getSignatureType())
@@ -167,7 +167,7 @@ it ('can handle signature type', function () {
         ->toBe(SignatureType::SES);
 });
 
-it ('can handle signer', function () {
+it('can handle signer', function () {
     expect($this->signatureRequest->getSigner())
         ->toBeNull()
         ->and($this->signatureRequest->for(new Signer('test@example.com'))->getSigner())
@@ -176,7 +176,7 @@ it ('can handle signer', function () {
         ->toHaveKey('email');
 });
 
-it ('possible signer params configured', function () {
+it('possible signer params configured', function () {
     expect($this->signatureRequest->getSignerParams())
         ->toBeArray()
         ->toBe([
@@ -192,7 +192,7 @@ it ('possible signer params configured', function () {
         ]);
 });
 
-it ('can handle auto sign', function () {
+it('can handle auto sign', function () {
     expect($this->signatureRequest->hasAutoSign())
         ->toBeBool()
         ->toBeFalse()
@@ -202,7 +202,7 @@ it ('can handle auto sign', function () {
         ->toBeFalse();
 });
 
-it ('can handle file name', function () {
+it('can handle file name', function () {
     expect($this->signatureRequest->getFileName())
         ->toBeNull()
         ->and($this->signatureRequest->fileName('test.pdf')->getFileName())
@@ -210,7 +210,7 @@ it ('can handle file name', function () {
         ->toBe('test.pdf');
 });
 
-it ('can handle signer notification', function () {
+it('can handle signer notification', function () {
     expect($this->signatureRequest->shouldNotifySigner())
         ->toBeBool()
         ->toBeFalse()
@@ -220,7 +220,7 @@ it ('can handle signer notification', function () {
         ->toBeFalse();
 });
 
-it ('can handle message', function () {
+it('can handle message', function () {
     expect($this->signatureRequest->getMessage())
         ->toBeNull()
         ->and($this->signatureRequest->message('TEST')->getMessage())
@@ -228,7 +228,7 @@ it ('can handle message', function () {
         ->toBe('TEST');
 });
 
-it ('can handle selective signing', function () {
+it('can handle selective signing', function () {
     expect($this->signatureRequest->hasSelectiveSigning())
         ->toBeBool()
         ->toBeFalse()
@@ -238,7 +238,7 @@ it ('can handle selective signing', function () {
         ->toBeFalse();
 });
 
-it ('can handle transaction id', function () {
+it('can handle transaction id', function () {
     expect($this->signatureRequest->getTransactionId())
         ->toBeNull()
         ->and($this->signatureRequest->transactionId('TEST_ID')->getTransactionId())
@@ -246,7 +246,7 @@ it ('can handle transaction id', function () {
         ->toBe('TEST_ID');
 });
 
-it ('can handle webhook url', function () {
+it('can handle webhook url', function () {
     expect($this->signatureRequest->getWebhookUrl())
         ->toBeNull()
         ->and($this->signatureRequest->webhookUrl('https://test.example')->getWebhookUrl())
@@ -254,8 +254,8 @@ it ('can handle webhook url', function () {
         ->toBe('https://test.example');
 });
 
-it ('can handle password', function () {
-   expect($this->signatureRequest->hasPassword())
+it('can handle password', function () {
+    expect($this->signatureRequest->hasPassword())
         ->toBeBool()
         ->toBeFalse()
         ->and($this->signatureRequest->getPasswordEncryption())
@@ -272,7 +272,7 @@ it ('can handle password', function () {
         ->toBe('xor-b58');
 });
 
-it ('can handle documents', function () {
+it('can handle documents', function () {
     expect($this->signatureRequest->getDocuments())
         ->toBeInstanceOf(Collection::class)
         ->toBeEmpty()

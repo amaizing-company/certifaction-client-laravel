@@ -8,7 +8,7 @@ beforeEach(function () {
     $this->signer = new Signer('test@example.com');
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->signer)
         ->toBeInstanceOf(Signer::class);
 });
@@ -26,6 +26,6 @@ it('can be converted into an array', function () {
             'last-name',
             'middle-names',
             'mobile-phone',
-            'name'
+            'name',
         ]);
 });

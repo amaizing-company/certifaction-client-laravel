@@ -11,7 +11,6 @@ use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
 
 final class StartAccountIdentificationRequest implements Request
 {
@@ -31,8 +30,7 @@ final class StartAccountIdentificationRequest implements Request
         string $phoneNumber,
         DocumentType $documentType,
         Jurisdiction $jurisdiction
-    ): StartAccountIdentificationRequest
-    {
+    ): StartAccountIdentificationRequest {
         return new StartAccountIdentificationRequest($email, $firstName, $lastName, $phoneNumber, $documentType, $jurisdiction);
     }
 
@@ -50,7 +48,7 @@ final class StartAccountIdentificationRequest implements Request
                     'last_name' => $this->lastName,
                     'phone_number' => $this->phoneNumber,
                     'document_type' => $this->documentType->name,
-                    'jurisdiction' => $this->jurisdiction->name
+                    'jurisdiction' => $this->jurisdiction->name,
                 ])
             )
             ->acceptJson()

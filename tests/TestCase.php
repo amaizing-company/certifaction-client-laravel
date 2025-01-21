@@ -2,11 +2,10 @@
 
 namespace AmaizingCompany\CertifactionClient\Tests;
 
-use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
+use AmaizingCompany\CertifactionClient\CertifactionClientServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as Orchestra;
-use AmaizingCompany\CertifactionClient\CertifactionClientServiceProvider;
 
 class TestCase extends Orchestra
 {

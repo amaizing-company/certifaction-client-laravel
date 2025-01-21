@@ -53,7 +53,7 @@ class CheckServerHealthResponse extends BaseResponse implements CertifactionResp
         $items = Collection::empty();
 
         foreach ($services as $service) {
-            if (!$service->isHealthy()) {
+            if (! $service->isHealthy()) {
                 $items->add($service);
             }
         }

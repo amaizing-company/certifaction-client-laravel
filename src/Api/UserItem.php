@@ -8,20 +8,35 @@ use Illuminate\Support\Collection;
 class UserItem
 {
     protected bool $admin = false;
+
     protected ?string $citizenship = null;
+
     protected ?Carbon $createdAt = null;
+
     protected ?string $email = null;
+
     protected ?string $externalId = null;
+
     protected ?string $id = null;
+
     protected ?UserItem $inviter = null;
+
     protected ?string $inviteEmail = null;
+
     protected ?string $name = null;
+
     protected bool $nameVerified = false;
+
     protected bool $organization = false;
+
     protected Collection $roles;
+
     protected ?string $status = null;
+
     protected Collection $teamspaces;
+
     protected ?string $uid = null;
+
     protected bool $legacyCredits = false;
 
     public function __construct()

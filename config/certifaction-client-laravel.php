@@ -10,7 +10,7 @@ return [
         ],
         'auth' => [
             'key' => env('CERTIFACTION_CLIENT_API_KEY'),
-        ]
+        ],
     ],
 
     'database' => [

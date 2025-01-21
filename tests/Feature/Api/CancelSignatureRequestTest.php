@@ -2,7 +2,6 @@
 
 use AmaizingCompany\CertifactionClient\Api\Requests\CancelSignatureRequest;
 use AmaizingCompany\CertifactionClient\Api\Signer;
-use Illuminate\Http\Client\RequestException;
 
 pest()->group('api');
 
