@@ -2,15 +2,14 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
+use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckSignatureStatusResponse;
 use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
-use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Arr;
 
 final class CheckSignatureStatusRequest implements Request
@@ -24,7 +23,7 @@ final class CheckSignatureStatusRequest implements Request
 
     public static function make(string $requestUrl): static
     {
-        return new static($requestUrl);
+        return new self($requestUrl);
     }
 
     public function getRequestUrl(bool $urlEncoded = true): string

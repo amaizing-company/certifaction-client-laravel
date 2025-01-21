@@ -30,6 +30,7 @@ class SignatureTransaction extends Model
     protected $guarded = [];
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected static function boot(): void

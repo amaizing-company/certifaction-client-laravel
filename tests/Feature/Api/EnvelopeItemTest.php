@@ -27,15 +27,15 @@ it('can initiate instance from data', function ($jurisdiction, $status, $signedA
     ['eIDAS', 'signed', '01.01.2025', ['testcomment']],
 ]);
 
-it ('can get legal weight', function () {
+it('can get legal weight', function () {
     $item = new EnvelopeItem(['legal_weight' => 'standard']);
 
     expect($item->getLegalWeight())
-         ->toBeString()
-         ->toBe('standard');
+        ->toBeString()
+        ->toBe('standard');
 });
 
-it ('can get jurisdiction', function () {
+it('can get jurisdiction', function () {
     $item = new EnvelopeItem(['jurisdiction' => 'eIDAS']);
 
     expect($item->getJurisdiction())
@@ -43,7 +43,7 @@ it ('can get jurisdiction', function () {
         ->toBe(Jurisdiction::EIDAS);
 });
 
-it ('can get status', function () {
+it('can get status', function () {
     $item = new EnvelopeItem(['status' => 'signed']);
 
     expect($item->getStatus())
@@ -51,7 +51,7 @@ it ('can get status', function () {
         ->toBe(DocumentStatus::SIGNED);
 });
 
-it ('can get signed at', function () {
+it('can get signed at', function () {
     $item = new EnvelopeItem(['signed_at' => '01.01.2025']);
 
     expect($item->getSignedAt())
@@ -60,7 +60,7 @@ it ('can get signed at', function () {
         ->toBe('01.01.2025');
 });
 
-it ('can get file url', function () {
+it('can get file url', function () {
     $item = new EnvelopeItem(['file_url' => 'https://example.test']);
 
     expect($item->getFileUrl())
@@ -68,7 +68,7 @@ it ('can get file url', function () {
         ->toBe('https://example.test');
 });
 
-it ('can get file id', function () {
+it('can get file id', function () {
     $item = new EnvelopeItem(['file_id' => 'FILE_ID']);
 
     expect($item->getFileId())
@@ -76,7 +76,7 @@ it ('can get file id', function () {
         ->toBe('FILE_ID');
 });
 
-it ('can get comments', function () {
+it('can get comments', function () {
     $item = new EnvelopeItem(['comments' => []]);
 
     expect($item->getComments())

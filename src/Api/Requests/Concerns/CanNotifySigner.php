@@ -9,6 +9,7 @@ trait CanNotifySigner
     public function notifySigner(bool $condition = true): static
     {
         $this->mergeQueryParams('send-email', $condition);
+
         return $this;
     }
 

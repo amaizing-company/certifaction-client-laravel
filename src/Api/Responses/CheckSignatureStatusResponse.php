@@ -23,7 +23,7 @@ class CheckSignatureStatusResponse extends BaseResponse implements CertifactionR
 
     public function getSignatureRequestUrl(): ?string
     {
-        return  $this->json('url');
+        return $this->json('url');
     }
 
     public function getSignatureRequestId(): ?string
@@ -52,7 +52,7 @@ class CheckSignatureStatusResponse extends BaseResponse implements CertifactionR
      */
     public function getSignedEnvelopeItems(): Collection
     {
-        return $this->envelopeItems->filter(fn(EnvelopeItem $item) => $item->isSigned());
+        return $this->envelopeItems->filter(fn (EnvelopeItem $item) => $item->isSigned());
     }
 
     /**
@@ -60,7 +60,7 @@ class CheckSignatureStatusResponse extends BaseResponse implements CertifactionR
      */
     public function getUnsignedEnvelopeItems(): Collection
     {
-        return $this->envelopeItems->filter(fn(EnvelopeItem $item) => !$item->isSigned());
+        return $this->envelopeItems->filter(fn (EnvelopeItem $item) => ! $item->isSigned());
     }
 
     public function getSigner(): ?Signer

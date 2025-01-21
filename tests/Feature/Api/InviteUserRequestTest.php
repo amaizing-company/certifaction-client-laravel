@@ -8,12 +8,12 @@ beforeEach(function () {
     $this->inviteUserRequest = new InviteUserRequest('test_org_id', 'test@example.com', 'test_role_id');
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->inviteUserRequest)
         ->toBeInstanceOf(InviteUserRequest::class);
 });
 
-it ('can handle organization id', function () {
+it('can handle organization id', function () {
     expect($this->inviteUserRequest->getOrganizationId())
         ->toBeString()
         ->toBe('test_org_id')
@@ -22,7 +22,7 @@ it ('can handle organization id', function () {
         ->toBe('modified_id');
 });
 
-it ('can handle role id', function () {
+it('can handle role id', function () {
     expect($this->inviteUserRequest->getRoleId())
         ->toBeString()
         ->toBe('test_role_id')
@@ -31,7 +31,7 @@ it ('can handle role id', function () {
         ->toBe('modified_id');
 });
 
-it ('can handle email', function () {
+it('can handle email', function () {
     expect($this->inviteUserRequest->getEmail())
         ->toBeString()
         ->toBe('test@example.com')

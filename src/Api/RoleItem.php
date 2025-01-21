@@ -5,8 +5,11 @@ namespace AmaizingCompany\CertifactionClient\Api;
 class RoleItem
 {
     protected string $id;
+
     protected string $name;
+
     protected bool $default = false;
+
     protected bool $admin = false;
 
     public function __construct(string $id, string $name)

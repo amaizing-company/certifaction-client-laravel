@@ -7,8 +7,7 @@ class TeamspaceItem
     public function __construct(
         protected string $id,
         protected string $name
-    )
-    {}
+    ) {}
 
     public function getId(): string
     {

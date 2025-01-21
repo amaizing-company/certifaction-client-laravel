@@ -40,7 +40,7 @@ trait HasSignature
 
     public function isPrepared(): bool
     {
-        return !Arr::get($this->getQueryParams(), 'no-prepare', false);
+        return ! Arr::get($this->getQueryParams(), 'no-prepare', false);
     }
 
     public function jurisdiction(Jurisdiction $jurisdiction): static

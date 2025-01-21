@@ -2,21 +2,28 @@
 
 namespace AmaizingCompany\CertifactionClient\Api;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 
 class Signer
 {
     protected ?string $birthdate;
+
     protected ?string $citizenship;
+
     protected ?string $domicile;
+
     protected string $email;
 
     protected ?string $firstName;
+
     protected ?string $gender;
+
     protected ?string $lastName;
+
     protected ?string $middleNames;
+
     protected ?string $mobilePhone;
+
     protected ?string $name;
 
     public function __construct(string $email)
@@ -28,11 +35,13 @@ class Signer
     {
         if (is_object($date)) {
             $this->birthdate = $date->format('d.m.Y');
+
             return $this;
         }
 
         if (is_string($date)) {
             $this->birthdate = Carbon::create($date)->format('d.m.Y');
+
             return $this;
         }
 
@@ -170,4 +179,3 @@ class Signer
         ];
     }
 }
-

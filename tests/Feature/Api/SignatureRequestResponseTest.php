@@ -5,7 +5,7 @@ use GuzzleHttp\Psr7\Response;
 
 pest()->group('api');
 
-it ('can initiate instance', function (int $status, array $headers, array $body) {
+it('can initiate instance', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $signatureRequestResponse = new SignatureRequestResponse($response);
 
@@ -14,17 +14,17 @@ it ('can initiate instance', function (int $status, array $headers, array $body)
 
 })->with([
     [200, [], ['request_url' => 'https://test.example']],
-    [500, [], []]
+    [500, [], []],
 ]);
 
-it ('can get request url', function (int $status, array $headers, array $body) {
+it('can get request url', function (int $status, array $headers, array $body) {
     $response = new Response($status, $headers, json_encode($body));
     $signatureRequestResponse = new SignatureRequestResponse($response);
 
     expect($signatureRequestResponse)
-        ->when($signatureRequestResponse->successful(), fn($expectation) => $expectation->getRequestUrl()->toBeString()->toBe('https://test.example'))
-        ->when($signatureRequestResponse->successful() === false, fn($expectation) => $expectation->getRequestUrl()->toBeNull());
+        ->when($signatureRequestResponse->successful(), fn ($expectation) => $expectation->getRequestUrl()->toBeString()->toBe('https://test.example'))
+        ->when($signatureRequestResponse->successful() === false, fn ($expectation) => $expectation->getRequestUrl()->toBeNull());
 })->with([
     [200, [], ['request_url' => 'https://test.example']],
-    [500, [], []]
+    [500, [], []],
 ]);

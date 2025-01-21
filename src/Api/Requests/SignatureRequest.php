@@ -3,30 +3,30 @@
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\DocumentItem;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\AcceptLanguage;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\CanNotifySigner;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasAdditionalPage;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasAutoSign;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasDigitalTwin;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasEncryption;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasFileName;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasHash;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasMessage;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasNote;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasPassword;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasPdfA;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasSelectiveSigning;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasSignature;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasSigner;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasTransactionId;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasWebhookUrl;
+use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Responses\SignatureRequestResponse;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\AcceptLanguage;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasAdditionalPage;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasDigitalTwin;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasHash;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasPdfA;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasSignature;
-use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Collection;
 
@@ -56,9 +56,6 @@ final class SignatureRequest implements Request
      */
     protected ?Collection $documents;
 
-    /**
-     * @return array
-     */
     public function getSignerParams(): array
     {
         return [
@@ -97,7 +94,7 @@ final class SignatureRequest implements Request
 
     public static function make(): static
     {
-        return new static();
+        return new static;
     }
 
     /**
@@ -131,7 +128,7 @@ final class SignatureRequest implements Request
             ->withQueryParameters($this->getQueryParams())
             ->withBody($this->getDocumentsBody());
 
-        if (!empty($this->acceptLanguage)) {
+        if (! empty($this->acceptLanguage)) {
             $request->withHeader('Accept-Language', $this->acceptLanguage->value);
         }
 

@@ -8,8 +8,7 @@ class ServiceStatusItem
         protected string $service,
         protected string $description,
         protected string $status,
-    )
-    {}
+    ) {}
 
     public function getServiceName(): string
     {

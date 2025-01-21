@@ -11,7 +11,6 @@ use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
 
 final class CancelSignatureRequest implements Request
 {
@@ -21,6 +20,7 @@ final class CancelSignatureRequest implements Request
     use HasSigner;
 
     const string ENDPOINT_ALL_REQUESTS = '/request/cancel/all';
+
     const string ENDPOINT_SIGNERS_REQUEST = '/request/cancel';
 
     public function __construct(string $fileContents)
@@ -36,7 +36,7 @@ final class CancelSignatureRequest implements Request
     public function getSignerParams(): array
     {
         return [
-            'email'
+            'email',
         ];
     }
 

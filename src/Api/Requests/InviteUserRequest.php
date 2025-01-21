@@ -12,7 +12,9 @@ use Illuminate\Http\Client\ConnectionException;
 class InviteUserRequest implements Request
 {
     protected string $email;
+
     protected string $organizationId;
+
     protected string $roleId;
 
     public function __construct(string $organizationId, string $email, string $roleId)

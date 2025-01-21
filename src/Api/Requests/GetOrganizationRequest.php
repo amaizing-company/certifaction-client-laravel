@@ -13,7 +13,7 @@ final class GetOrganizationRequest implements Request
 {
     public static function make(): GetOrganizationRequest
     {
-        return new GetOrganizationRequest();
+        return new GetOrganizationRequest;
     }
 
     /**

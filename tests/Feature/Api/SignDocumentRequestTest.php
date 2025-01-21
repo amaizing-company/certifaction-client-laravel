@@ -11,12 +11,12 @@ beforeEach(function () {
     $this->signDocumentRequest = new SignDocumentRequest($this->getPdfFileContents());
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->signDocumentRequest)
         ->toBeInstanceOf(SignDocumentRequest::class);
 });
 
-it ('can handle accept language', function () {
+it('can handle accept language', function () {
     expect($this->signDocumentRequest->getAcceptLanguage())
         ->toBeNull()
         ->and($this->signDocumentRequest->acceptLanguage(Language::DE)->getAcceptLanguage())
@@ -24,7 +24,7 @@ it ('can handle accept language', function () {
         ->toBe(Language::DE);
 });
 
-it ('can handle additional page for signature', function () {
+it('can handle additional page for signature', function () {
     expect($this->signDocumentRequest->hasAdditionalPageForSignature())
         ->toBeBool()
         ->toBeTrue()
@@ -34,7 +34,7 @@ it ('can handle additional page for signature', function () {
         ->toBeTrue();
 });
 
-it ('can handle digital twin', function () {
+it('can handle digital twin', function () {
     expect($this->signDocumentRequest->hasDigitalTwin())
         ->toBeBool()
         ->toBeFalse()
@@ -44,7 +44,7 @@ it ('can handle digital twin', function () {
         ->toBeFalse();
 });
 
-it ('can handle digital twin qr code page number', function () {
+it('can handle digital twin qr code page number', function () {
     expect($this->signDocumentRequest->getDigitalTwinPageNumber())
         ->toBeNull()
         ->and($this->signDocumentRequest->digitalTwinQrPageNumber(1)->getDigitalTwinPageNumber())
@@ -52,12 +52,12 @@ it ('can handle digital twin qr code page number', function () {
         ->toBe(1);
 });
 
-it ('can handle digital twin qr code position', function () {
+it('can handle digital twin qr code position', function () {
     expect($this->signDocumentRequest->getDigitalTwinQrPositionX())
         ->toBeNull()
         ->and($this->signDocumentRequest->getDigitalTwinQrPositionY())
         ->toBeNull()
-        ->and($this->signDocumentRequest->digitalTwinQrPosition(1,2)->getDigitalTwinQrPositionX())
+        ->and($this->signDocumentRequest->digitalTwinQrPosition(1, 2)->getDigitalTwinQrPositionX())
         ->toBeInt()
         ->toBe(1)
         ->and($this->signDocumentRequest->getDigitalTwinQrPositionY())
@@ -71,7 +71,7 @@ it ('can handle digital twin qr code position', function () {
         ->toBe(2.1);
 });
 
-it ('can handle encryption', function () {
+it('can handle encryption', function () {
     expect($this->signDocumentRequest->getEncryptionKey())
         ->toBeNull()
         ->and($this->signDocumentRequest->getPasswordEncryption())
@@ -84,13 +84,13 @@ it ('can handle encryption', function () {
         ->toBe('xor-b58');
 });
 
-it ('can handle file', function () {
+it('can handle file', function () {
     expect($this->signDocumentRequest->getFileContents())
         ->toBeString()
         ->toBe($this->getPdfFileContents());
 });
 
-it ('can handle filename', function () {
+it('can handle filename', function () {
     expect($this->signDocumentRequest->getFileName())
         ->toBeNull()
         ->and($this->signDocumentRequest->fileName('test.pdf')->getFileName())
@@ -98,7 +98,7 @@ it ('can handle filename', function () {
         ->toBe('test.pdf');
 });
 
-it ('can handle hash', function () {
+it('can handle hash', function () {
     expect($this->signDocumentRequest->getHash())
         ->toBeNull()
         ->and($this->signDocumentRequest->withHash('TEST')->getHash())
@@ -106,7 +106,7 @@ it ('can handle hash', function () {
         ->toBe('TEST');
 });
 
-it ('can handle note', function () {
+it('can handle note', function () {
     expect($this->signDocumentRequest->getNote())
         ->toBeNull()
         ->and($this->signDocumentRequest->note('TEST')->getNote())
@@ -114,7 +114,7 @@ it ('can handle note', function () {
         ->toBe('TEST');
 });
 
-it ('can handle pdf-a', function () {
+it('can handle pdf-a', function () {
     expect($this->signDocumentRequest->isPdfA())
         ->toBeBool()
         ->toBeFalse()
@@ -124,13 +124,13 @@ it ('can handle pdf-a', function () {
         ->toBeFalse();
 });
 
-it ('can get query params', function () {
+it('can get query params', function () {
     expect($this->signDocumentRequest->getQueryParams())
         ->toBeArray()
         ->toBeEmpty();
 });
 
-it ('can handle jurisdiction', function () {
+it('can handle jurisdiction', function () {
     expect($this->signDocumentRequest->getJurisdiction())
         ->toBeNull()
         ->and($this->signDocumentRequest->jurisdiction(Jurisdiction::EIDAS)->getJurisdiction())
@@ -138,7 +138,7 @@ it ('can handle jurisdiction', function () {
         ->toBe(Jurisdiction::EIDAS);
 });
 
-it ('can handle prepare option', function () {
+it('can handle prepare option', function () {
     expect($this->signDocumentRequest->isPrepared())
         ->toBeBool()
         ->toBeTrue()
@@ -148,7 +148,7 @@ it ('can handle prepare option', function () {
         ->toBeTrue();
 });
 
-it ('can handle signature height', function () {
+it('can handle signature height', function () {
     expect($this->signDocumentRequest->getSignatureHeight())
         ->toBeNull()
         ->and($this->signDocumentRequest->signatureHeight(100)->getSignatureHeight())
@@ -156,7 +156,7 @@ it ('can handle signature height', function () {
         ->toBe(100);
 });
 
-it ('can handle signature page number', function () {
+it('can handle signature page number', function () {
     expect($this->signDocumentRequest->getSignaturePageNumber())
         ->toBeNull()
         ->and($this->signDocumentRequest->signaturePageNumber(1)->getSignaturePageNumber())
@@ -164,7 +164,7 @@ it ('can handle signature page number', function () {
         ->toBe(1);
 });
 
-it ('can handle signature position', function () {
+it('can handle signature position', function () {
     expect($this->signDocumentRequest->getSignaturePositionX())
         ->toBeNull()
         ->and($this->signDocumentRequest->getSignaturePositionY())
@@ -183,7 +183,7 @@ it ('can handle signature position', function () {
         ->toBe(2.1);
 });
 
-it ('can handle signature type', function () {
+it('can handle signature type', function () {
     expect($this->signDocumentRequest->getSignatureType())
         ->toBeNull()
         ->and($this->signDocumentRequest->signatureType(SignatureType::SES)->getSignatureType())

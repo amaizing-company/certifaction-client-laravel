@@ -8,12 +8,12 @@ beforeEach(function () {
     $this->roleItem = new RoleItem('test_id', 'test name');
 });
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     expect($this->roleItem)
         ->toBeInstanceOf(RoleItem::class);
 });
 
-it ('can handle id', function () {
+it('can handle id', function () {
     expect($this->roleItem->getId())
         ->toBeString()
         ->toBe('test_id')
@@ -21,7 +21,7 @@ it ('can handle id', function () {
         ->toBe('modified_id');
 });
 
-it ('can handle name', function () {
+it('can handle name', function () {
     expect($this->roleItem->getName())
         ->toBeString()
         ->toBe('test name')
@@ -29,7 +29,7 @@ it ('can handle name', function () {
         ->toBe('modified name');
 });
 
-it ('can handle default option', function () {
+it('can handle default option', function () {
     expect($this->roleItem->isDefault())
         ->toBeBool()
         ->toBeFalse()
@@ -39,7 +39,7 @@ it ('can handle default option', function () {
         ->toBeFalse();
 });
 
-it ('can handle admin option', function () {
+it('can handle admin option', function () {
     expect($this->roleItem->isAdmin())
         ->toBeBool()
         ->toBeFalse()

@@ -9,13 +9,15 @@ use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
-use Illuminate\Support\Arr;
 
 class DeleteUserRequest implements Request
 {
     protected bool $existingUser = false;
+
     protected ?string $uid = null;
+
     protected ?string $invitationEmail = null;
+
     protected string $organizationId;
 
     public function __construct(string $organizationId)

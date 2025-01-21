@@ -7,6 +7,7 @@ use AmaizingCompany\CertifactionClient\Api\Signer;
 trait HasSigner
 {
     protected array $signerParams = [];
+
     protected ?Signer $signer;
 
     public function for(Signer $signer): static
@@ -14,7 +15,7 @@ trait HasSigner
         $this->signer = $signer;
 
         foreach ($signer->toArray() as $key => $value) {
-            if (!empty($value) && in_array($key, $this->getSignerParams())) {
+            if (! empty($value) && in_array($key, $this->getSignerParams())) {
                 $this->mergeQueryParams($key, $value);
             }
         }

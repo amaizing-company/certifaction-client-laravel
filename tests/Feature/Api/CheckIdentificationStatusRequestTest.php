@@ -4,14 +4,14 @@ use AmaizingCompany\CertifactionClient\Api\Requests\CheckIdentificationStatusReq
 
 pest()->group('api');
 
-it ('can initiate instance', function () {
+it('can initiate instance', function () {
     $request = new CheckIdentificationStatusRequest('TEST_ID');
 
     expect($request)
         ->toBeInstanceOf(CheckIdentificationStatusRequest::class);
 });
 
-it ('can get identification id', function () {
+it('can get identification id', function () {
     $request = new CheckIdentificationStatusRequest('TEST_ID');
 
     expect($request->getIdentificationId())
@@ -19,7 +19,7 @@ it ('can get identification id', function () {
         ->toBe('TEST_ID');
 });
 
-it ('can set new identification id', function () {
+it('can set new identification id', function () {
     $request = new CheckIdentificationStatusRequest('TEST_ID');
 
     expect($request->identificationId('MODIFIED_TEST_ID')->getIdentificationId())

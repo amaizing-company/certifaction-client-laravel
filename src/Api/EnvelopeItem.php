@@ -4,29 +4,34 @@ namespace AmaizingCompany\CertifactionClient\Api;
 
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
-use AmaizingCompany\CertifactionClient\Enums\SignatureTransactionStatus;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 
 class EnvelopeItem
 {
     protected string $legalWeight;
+
     protected ?Jurisdiction $jurisdiction;
+
     protected ?DocumentStatus $status;
+
     protected ?Carbon $signedAt;
+
     protected string $fileUrl;
+
     protected string $fileId;
+
     protected array $comments;
 
     public function __construct(array $data)
     {
         $this
-            ->setLegalWeight(Arr::get($data, 'legal_weight', ""))
-            ->setJurisdiction(Arr::get($data, 'jurisdiction', ""))
-            ->setStatus(Arr::get($data, 'status', ""))
-            ->setSignedAt(Arr::get($data, 'signed_at', ""))
-            ->setFileUrl(Arr::get($data, 'file_url', ""))
-            ->setFileId(Arr::get($data, 'file_id', ""))
+            ->setLegalWeight(Arr::get($data, 'legal_weight', ''))
+            ->setJurisdiction(Arr::get($data, 'jurisdiction', ''))
+            ->setStatus(Arr::get($data, 'status', ''))
+            ->setSignedAt(Arr::get($data, 'signed_at', ''))
+            ->setFileUrl(Arr::get($data, 'file_url', ''))
+            ->setFileId(Arr::get($data, 'file_id', ''))
             ->setComments(Arr::get($data, 'comments', []));
     }
 
@@ -65,11 +70,9 @@ class EnvelopeItem
         return $this->status;
     }
 
-
-
     public function isSigned(): bool
     {
-        return DocumentStatus::SIGNED === $this->getStatus();
+        return $this->getStatus() === DocumentStatus::SIGNED;
     }
 
     protected function setLegalWeight(string $legalWeight): static
@@ -81,7 +84,7 @@ class EnvelopeItem
 
     protected function setJurisdiction(?string $jurisdiction): static
     {
-        if (!empty($jurisdiction)) {
+        if (! empty($jurisdiction)) {
             $this->jurisdiction = Jurisdiction::tryFrom($jurisdiction);
         }
 
@@ -90,7 +93,7 @@ class EnvelopeItem
 
     protected function setStatus(string $status): static
     {
-        if (!empty($status)) {
+        if (! empty($status)) {
             $this->status = DocumentStatus::tryFrom($status);
         }
 
@@ -99,7 +102,7 @@ class EnvelopeItem
 
     protected function setSignedAt(string $datetime): static
     {
-        if (!empty($datetime)) {
+        if (! empty($datetime)) {
             $this->signedAt = Carbon::create($datetime);
         }
 
