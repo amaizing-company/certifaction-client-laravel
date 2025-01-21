@@ -1,0 +1,66 @@
+<?php
+
+namespace AmaizingCompany\CertifactionClient\Api\Requests;
+
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
+use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\Responses\PdfFileResponse;
+use AmaizingCompany\CertifactionClient\CertifactionClient;
+use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
+use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Arr;
+
+final class DownloadDocumentRequest implements Request
+{
+    use HasQueryParams;
+
+    public function __construct(string $fileUrl)
+    {
+        $this->fileUrl($fileUrl);
+    }
+
+    public static function make(string $fileUrl): static
+    {
+        return new static($fileUrl);
+    }
+
+    public function fileUrl(string $url): static
+    {
+        $this->mergeQueryParams('file', $url);
+
+        return $this;
+    }
+
+    public function getFileUrl(): string
+    {
+        return Arr::get($this->getQueryParams(), 'file');
+    }
+
+    public function password(string $password): static
+    {
+        $this->mergeQueryParams('password', $password);
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return Arr::get($this->getQueryParams(), 'password');
+    }
+
+    /**
+     * @throws ApiServerUriMissingException
+     * @throws ConnectionException
+     */
+    public function send(): PdfFileResponse|CertifactionResponse
+    {
+        $response = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+            ->withQueryParameters($this->getQueryParams())
+            ->get('/download');
+
+        return new PdfFileResponse($response->toPsrResponse());
+    }
+}
