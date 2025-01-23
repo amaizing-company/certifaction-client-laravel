@@ -14,8 +14,8 @@ use Illuminate\Http\Client\ConnectionException;
 
 final class CheckSignatureStatusRequest implements Request
 {
-    use HasRequestUrl;
     use HasQueryParams;
+    use HasRequestUrl;
 
     public function __construct(string $requestUrl)
     {

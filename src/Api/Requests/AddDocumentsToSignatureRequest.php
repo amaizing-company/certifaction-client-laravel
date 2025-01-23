@@ -16,8 +16,8 @@ use Illuminate\Http\Client\Response;
 final class AddDocumentsToSignatureRequest implements Request
 {
     use HasDocuments;
-    use HasRequestUrl;
     use HasQueryParams;
+    use HasRequestUrl;
 
     public function __construct(string $requestUrl)
     {

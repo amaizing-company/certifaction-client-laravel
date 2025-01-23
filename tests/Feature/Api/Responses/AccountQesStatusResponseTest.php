@@ -60,7 +60,7 @@ it('can get qes status items when no items provided', function () {
         ->toBeEmpty();
 });
 
-it ('can get qes status item by jurisdiction', function () {
+it('can get qes status item by jurisdiction', function () {
     $response = new Response(200, [], json_encode($this->getAccountQesStatusResponseData()));
     $accountQesStatusResponse = new AccountQesStatusResponse($response);
 

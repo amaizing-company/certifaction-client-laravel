@@ -7,7 +7,9 @@ use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 class QesStatusItem
 {
     protected Jurisdiction $jurisdiction;
+
     protected ?string $signatureLevel = null;
+
     protected string $status;
 
     public function __construct(string|Jurisdiction $jurisdiction, string $status, ?string $signatureLevel = null)
@@ -15,7 +17,7 @@ class QesStatusItem
         $this->jurisdiction($jurisdiction)
             ->status($status);
 
-        if (!empty($signatureLevel)) {
+        if (! empty($signatureLevel)) {
             $this->signatureLevel($signatureLevel);
         }
     }

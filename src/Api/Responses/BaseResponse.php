@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use Illuminate\Http\Client\Response;
 use Psr\Http\Message\MessageInterface;
 
