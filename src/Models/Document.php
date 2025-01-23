@@ -13,16 +13,16 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
 /**
- * @property string id
- * @property string signable_type
- * @property string signable_id
- * @property Signable signable
- * @property string external_id
- * @property string name
- * @property string|null location
- * @property DocumentStatus status
- * @property Carbon created_at
- * @property Carbon updated_at
+ * @property string $id
+ * @property string $signable_type
+ * @property string $signable_id
+ * @property Signable $signable
+ * @property string $external_id
+ * @property string $name
+ * @property string|null $location
+ * @property DocumentStatus $status
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Document extends Model
 {

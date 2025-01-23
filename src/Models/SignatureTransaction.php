@@ -12,18 +12,18 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
 /**
- * @property string id
- * @property string signer_type
- * @property string signer_id
- * @property SignatureType signature_type
- * @property Jurisdiction jurisdiction
- * @property SignatureTransactionStatus status
- * @property string|null request_url
- * @property string|null failure_reason
- * @property Carbon|null requested_at
- * @property Carbon|null finished_at
- * @property Carbon created_at
- * @property Carbon updated_at
+ * @property string $id
+ * @property string $signer_type
+ * @property string $signer_id
+ * @property SignatureType $signature_type
+ * @property Jurisdiction $jurisdiction
+ * @property SignatureTransactionStatus $status
+ * @property string|null $request_url
+ * @property string|null $failure_reason
+ * @property Carbon|null $requested_at
+ * @property Carbon|null $finished_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class SignatureTransaction extends Model
 {
