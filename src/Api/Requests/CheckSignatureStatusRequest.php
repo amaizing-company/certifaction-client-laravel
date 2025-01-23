@@ -3,6 +3,7 @@
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasRequestUrl;
 use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckSignatureStatusResponse;
 use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
@@ -14,27 +15,17 @@ use Illuminate\Support\Arr;
 
 final class CheckSignatureStatusRequest implements Request
 {
+    use HasRequestUrl;
     use HasQueryParams;
 
     public function __construct(string $requestUrl)
     {
-        $this->mergeQueryParams('request_url', urlencode($requestUrl));
+        $this->requestUrl($requestUrl);
     }
 
-    public static function make(string $requestUrl): static
+    public static function make(string $requestUrl): CheckSignatureStatusRequest
     {
         return new self($requestUrl);
-    }
-
-    public function getRequestUrl(bool $urlEncoded = true): string
-    {
-        $value = Arr::get($this->getQueryParams(), 'request_url');
-
-        if ($urlEncoded) {
-            return $value;
-        }
-
-        return urldecode($value);
     }
 
     /**
