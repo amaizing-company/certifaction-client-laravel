@@ -9,7 +9,7 @@ use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-class InviteUserRequest implements Request
+final class InviteUserRequest implements Request
 {
     protected string $email;
 

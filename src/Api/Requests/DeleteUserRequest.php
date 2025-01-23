@@ -10,7 +10,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 
-class DeleteUserRequest implements Request
+final class DeleteUserRequest implements Request
 {
     protected bool $existingUser = false;
 
