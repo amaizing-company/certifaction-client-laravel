@@ -1,0 +1,25 @@
+<?php
+
+use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create(DatabaseHelper::getTableName('signature_transactions'), function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->ulidMorphs('signer');
+            $table->string('signature_type');
+            $table->string('jurisdiction');
+            $table->string('status');
+            $table->string('request_url')->nullable();
+            $table->text('failure_reason')->nullable();
+            $table->timestamp('requested_at')->nullable();
+            $table->timestamp('finished_at')->nullable();
+            $table->timestamps();
+        });
+    }
+};
