@@ -12,10 +12,8 @@ class CheckServerHealthResponse extends BaseResponse implements CertifactionResp
 {
     protected Collection $serviceStatusItems;
 
-    public function __construct(MessageInterface $response)
+    protected function boot(): void
     {
-        parent::__construct($response);
-
         $this->serviceStatusItems = $this->parseServiceStatusItems();
     }
 

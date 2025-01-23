@@ -14,10 +14,8 @@ class CheckSignatureStatusResponse extends BaseResponse implements CertifactionR
 {
     protected Collection $envelopeItems;
 
-    public function __construct(MessageInterface $response)
+    protected function boot(): void
     {
-        parent::__construct($response);
-
         $this->envelopeItems = $this->parseEnvelopeItems($this->json('envelope_items', []));
     }
 
