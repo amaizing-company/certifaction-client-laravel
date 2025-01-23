@@ -147,4 +147,23 @@ class ApiTestCase extends TestCase
             ],
         ];
     }
+
+    public function getAccountQesStatusResponseData(): array
+    {
+        return [
+            'StatusForSigningResponse' => [
+                [
+                    'jurisdiction' => 'ZertES',
+                    'signatureLevel' => '',
+                    'status' => 'USER_SIGNING_STATUS_NOT_FOUND',
+                ],
+                [
+                    'jurisdiction' => 'eIDAS',
+                    'signatureLevel' => '',
+                    'status' => 'USER_SIGNING_STATUS_NOT_FOUND',
+
+                ],
+            ],
+        ];
+    }
 }
