@@ -2,7 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 
 class IdentificationStatusResponse extends BaseResponse implements CertifactionResponse

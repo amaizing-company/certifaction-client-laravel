@@ -2,7 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\GetOrganizationResponse;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;

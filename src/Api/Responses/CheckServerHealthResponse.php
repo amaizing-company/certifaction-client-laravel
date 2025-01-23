@@ -2,11 +2,10 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
-use AmaizingCompany\CertifactionClient\Api\ServiceStatusItem;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\ServiceStatusItem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Psr\Http\Message\MessageInterface;
 
 class CheckServerHealthResponse extends BaseResponse implements CertifactionResponse
 {

@@ -2,10 +2,10 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasDocuments;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasRequestUrl;
-use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Concerns\HasDocuments;
+use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
+use AmaizingCompany\CertifactionClient\Api\Concerns\HasRequestUrl;
+use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
@@ -13,7 +13,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 
-class AddDocumentsToSignatureRequest implements Request
+final class AddDocumentsToSignatureRequest implements Request
 {
     use HasDocuments;
     use HasRequestUrl;

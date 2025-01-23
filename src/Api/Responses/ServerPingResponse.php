@@ -2,7 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 
 class ServerPingResponse extends BaseResponse implements CertifactionResponse
 {

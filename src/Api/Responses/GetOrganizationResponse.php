@@ -2,10 +2,10 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
-use AmaizingCompany\CertifactionClient\Api\RoleItem;
-use AmaizingCompany\CertifactionClient\Api\TeamspaceItem;
-use AmaizingCompany\CertifactionClient\Api\UserItem;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\RoleItem;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\TeamspaceItem;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\UserItem;
 use Illuminate\Support\Collection;
 
 class GetOrganizationResponse extends BaseResponse implements CertifactionResponse

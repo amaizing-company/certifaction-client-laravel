@@ -2,16 +2,15 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasQueryParams;
-use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasRequestUrl;
-use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
+use AmaizingCompany\CertifactionClient\Api\Concerns\HasRequestUrl;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckSignatureStatusResponse;
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Support\Arr;
 
 final class CheckSignatureStatusRequest implements Request
 {

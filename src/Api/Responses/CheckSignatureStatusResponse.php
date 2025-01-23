@@ -2,13 +2,12 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\EnvelopeItem;
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
-use AmaizingCompany\CertifactionClient\Api\Signer;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\EnvelopeItem;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\Signer;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Psr\Http\Message\MessageInterface;
 
 class CheckSignatureStatusResponse extends BaseResponse implements CertifactionResponse
 {

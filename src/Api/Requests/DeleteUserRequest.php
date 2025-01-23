@@ -2,7 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Requests\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
@@ -71,7 +71,6 @@ final class DeleteUserRequest implements Request
     /**
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
-     * @throws Exception
      */
     public function send(): PromiseInterface|Response
     {

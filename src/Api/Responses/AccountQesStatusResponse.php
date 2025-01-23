@@ -2,8 +2,8 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\QesStatusItem;
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\DataObjects\QesStatusItem;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use Illuminate\Support\Collection;
 

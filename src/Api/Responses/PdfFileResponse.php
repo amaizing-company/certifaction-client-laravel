@@ -2,7 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Responses\Contracts\CertifactionResponse;
+use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use Illuminate\Support\Facades\Storage;
 
 class PdfFileResponse extends BaseResponse implements CertifactionResponse
