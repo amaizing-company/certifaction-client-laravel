@@ -8,6 +8,7 @@ use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\CanNotifySigner;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasAdditionalPage;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasAutoSign;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasDigitalTwin;
+use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasDocuments;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasEncryption;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasFileName;
 use AmaizingCompany\CertifactionClient\Api\Requests\Concerns\HasHash;
@@ -37,6 +38,7 @@ final class SignatureRequest implements Request
     use HasAdditionalPage;
     use HasAutoSign;
     use HasDigitalTwin;
+    use HasDocuments;
     use HasEncryption;
     use HasFileName;
     use HasHash;
@@ -50,11 +52,6 @@ final class SignatureRequest implements Request
     use HasSigner;
     use HasTransactionId;
     use HasWebhookUrl;
-
-    /**
-     * @var ?Collection<DocumentItem>
-     */
-    protected ?Collection $documents;
 
     public function getSignerParams(): array
     {
@@ -73,48 +70,12 @@ final class SignatureRequest implements Request
 
     public function __construct()
     {
-        $this->documents = Collection::empty();
+        $this->initDocuments();
     }
 
-    public function addDocument(DocumentItem $document): static
+    public static function make(): SignatureRequest
     {
-        $this->documents->add($document);
-
-        return $this;
-    }
-
-    public function addDocuments(DocumentItem ...$documents): static
-    {
-        foreach ($documents as $document) {
-            $this->addDocument($document);
-        }
-
-        return $this;
-    }
-
-    public static function make(): static
-    {
-        return new static;
-    }
-
-    /**
-     * @return Collection<DocumentItem>
-     */
-    public function getDocuments(): Collection
-    {
-        return $this->documents ?? Collection::empty();
-    }
-
-    protected function getDocumentsBody(): string
-    {
-        foreach ($this->documents as $document) {
-            $body['files'][] = [
-                'url' => $document->getUrl(),
-                'name' => $document->getName(),
-            ];
-        }
-
-        return json_encode($body ?? ['files' => []]);
+        return new SignatureRequest;
     }
 
     /**
