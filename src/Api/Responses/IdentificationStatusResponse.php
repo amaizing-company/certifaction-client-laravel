@@ -16,4 +16,9 @@ class IdentificationStatusResponse extends BaseResponse implements CertifactionR
     {
         return IdentificationStatus::tryFrom($this->json('status'));
     }
+
+    public function getIdentificationMethod(): ?string
+    {
+        return $this->json('identification_method');
+    }
 }

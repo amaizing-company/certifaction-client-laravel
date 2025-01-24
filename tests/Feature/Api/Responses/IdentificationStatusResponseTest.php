@@ -52,3 +52,19 @@ it('can get identification status', function (int $status, array $headers, array
     ]],
     [500, [], []],
 ]);
+
+it('can get identification method', function (int $status, array $headers, array $body) {
+    $response = new Response($status, $headers, json_encode($body));
+    $identificationStatusResponse = new IdentificationStatusResponse($response);
+
+    expect($identificationStatusResponse)
+        ->when($identificationStatusResponse->successful(), fn ($expectation) => $expectation->getIdentificationMethod()->toBeString()->toBe('autoident'))
+        ->when($identificationStatusResponse->successful() === false, fn ($expectation) => $expectation->getIdentificationMethod()->toBeNull());
+})->with([
+    [200, [], [
+        'id' => 'test_id',
+        'status' => 'pending',
+        'identification_method' => 'autoident',
+    ]],
+    [500, [], []],
+]);
