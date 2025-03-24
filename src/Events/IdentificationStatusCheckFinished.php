@@ -19,6 +19,6 @@ class IdentificationStatusCheckFinished extends BaseEvent implements ShouldBroad
 
     public function broadcastOn()
     {
-        return new PrivateChannel("certifaction.identity_transaction.{$this->identityTransaction->id}");
+        return new PrivateChannel("certifaction.identity_transaction.{$this->identityTransaction->getKey()}");
     }
 }

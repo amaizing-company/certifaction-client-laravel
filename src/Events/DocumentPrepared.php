@@ -19,6 +19,6 @@ class DocumentPrepared extends BaseEvent implements ShouldBroadcast
 
     public function broadcastOn(): PrivateChannel
     {
-        return new PrivateChannel("certifaction.document.{$this->document->id}");
+        return new PrivateChannel("certifaction.document.{$this->document->getKey()}");
     }
 }

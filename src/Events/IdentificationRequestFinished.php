@@ -20,6 +20,6 @@ class IdentificationRequestFinished extends BaseEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel("certifaction.identity_transaction.{$this->identityTransaction->id}");
+        return new PrivateChannel("certifaction.identity_transaction.{$this->identityTransaction->getKey()}");
     }
 }

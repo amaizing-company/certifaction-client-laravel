@@ -19,6 +19,6 @@ class SignatureRequestStarted extends BaseEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel("certifaction.signature_transaction.{$this->transaction->id}");
+        return new PrivateChannel("certifaction.signature_transaction.{$this->transaction->getKey()}");
     }
 }
