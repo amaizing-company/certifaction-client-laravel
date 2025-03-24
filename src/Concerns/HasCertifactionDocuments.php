@@ -7,6 +7,9 @@ use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @phpstan-ignore trait.unused
+ */
 trait HasCertifactionDocuments
 {
     public function certifactionDocuments(): HasMany

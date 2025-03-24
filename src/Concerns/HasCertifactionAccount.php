@@ -7,6 +7,9 @@ use AmaizingCompany\CertifactionClient\Contracts\Account;
 use AmaizingCompany\CertifactionClient\Jobs\ProcessUserInvitation;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * @phpstan-ignore trait.unused
+ */
 trait HasCertifactionAccount
 {
     public function certifactionAccount(): HasOne
