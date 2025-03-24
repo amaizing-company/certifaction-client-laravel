@@ -33,48 +33,31 @@ interface SignatureTransaction
 {
     /**
      * Document model relationship.
-     *
-     * @return BelongsToMany
      */
     public function documents(): BelongsToMany;
 
     /**
      * Get the webhook url that will be called if an signature request was finished.
-     *
-     * @return string
      */
     public function getWebhookUrl(): string;
 
     /**
      * Mark the current transaction as pending.
-     *
-     * @param string $requestUrl
-     * @param Carbon|null $requestedAt
-     * @return bool
      */
     public function markPending(string $requestUrl, ?Carbon $requestedAt = null): bool;
 
     /**
      * Mark the current transaction as failed.
-     *
-     * @param string $failureReason
-     * @param Carbon|null $finishedAt
-     * @return bool
      */
     public function markFailed(string $failureReason, ?Carbon $finishedAt = null): bool;
 
     /**
      * Mark the current transaction as finished.
-     *
-     * @param Carbon|null $finishedAt
-     * @return bool
      */
     public function markFinished(?Carbon $finishedAt = null): bool;
 
     /**
      * User model relationship.
-     *
-     * @return MorphTo
      */
     public function signer(): MorphTo;
 }

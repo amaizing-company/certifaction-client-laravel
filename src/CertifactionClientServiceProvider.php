@@ -57,11 +57,11 @@ class CertifactionClientServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind(AccountContract::class, fn($app) => $app->make(Account::class));
-        $this->app->bind(DocumentContract::class, fn($app) => $app->make(Document::class));
-        $this->app->bind(FileTransactionContract::class, fn($app) => $app->make(FileTransaction::class));
-        $this->app->bind(IdentityTransactionContract::class, fn($app) => $app->make(IdentityTransaction::class));
-        $this->app->bind(SignatureTransactionContract::class, fn($app) => $app->make(SignatureTransaction::class));
+        $this->app->bind(AccountContract::class, fn ($app) => $app->make(Account::class));
+        $this->app->bind(DocumentContract::class, fn ($app) => $app->make(Document::class));
+        $this->app->bind(FileTransactionContract::class, fn ($app) => $app->make(FileTransaction::class));
+        $this->app->bind(IdentityTransactionContract::class, fn ($app) => $app->make(IdentityTransaction::class));
+        $this->app->bind(SignatureTransactionContract::class, fn ($app) => $app->make(SignatureTransaction::class));
     }
 
     public function packageBooted(): void
