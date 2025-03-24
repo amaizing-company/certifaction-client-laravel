@@ -9,22 +9,22 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create(DatabaseHelper::getTableName('signature_transactions_documents'), function (Blueprint $table) {
+        Schema::create(DatabaseHelper::getTableName('file_transactions'), function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table
-                ->foreignUlid('signature_transaction_id')
-                ->constrained(DatabaseHelper::getTableName('signature_transactions'))
-                ->cascadeOnDelete();
-            $table
-                ->foreignUlid('document_id')
+            $table->foreignUlid('document_id')
                 ->constrained(DatabaseHelper::getTableName('documents'))
                 ->cascadeOnDelete();
+            $table->string('status');
+            $table->longText('file_url');
+            $table->string('failure_reason')->nullable();
+            $table->timestamp('requested_at')->nullable();
+            $table->timestamp('finished_at')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists(DatabaseHelper::getTableName('signature_transactions_documents'));
+        Schema::dropIfExists(DatabaseHelper::getTableName('file_transactions'));
     }
 };

@@ -2,10 +2,10 @@
 
 namespace AmaizingCompany\CertifactionClient\Enums;
 
-enum IdentificationStatus: string
+enum FileTransactionStatus: string
 {
     case INTENT = 'intent';
     case PENDING = 'pending';
-    case VERIFIED = 'verified';
-    case FAILED = 'failed';
+    case SUCCESS = 'success';
+    case FAILURE = 'failure';
 }
