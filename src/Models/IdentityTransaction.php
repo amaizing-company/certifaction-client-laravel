@@ -7,14 +7,11 @@ use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction as Identity
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
-use AmaizingCompany\CertifactionClient\Observers\IdentityTransactionObserver;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
-#[ObservedBy(IdentityTransactionObserver::class)]
 class IdentityTransaction extends Model implements IdentityTransactionContract
 {
     protected $guarded = [];

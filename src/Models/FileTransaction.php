@@ -5,13 +5,10 @@ namespace AmaizingCompany\CertifactionClient\Models;
 use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction as FileTransactionContract;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
-use AmaizingCompany\CertifactionClient\Observers\FileTransactionObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
-#[ObservedBy(FileTransactionObserver::class)]
 class FileTransaction extends Model implements FileTransactionContract
 {
     protected $guarded = [];
