@@ -15,10 +15,7 @@ class IdentitifcationRequestStarted extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public IdentityTransaction $identityTransaction)
-    {
-
-    }
+    public function __construct(public IdentityTransaction $identityTransaction) {}
 
     public function broadcastOn()
     {

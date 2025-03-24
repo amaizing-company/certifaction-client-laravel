@@ -5,25 +5,20 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 use AmaizingCompany\CertifactionClient\Api\Requests\DownloadDocumentRequest;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
-use AmaizingCompany\CertifactionClient\Events\FileTransactionFinished;
-use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 
-class ProcessFileTransaction implements ShouldQueue, ShouldBeUniqueUntilProcessing
+class ProcessFileTransaction implements ShouldBeUniqueUntilProcessing, ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public FileTransaction $transaction)
-    {
-
-    }
+    public function __construct(public FileTransaction $transaction) {}
 
     public function handle(): void
     {
-        if (!in_array($this->transaction->status, [FileTransactionStatus::PENDING, FileTransactionStatus::INTENT])) {
+        if (! in_array($this->transaction->status, [FileTransactionStatus::PENDING, FileTransactionStatus::INTENT])) {
             Log::warning('File transaction already processed', ['file_transaction_id' => $this->transaction->id]);
 
             return;

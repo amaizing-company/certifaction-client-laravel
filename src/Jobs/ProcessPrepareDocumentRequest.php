@@ -18,8 +18,7 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
     public function __construct(
         public PrepareDocumentRequest $request,
         public Signable $signable,
-    )
-    {}
+    ) {}
 
     public function handle()
     {
@@ -33,7 +32,7 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
             return;
         }
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             return;
         }
 

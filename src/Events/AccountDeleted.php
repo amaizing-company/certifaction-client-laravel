@@ -3,7 +3,6 @@
 namespace AmaizingCompany\CertifactionClient\Events;
 
 use AmaizingCompany\CertifactionClient\Contracts\CertifactionUser;
-use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -16,10 +15,7 @@ class AccountDeleted extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public CertifactionUser $user)
-    {
-
-    }
+    public function __construct(public CertifactionUser $user) {}
 
     public function broadcastOn(): PrivateChannel
     {

@@ -4,18 +4,19 @@ namespace AmaizingCompany\CertifactionClient;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\GetOrganizationRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\GetOrganizationResponse;
+use AmaizingCompany\CertifactionClient\Contracts\Account;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Jobs\ProcessAccountDeletion;
 use AmaizingCompany\CertifactionClient\Jobs\ProcessAccountIdentificationRequest;
 use AmaizingCompany\CertifactionClient\Jobs\ProcessAccountIdentificationStatusCheck;
-use AmaizingCompany\CertifactionClient\Contracts\Account;
 use Illuminate\Support\Facades\Cache;
 
 class CertifactionClient
 {
     const CACHE_KEY = 'cerifaction-client';
+
     const CONFIG_KEY = 'certifaction-client-laravel';
 
     protected static function getApiKey(): string
@@ -46,12 +47,12 @@ class CertifactionClient
 
     protected static function getCacheKey(?string $key = null): string
     {
-        return static::CACHE_KEY . empty($key) ?: ".$key";
+        return static::CACHE_KEY.empty($key) ?: ".$key";
     }
 
     public static function getConfig(string $key)
     {
-        return config(static::CONFIG_KEY . ".$key");
+        return config(static::CONFIG_KEY.".$key");
     }
 
     public static function requestAccountIdentification(Account $account, DocumentType $method, ?Jurisdiction $jurisdiction = null): bool

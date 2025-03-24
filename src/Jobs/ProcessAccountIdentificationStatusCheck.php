@@ -5,8 +5,8 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 use AmaizingCompany\CertifactionClient\Api\Requests\CheckIdentificationStatusRequest;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
-use AmaizingCompany\CertifactionClient\Events\IdentificationStatusCheckFinished;
 use AmaizingCompany\CertifactionClient\Events\IdentificationRequestFinished;
+use AmaizingCompany\CertifactionClient\Events\IdentificationStatusCheckFinished;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -15,10 +15,7 @@ class ProcessAccountIdentificationStatusCheck implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(protected IdentityTransaction $identityTransaction)
-    {
-
-    }
+    public function __construct(protected IdentityTransaction $identityTransaction) {}
 
     public function handle(): void
     {

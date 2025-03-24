@@ -15,10 +15,7 @@ class IdentificationStatusCheckFinished extends BaseEvent implements ShouldBroad
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public IdentityTransaction $identityTransaction)
-    {
-
-    }
+    public function __construct(public IdentityTransaction $identityTransaction) {}
 
     public function broadcastOn()
     {

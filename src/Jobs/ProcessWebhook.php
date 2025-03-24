@@ -12,7 +12,6 @@ use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
 use AmaizingCompany\CertifactionClient\Events\SignatureRequestFailed;
 use AmaizingCompany\CertifactionClient\Events\SignatureRequestFinished;
-use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -21,10 +20,7 @@ class ProcessWebhook implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public SignatureTransaction $transaction)
-    {
-
-    }
+    public function __construct(public SignatureTransaction $transaction) {}
 
     public function handle(): void
     {
@@ -69,11 +65,11 @@ class ProcessWebhook implements ShouldQueue
                 ]);
         }
 
-        if (!empty($signedIds)) {
+        if (! empty($signedIds)) {
             app(Document::class)->query()
                 ->whereIn('id', $signedIds)
                 ->update([
-                    'status' => DocumentStatus::SIGNED
+                    'status' => DocumentStatus::SIGNED,
                 ]);
         }
     }
@@ -86,7 +82,7 @@ class ProcessWebhook implements ShouldQueue
             }
         }
 
-        if (!empty($unsignedItemIds)) {
+        if (! empty($unsignedItemIds)) {
             app(Document::class)->query()
                 ->whereIn('id', $unsignedItemIds)
                 ->update([

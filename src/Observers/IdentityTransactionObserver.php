@@ -2,9 +2,9 @@
 
 namespace AmaizingCompany\CertifactionClient\Observers;
 
+use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Exceptions\TooManyIdentificationRequestsPerAccountException;
-use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 
 class IdentityTransactionObserver
 {
@@ -18,7 +18,7 @@ class IdentityTransactionObserver
             ->whereIn('status', [IdentificationStatus::PENDING, IdentificationStatus::INTENT])
             ->exists()
         ) {
-            throw new TooManyIdentificationRequestsPerAccountException();
+            throw new TooManyIdentificationRequestsPerAccountException;
         }
     }
 }

@@ -2,7 +2,4 @@
 
 namespace AmaizingCompany\CertifactionClient\Tests;
 
-class CommandTestCase extends TestCase
-{
-
-}
+class CommandTestCase extends TestCase {}

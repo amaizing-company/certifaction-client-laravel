@@ -15,10 +15,7 @@ class SignatureRequestFailed extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public SignatureTransaction $transaction)
-    {
-
-    }
+    public function __construct(public SignatureTransaction $transaction) {}
 
     public function broadcastOn()
     {

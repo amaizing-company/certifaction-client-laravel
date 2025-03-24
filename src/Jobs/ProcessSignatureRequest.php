@@ -4,8 +4,8 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\DataObjects\DocumentItem;
 use AmaizingCompany\CertifactionClient\Api\Requests\SignatureRequest;
-use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\Signable;
+use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Events\SignatureRequestFailed;
 use AmaizingCompany\CertifactionClient\Events\SignatureRequestStarted;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,9 +16,7 @@ class ProcessSignatureRequest implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public SignatureTransaction $transaction)
-    {
-    }
+    public function __construct(public SignatureTransaction $transaction) {}
 
     public function handle()
     {
@@ -85,8 +83,9 @@ class ProcessSignatureRequest implements ShouldQueue
     protected function addDocuments(SignatureRequest &$request): void
     {
         foreach ($this->transaction->documents as $document) {
-            if (!$document->isPrepared()) {
+            if (! $document->isPrepared()) {
                 Log::warning('The document is not prepared.', ['document_id' => $document->id, 'transaction_id' => $this->transaction->id]);
+
                 continue;
             }
 

@@ -3,9 +3,9 @@
 namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\InviteUserRequest;
+use AmaizingCompany\CertifactionClient\Contracts\CertifactionUser;
 use AmaizingCompany\CertifactionClient\Events\UserInvitedToCertifaction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
-use AmaizingCompany\CertifactionClient\Contracts\CertifactionUser;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Queue\Queueable;

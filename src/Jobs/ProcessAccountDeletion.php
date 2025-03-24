@@ -14,10 +14,7 @@ class ProcessAccountDeletion implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(protected Account $account)
-    {
-
-    }
+    public function __construct(protected Account $account) {}
 
     public function handle(): void
     {

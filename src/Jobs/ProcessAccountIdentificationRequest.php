@@ -18,8 +18,7 @@ class ProcessAccountIdentificationRequest implements ShouldQueue
     public function __construct(
         protected IdentityTransaction $identityTransaction,
         protected ?Jurisdiction $jurisdiction = null
-    )
-    {
+    ) {
         $this->identityTransaction->loadMissing('account.user');
 
         if (empty($this->jurisdiction)) {

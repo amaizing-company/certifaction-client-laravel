@@ -3,12 +3,12 @@
 namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
+use AmaizingCompany\CertifactionClient\Contracts\Document as DocumentContract;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
-use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
-use AmaizingCompany\CertifactionClient\Contracts\Document as DocumentContract;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
+use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -53,7 +53,7 @@ class Document extends Model implements DocumentContract
 
         $fileName = $this->signable->getDocumentName();
 
-        if (!Str::endsWith($fileName, '.pdf')) {
+        if (! Str::endsWith($fileName, '.pdf')) {
             $fileName .= '.pdf';
         }
 

@@ -19,7 +19,9 @@ class CertifactionListUsers extends Command
         $users = CertifactionClient::getOrganization($this->option('remote'))->getUsers();
 
         if ($this->option('email')) {
-            $users = $users->filter(function (UserItem $user) { return $user->getEmail() === $this->option('email'); });
+            $users = $users->filter(function (UserItem $user) {
+                return $user->getEmail() === $this->option('email');
+            });
         }
 
         $this->table([
@@ -38,7 +40,7 @@ class CertifactionListUsers extends Command
             'Admin',
             'Invited by',
             'Roles',
-            'Teamspaces'
+            'Teamspaces',
         ], $users->map(function (UserItem $user) {
             return [
                 $user->getId(),
@@ -55,8 +57,12 @@ class CertifactionListUsers extends Command
                 $user->isOrganization() ? 'yes' : 'no',
                 $user->isAdmin() ? 'yes' : 'no',
                 $user->getInviter()->getEmail(),
-                $user->getRoles()->map(function ($role) { return $role->getName(); })->implode(', '),
-                $user->getTeamspaces()->map(function ($teamspace) { return $teamspace->getName(); })->implode(', '),
+                $user->getRoles()->map(function ($role) {
+                    return $role->getName();
+                })->implode(', '),
+                $user->getTeamspaces()->map(function ($teamspace) {
+                    return $teamspace->getName();
+                })->implode(', '),
             ];
         }));
 

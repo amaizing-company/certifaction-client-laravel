@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class ProcessOpenFileTransactions implements ShouldQueue, ShouldBeUniqueUntilProcessing
+class ProcessOpenFileTransactions implements ShouldBeUniqueUntilProcessing, ShouldQueue
 {
     use Queueable;
 

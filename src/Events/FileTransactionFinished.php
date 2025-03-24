@@ -15,10 +15,7 @@ class FileTransactionFinished extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public FileTransaction $transaction)
-    {
-
-    }
+    public function __construct(public FileTransaction $transaction) {}
 
     public function broadcastOn()
     {

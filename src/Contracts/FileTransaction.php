@@ -3,7 +3,6 @@
 namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
@@ -23,34 +22,21 @@ interface FileTransaction
 {
     /**
      * Certifaction document model relation.
-     *
-     * @return BelongsTo
      */
     public function document(): BelongsTo;
 
     /**
      * Mark transaction as failed.
-     *
-     * @param string $failureReason
-     * @param Carbon|null $finishedAt
-     * @param bool $replicate
-     * @return bool
      */
     public function markFailure(string $failureReason, ?Carbon $finishedAt = null, bool $replicate = true): bool;
 
     /**
      * Mark transaction as pending.
-     *
-     * @param Carbon|null $requestedAt
-     * @return bool
      */
     public function markPending(?Carbon $requestedAt = null): bool;
 
     /**
      * Mark transaction as succeeded.
-     *
-     * @param Carbon|null $finishedAt
-     * @return bool
      */
     public function markSuccess(?Carbon $finishedAt = null): bool;
 }

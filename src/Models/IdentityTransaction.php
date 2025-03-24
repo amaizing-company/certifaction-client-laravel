@@ -3,10 +3,10 @@
 namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Account;
-use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction as IdentityTransactionContract;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
+use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Observers\IdentityTransactionObserver;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;

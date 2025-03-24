@@ -4,7 +4,6 @@ namespace AmaizingCompany\CertifactionClient\Events;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
 use AmaizingCompany\CertifactionClient\Contracts\Signable;
-use Faker\Provider\Base;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

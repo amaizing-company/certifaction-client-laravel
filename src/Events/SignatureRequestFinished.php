@@ -3,7 +3,6 @@
 namespace AmaizingCompany\CertifactionClient\Events;
 
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
-use Faker\Provider\Base;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -16,10 +15,7 @@ class SignatureRequestFinished extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public SignatureTransaction $transaction)
-    {
-
-    }
+    public function __construct(public SignatureTransaction $transaction) {}
 
     public function broadcastOn()
     {

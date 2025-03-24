@@ -15,10 +15,7 @@ class DocumentPrepared extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public Document $document)
-    {
-
-    }
+    public function __construct(public Document $document) {}
 
     public function broadcastOn(): PrivateChannel
     {

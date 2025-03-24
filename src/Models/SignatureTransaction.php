@@ -61,7 +61,7 @@ class SignatureTransaction extends Model implements SignatureTransactionContract
     {
         $encryptedId = Crypt::encrypt($this->id);
 
-        return $this->documents->first()->signable->getWebhookUrl() . "/$encryptedId";
+        return $this->documents->first()->signable->getWebhookUrl()."/$encryptedId";
     }
 
     public function markPending(string $requestUrl, ?Carbon $requestedAt = null): bool
