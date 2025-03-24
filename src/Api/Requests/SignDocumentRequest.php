@@ -16,12 +16,11 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasSignature;
 use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\PdfFileResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class SignDocumentRequest implements Request
+final class SignDocumentRequest extends BaseRequest implements Request
 {
     use AcceptLanguage;
     use HasAdditionalPage;
@@ -51,7 +50,7 @@ final class SignDocumentRequest implements Request
      */
     public function send(): PdfFileResponse|CertifactionResponse
     {
-        $request = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $request = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())
             ->withBody(
                 $this->getFileContents(true),

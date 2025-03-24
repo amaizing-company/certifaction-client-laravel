@@ -10,14 +10,13 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
 use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\PrepareDocumentResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 
-final class PrepareDocumentRequest implements Request
+final class PrepareDocumentRequest extends BaseRequest implements Request
 {
     use AcceptLanguage;
     use HasAdditionalPage;
@@ -56,7 +55,7 @@ final class PrepareDocumentRequest implements Request
      */
     public function send(): PrepareDocumentResponse|CertifactionResponse
     {
-        $request = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $request = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())
             ->withBody(
                 $this->file,

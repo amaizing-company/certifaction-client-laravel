@@ -7,12 +7,12 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasNote;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasSigner;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
+use AmaizingCompany\CertifactionClient\Enums\CertifactionLocalEndpoint;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class CancelSignatureRequest implements Request
+final class CancelSignatureRequest extends BaseRequest implements Request
 {
     use HasFile;
     use HasNote;

@@ -5,14 +5,13 @@ namespace AmaizingCompany\CertifactionClient\Api\Requests;
 use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\AccountIdentificationResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class StartAccountIdentificationRequest implements Request
+final class StartAccountIdentificationRequest extends BaseRequest implements Request
 {
     public function __construct(
         protected string $email,
@@ -40,7 +39,7 @@ final class StartAccountIdentificationRequest implements Request
      */
     public function send(): AccountIdentificationResponse|CertifactionResponse
     {
-        $response = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withBody(
                 json_encode([
                     'email' => $this->email,

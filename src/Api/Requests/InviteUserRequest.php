@@ -4,12 +4,11 @@ namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\InviteUserResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class InviteUserRequest implements Request
+final class InviteUserRequest extends BaseRequest implements Request
 {
     protected string $email;
 
@@ -24,7 +23,12 @@ final class InviteUserRequest implements Request
         $this->roleId($roleId);
     }
 
-    public function email(string $email): static
+    public static function make(string $organizationId, string $email, string $roleId): InviteUserRequest
+    {
+        return new self($organizationId, $email, $roleId);
+    }
+
+    public function email(string $email): InviteUserRequest
     {
         $this->email = $email;
 
@@ -66,7 +70,7 @@ final class InviteUserRequest implements Request
      */
     public function send(): InviteUserResponse
     {
-        $response = CertifactionClient::makeRequest(CertifactionEnvironment::ADMIN)
+        $response = self::makeRequest(CertifactionEnvironment::ADMIN)
             ->acceptJson()
             ->withBody(json_encode([
                 'email' => $this->getEmail(),
