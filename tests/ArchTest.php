@@ -18,12 +18,14 @@ arch()
     ->ignoring(BaseRequest::class)
     ->toExtend(BaseRequest::class)
     ->ignoring(BaseRequest::class)
-    ->toBeFinal();
+    ->toBeFinal()
+    ->ignoring(BaseRequest::class);
 
 arch()
     ->expect(BaseRequest::class)
     ->toBeClass()
-    ->toBeAbstract();
+    ->toBeAbstract()
+    ->toHaveMethod('makeRequest');
 
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Responses')
