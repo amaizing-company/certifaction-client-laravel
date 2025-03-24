@@ -19,6 +19,6 @@ class AccountDeleted extends BaseEvent implements ShouldBroadcast
 
     public function broadcastOn(): PrivateChannel
     {
-        return new PrivateChannel("certifaction.user.{$this->user->id}");
+        return new PrivateChannel("certifaction.user.{$this->user->getKey()}");
     }
 }

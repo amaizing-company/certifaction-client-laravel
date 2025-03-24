@@ -25,6 +25,6 @@ class DocumentPreparationFailed extends BaseEvent implements ShouldBroadcast
 
     public function broadcastOn(): PrivateChannel
     {
-        return new PrivateChannel("certifaction.signable.{$this->signable->id}");
+        return new PrivateChannel("certifaction.signable.{$this->signable->getKey()}");
     }
 }

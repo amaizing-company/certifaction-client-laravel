@@ -19,6 +19,6 @@ class UserInvitedToCertifaction extends BaseEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel("certifaction.user.{$this->user->id}");
+        return new PrivateChannel("certifaction.user.{$this->user->getKey()}");
     }
 }
