@@ -9,7 +9,6 @@ use AmaizingCompany\CertifactionClient\Exceptions\TooManyIdentificationRequestsP
 class IdentityTransactionObserver
 {
     /**
-     * @param IdentityTransaction $transaction
      * @throws TooManyIdentificationRequestsPerAccountException
      */
     public function creating(IdentityTransaction $transaction): void

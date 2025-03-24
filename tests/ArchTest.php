@@ -15,9 +15,9 @@ arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Requests')
     ->toBeClasses()
     ->toImplement(Request::class)
-        ->ignoring(BaseRequest::class)
+    ->ignoring(BaseRequest::class)
     ->toExtend(BaseRequest::class)
-        ->ignoring(BaseRequest::class)
+    ->ignoring(BaseRequest::class)
     ->toBeFinal();
 
 arch()
@@ -29,7 +29,7 @@ arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Responses')
     ->toBeClasses()
     ->toExtend(BaseResponse::class)
-        ->ignoring(BaseResponse::class)
+    ->ignoring(BaseResponse::class)
     ->not->toBeFinal();
 
 arch()
