@@ -37,13 +37,12 @@ class CertifactionClientServiceProvider extends PackageServiceProvider
             ->name('certifaction-client-laravel')
             ->hasConfigFile()
             ->hasMigrations([
-                'create_certifaction_roles_table',
                 'create_certifaction_accounts_table',
-                'create_certifaction_accounts_roles_table',
                 'create_certifaction_identity_transactions_table',
                 'create_certifaction_documents_table',
                 'create_certifaction_signature_transactions_table',
                 'create_certifaction_signature_transactions_documents_table',
+                'create_certifaction_file_transactions_table',
             ])
             ->hasCommands([
                 CertifactionClearCache::class,
