@@ -69,9 +69,14 @@ class Account extends Model implements AccountContract
 
     public function getPendingIdentityTransaction(): IdentityTransaction
     {
-        return $this->identityTransactions()
+        /**
+         * @var IdentityTransaction $transaction
+         */
+        $transaction = $this->identityTransactions()
             ->where('status', IdentificationStatus::PENDING)
             ->first();
+
+        return $transaction;
     }
 
     public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null): bool
@@ -84,7 +89,7 @@ class Account extends Model implements AccountContract
         return CertifactionClient::requestAccountIdentificationStatusCheck($this);
     }
 
-    public function requestDeletion()
+    public function requestDeletion(): void
     {
         CertifactionClient::requestAccountDeletion($this);
     }

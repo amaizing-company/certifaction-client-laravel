@@ -5,6 +5,7 @@ namespace AmaizingCompany\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Api\Requests\GetOrganizationRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\GetOrganizationResponse;
 use AmaizingCompany\CertifactionClient\Contracts\Account;
+use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
@@ -61,6 +62,9 @@ class CertifactionClient
             return false;
         }
 
+        /**
+         * @var IdentityTransaction $identityTransaction
+         */
         $identityTransaction = $account->identityTransactions()->firstOrCreate([
             'status' => IdentificationStatus::INTENT,
             'identification_method' => $method,

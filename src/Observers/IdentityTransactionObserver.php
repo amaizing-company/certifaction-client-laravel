@@ -9,11 +9,12 @@ use AmaizingCompany\CertifactionClient\Exceptions\TooManyIdentificationRequestsP
 class IdentityTransactionObserver
 {
     /**
+     * @param IdentityTransaction $transaction
      * @throws TooManyIdentificationRequestsPerAccountException
      */
     public function creating(IdentityTransaction $transaction): void
     {
-        if (app(IdentityTransaction::class)->query()
+        if (app(IdentityTransaction::class)::query()
             ->where('account_id', $transaction->account_id)
             ->whereIn('status', [IdentificationStatus::PENDING, IdentificationStatus::INTENT])
             ->exists()
