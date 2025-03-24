@@ -29,7 +29,7 @@ class ProcessUserInvitation implements ShouldQueue
         try {
             $response = InviteUserRequest::make($organizationId, $this->user->getEmail(), $this->roleId)->send()->throw();
         } catch (\Throwable $e) {
-            Log::warning($e->getMessage(), $e->getCode());
+            Log::warning($e->getMessage(), ['user_id' => $this->user->getKey()]);
 
             return;
         }

@@ -22,7 +22,7 @@ class ProcessAccountIdentificationStatusCheck implements ShouldQueue
         try {
             $response = CheckIdentificationStatusRequest::make($this->identityTransaction->external_id)->send()->throw();
         } catch (\Throwable $e) {
-            Log::warning($e->getMessage(), $e->getCode());
+            Log::warning($e->getMessage(), ['identity_transaction_id' => $this->identityTransaction->getKey()]);
 
             return;
         }

@@ -34,7 +34,7 @@ class ProcessAccountDeletion implements ShouldQueue
         try {
             $response = $request->send()->throw();
         } catch (\Throwable $e) {
-            Log::warning($e->getMessage(), $e->getCode());
+            Log::warning($e->getMessage(), ['account_id' => $this->account->getKey()]);
 
             return;
         }

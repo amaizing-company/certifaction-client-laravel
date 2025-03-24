@@ -66,7 +66,7 @@ class ProcessSignatureRequest implements ShouldQueue
         try {
             $response = $request->send()->throw();
         } catch (\Throwable $e) {
-            Log::warning($e->getMessage(), $e->getCode());
+            Log::warning($e->getMessage(), ['signature_transaction_id' => $this->transaction->getKey()]);
 
             SignatureRequestFailed::dispatch($this->transaction);
 

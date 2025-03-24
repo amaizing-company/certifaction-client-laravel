@@ -27,7 +27,7 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
         } catch (\Throwable $e) {
             DocumentPreparationFailed::dispatch($this->request, $e);
 
-            Log::warning($e->getMessage(), $e->getCode());
+            Log::warning($e->getMessage(), ['signable_id' => $this->signable->getKey()]);
 
             return;
         }
