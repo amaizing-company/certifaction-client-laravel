@@ -105,6 +105,6 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
 
     public function requestStatusCheck(): bool
     {
-        return CertifactionClient::requestIdentificationStatusCheck($this);
+        return CertifactionClient::requestAccountIdentificationStatusCheck($this->account);
     }
 }
