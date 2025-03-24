@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckServerHealthResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -20,7 +19,7 @@ final class CheckServerHealthRequest extends BaseRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): CheckServerHealthResponse|CertifactionResponse
+    public function send(): CheckServerHealthResponse
     {
         $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->acceptJson()

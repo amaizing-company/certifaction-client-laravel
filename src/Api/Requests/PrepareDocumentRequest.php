@@ -7,7 +7,6 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasAdditionalPage;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasDigitalTwin;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasPdfA;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\PrepareDocumentResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -53,7 +52,7 @@ final class PrepareDocumentRequest extends BaseRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): PrepareDocumentResponse|CertifactionResponse
+    public function send(): PrepareDocumentResponse
     {
         $request = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())

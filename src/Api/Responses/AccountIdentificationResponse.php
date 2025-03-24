@@ -2,9 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
-
-class AccountIdentificationResponse extends BaseResponse implements CertifactionResponse
+class AccountIdentificationResponse extends BaseResponse
 {
     public function getIdentityId(): ?string
     {

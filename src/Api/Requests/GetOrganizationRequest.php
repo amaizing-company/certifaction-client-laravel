@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\GetOrganizationResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -20,7 +19,7 @@ final class GetOrganizationRequest extends BaseRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): GetOrganizationResponse|CertifactionResponse
+    public function send(): GetOrganizationResponse
     {
         $response = self::makeRequest(CertifactionEnvironment::ADMIN)
             ->acceptJson()

@@ -21,7 +21,6 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasSignature;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasSigner;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasTransactionId;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasWebhookUrl;
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\SignatureRequestResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -79,7 +78,7 @@ final class SignatureRequest extends BaseRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): SignatureRequestResponse|CertifactionResponse
+    public function send(): SignatureRequestResponse
     {
         $request = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->acceptJson()

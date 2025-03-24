@@ -4,7 +4,6 @@ namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasRequestUrl;
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckSignatureStatusResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -30,7 +29,7 @@ final class CheckSignatureStatusRequest extends BaseRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): CheckSignatureStatusResponse|CertifactionResponse
+    public function send(): CheckSignatureStatusResponse
     {
         $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())

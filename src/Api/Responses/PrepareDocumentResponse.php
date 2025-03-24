@@ -2,9 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
-
-class PrepareDocumentResponse extends BaseResponse implements CertifactionResponse
+class PrepareDocumentResponse extends BaseResponse
 {
     public function getFileLocation(): ?string
     {

@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\AccountIdentificationResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -37,7 +36,7 @@ final class StartAccountIdentificationRequest extends BaseRequest implements Req
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): AccountIdentificationResponse|CertifactionResponse
+    public function send(): AccountIdentificationResponse
     {
         $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withBody(

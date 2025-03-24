@@ -8,7 +8,7 @@ use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
-class BaseRequest
+abstract class BaseRequest
 {
     /**
      * @throws ApiServerUriMissingException

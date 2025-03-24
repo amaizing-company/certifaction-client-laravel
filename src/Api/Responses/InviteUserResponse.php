@@ -2,9 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
-
-class InviteUserResponse extends BaseResponse implements CertifactionResponse
+class InviteUserResponse extends BaseResponse
 {
     public function isInvited(): bool
     {

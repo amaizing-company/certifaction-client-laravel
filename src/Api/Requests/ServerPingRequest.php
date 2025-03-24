@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\ServerPingResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -20,7 +19,7 @@ final class ServerPingRequest extends BaseRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): ServerPingResponse|CertifactionResponse
+    public function send(): ServerPingResponse
     {
         $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->get('/ping');

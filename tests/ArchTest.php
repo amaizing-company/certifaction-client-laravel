@@ -1,6 +1,5 @@
 <?php
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Requests\BaseRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\BaseResponse;
@@ -24,9 +23,7 @@ arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Responses')
     ->toBeClasses()
     ->toExtend(BaseResponse::class)
-    ->ignoring(BaseResponse::class)
-    ->toImplement(CertifactionResponse::class)
-    ->ignoring(BaseResponse::class)
+        ->ignoring(BaseResponse::class)
     ->not->toBeFinal();
 
 arch()

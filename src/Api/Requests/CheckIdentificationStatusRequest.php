@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\IdentificationStatusResponse;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
@@ -39,7 +38,7 @@ final class CheckIdentificationStatusRequest extends BaseRequest implements Requ
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): IdentificationStatusResponse|CertifactionResponse
+    public function send(): IdentificationStatusResponse
     {
         $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->acceptJson()

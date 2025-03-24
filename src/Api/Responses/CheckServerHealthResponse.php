@@ -2,12 +2,11 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\DataObjects\ServiceStatusItem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
-class CheckServerHealthResponse extends BaseResponse implements CertifactionResponse
+class CheckServerHealthResponse extends BaseResponse
 {
     protected Collection $serviceStatusItems;
 

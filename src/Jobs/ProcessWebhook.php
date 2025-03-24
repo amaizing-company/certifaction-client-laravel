@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Jobs;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Requests\CheckSignatureStatusRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckSignatureStatusResponse;
 use AmaizingCompany\CertifactionClient\Contracts\Document;
@@ -48,7 +47,7 @@ class ProcessWebhook implements ShouldQueue
         SignatureRequestFinished::dispatch($this->transaction);
     }
 
-    protected function handleSignedItems(CertifactionResponse|CheckSignatureStatusResponse $response): void
+    protected function handleSignedItems(CheckSignatureStatusResponse $response): void
     {
         $signedItems = $response->getSignedEnvelopeItems();
         $documents = $this->transaction->documents;
@@ -74,7 +73,7 @@ class ProcessWebhook implements ShouldQueue
         }
     }
 
-    protected function handleUnsignedItems(CertifactionResponse|CheckSignatureStatusResponse $response): void
+    protected function handleUnsignedItems(CheckSignatureStatusResponse $response): void
     {
         if ($response->hasUnsignedItems()) {
             foreach ($response->getUnsignedEnvelopeItems() as $item) {
