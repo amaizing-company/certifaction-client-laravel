@@ -3,6 +3,7 @@
 namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
@@ -20,6 +21,8 @@ use Illuminate\Support\Carbon;
  * @property bool $identified
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @mixin Model
  */
 interface Account
 {

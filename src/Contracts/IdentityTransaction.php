@@ -4,6 +4,7 @@ namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
@@ -20,6 +21,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $finished_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @mixin Model
  */
 interface IdentityTransaction
 {
