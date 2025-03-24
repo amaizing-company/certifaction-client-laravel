@@ -2,9 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
-
-class SignatureRequestResponse extends BaseResponse implements CertifactionResponse
+class SignatureRequestResponse extends BaseResponse
 {
     public function getRequestUrl(): ?string
     {

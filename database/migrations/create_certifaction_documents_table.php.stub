@@ -7,16 +7,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create(DatabaseHelper::getTableName('documents'), function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->ulidMorphs('signable');
             $table->string('external_id')->nullable();
-            $table->string('name');
             $table->string('location')->nullable();
             $table->string('status');
+            $table->string('scope');
             $table->timestamps();
         });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists(DatabaseHelper::getTableName('documents'));
     }
 };

@@ -7,21 +7,17 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasNote;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasSigner;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
+use AmaizingCompany\CertifactionClient\Enums\CertifactionLocalEndpoint;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class CancelSignatureRequest implements Request
+final class CancelSignatureRequest extends BaseRequest implements Request
 {
     use HasFile;
     use HasNote;
     use HasQueryParams;
     use HasSigner;
-
-    const string ENDPOINT_ALL_REQUESTS = '/request/cancel/all';
-
-    const string ENDPOINT_SIGNERS_REQUEST = '/request/cancel';
 
     public function __construct(string $fileContents)
     {
@@ -43,10 +39,10 @@ final class CancelSignatureRequest implements Request
     public function getEndpoint(): string
     {
         if ($this->getSigner()?->getEmail()) {
-            return CancelSignatureRequest::ENDPOINT_SIGNERS_REQUEST;
+            return CertifactionLocalEndpoint::SIGNATURE_REQUEST_CANCEL_SIGNERS->value;
         }
 
-        return CancelSignatureRequest::ENDPOINT_ALL_REQUESTS;
+        return CertifactionLocalEndpoint::SIGNATURE_REQUEST_CANCEL_ALL->value;
     }
 
     /**
@@ -55,7 +51,7 @@ final class CancelSignatureRequest implements Request
      */
     public function send(): bool
     {
-        return CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        return self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())
             ->withBody(
                 $this->getFileContents(true),

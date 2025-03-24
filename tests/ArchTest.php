@@ -1,7 +1,7 @@
 <?php
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Requests\BaseRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\BaseResponse;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\Response;
@@ -15,14 +15,22 @@ arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Requests')
     ->toBeClasses()
     ->toImplement(Request::class)
-    ->toBeFinal();
+    ->ignoring(BaseRequest::class)
+    ->toExtend(BaseRequest::class)
+    ->ignoring(BaseRequest::class)
+    ->toBeFinal()
+    ->ignoring(BaseRequest::class);
+
+arch()
+    ->expect(BaseRequest::class)
+    ->toBeClass()
+    ->toBeAbstract()
+    ->toHaveMethod('makeRequest');
 
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Responses')
     ->toBeClasses()
     ->toExtend(BaseResponse::class)
-    ->ignoring(BaseResponse::class)
-    ->toImplement(CertifactionResponse::class)
     ->ignoring(BaseResponse::class)
     ->not->toBeFinal();
 

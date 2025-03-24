@@ -2,15 +2,13 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\IdentificationStatusResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class CheckIdentificationStatusRequest implements Request
+final class CheckIdentificationStatusRequest extends BaseRequest implements Request
 {
     protected string $identificationId;
 
@@ -19,12 +17,12 @@ final class CheckIdentificationStatusRequest implements Request
         $this->identificationId($identificationId);
     }
 
-    public function make(string $identificationId): static
+    public static function make(string $identificationId): CheckIdentificationStatusRequest
     {
         return new self($identificationId);
     }
 
-    public function identificationId(string $id): static
+    public function identificationId(string $id): CheckIdentificationStatusRequest
     {
         $this->identificationId = $id;
 
@@ -40,9 +38,9 @@ final class CheckIdentificationStatusRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): IdentificationStatusResponse|CertifactionResponse
+    public function send(): IdentificationStatusResponse
     {
-        $response = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->acceptJson()
             ->get('/identity/'.$this->getIdentificationId().'/status');
 

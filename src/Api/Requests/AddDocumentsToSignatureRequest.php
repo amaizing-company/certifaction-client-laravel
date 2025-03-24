@@ -6,14 +6,14 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasDocuments;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasRequestUrl;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
+use AmaizingCompany\CertifactionClient\Enums\CertifactionLocalEndpoint;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 
-final class AddDocumentsToSignatureRequest implements Request
+final class AddDocumentsToSignatureRequest extends BaseRequest implements Request
 {
     use HasDocuments;
     use HasQueryParams;
@@ -31,9 +31,9 @@ final class AddDocumentsToSignatureRequest implements Request
      */
     public function send(): PromiseInterface|Response
     {
-        return CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        return self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())
             ->withBody($this->getDocumentsBody())
-            ->post('/request/file/add');
+            ->post(CertifactionLocalEndpoint::SIGNATURE_REQUEST_ADD_DOCUMENTS->value);
     }
 }

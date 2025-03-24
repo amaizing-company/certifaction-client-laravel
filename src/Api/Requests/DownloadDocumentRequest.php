@@ -3,16 +3,14 @@
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasQueryParams;
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\PdfFileResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 
-final class DownloadDocumentRequest implements Request
+final class DownloadDocumentRequest extends BaseRequest implements Request
 {
     use HasQueryParams;
 
@@ -54,9 +52,9 @@ final class DownloadDocumentRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): PdfFileResponse|CertifactionResponse
+    public function send(): PdfFileResponse
     {
-        $response = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withQueryParameters($this->getQueryParams())
             ->get('/download');
 

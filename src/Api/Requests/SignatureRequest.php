@@ -21,15 +21,13 @@ use AmaizingCompany\CertifactionClient\Api\Concerns\HasSignature;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasSigner;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasTransactionId;
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasWebhookUrl;
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\SignatureRequestResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class SignatureRequest implements Request
+final class SignatureRequest extends BaseRequest implements Request
 {
     use AcceptLanguage;
     use CanNotifySigner;
@@ -80,9 +78,9 @@ final class SignatureRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): SignatureRequestResponse|CertifactionResponse
+    public function send(): SignatureRequestResponse
     {
-        $request = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $request = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->acceptJson()
             ->withQueryParameters($this->getQueryParams())
             ->withBody($this->getDocumentsBody());

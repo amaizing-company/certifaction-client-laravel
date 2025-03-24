@@ -4,14 +4,13 @@ namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\Concerns\HasFile;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 
-final class RevokeDocumentRequest implements Request
+final class RevokeDocumentRequest extends BaseRequest implements Request
 {
     use HasFile;
 
@@ -26,7 +25,7 @@ final class RevokeDocumentRequest implements Request
      */
     public function send(): PromiseInterface|Response
     {
-        return CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        return self::makeRequest(CertifactionEnvironment::LOCAL)
             ->withBody($this->getFileContents(true), 'application/pdf')
             ->post('/revoke');
     }

@@ -3,14 +3,13 @@
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 
-final class DeleteUserRequest implements Request
+final class DeleteUserRequest extends BaseRequest implements Request
 {
     protected bool $existingUser = false;
 
@@ -80,7 +79,7 @@ final class DeleteUserRequest implements Request
             $body = ['invite_email' => $this->invitationEmail];
         }
 
-        return CertifactionClient::makeRequest(CertifactionEnvironment::ADMIN)
+        return self::makeRequest(CertifactionEnvironment::ADMIN)
             ->withBody(json_encode($body))
             ->delete("/organization/{$this->getOrganizationId()}/user");
     }

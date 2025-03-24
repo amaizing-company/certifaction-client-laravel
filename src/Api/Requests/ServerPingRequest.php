@@ -2,15 +2,13 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Requests;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Responses\ServerPingResponse;
-use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Enums\CertifactionEnvironment;
 use AmaizingCompany\CertifactionClient\Exceptions\ApiServerUriMissingException;
 use Illuminate\Http\Client\ConnectionException;
 
-final class ServerPingRequest implements Request
+final class ServerPingRequest extends BaseRequest implements Request
 {
     public static function make(): static
     {
@@ -21,9 +19,9 @@ final class ServerPingRequest implements Request
      * @throws ApiServerUriMissingException
      * @throws ConnectionException
      */
-    public function send(): ServerPingResponse|CertifactionResponse
+    public function send(): ServerPingResponse
     {
-        $response = CertifactionClient::makeRequest(CertifactionEnvironment::LOCAL)
+        $response = self::makeRequest(CertifactionEnvironment::LOCAL)
             ->get('/ping');
 
         return new ServerPingResponse($response->toPsrResponse());

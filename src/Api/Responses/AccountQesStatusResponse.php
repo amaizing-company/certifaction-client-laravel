@@ -2,12 +2,11 @@
 
 namespace AmaizingCompany\CertifactionClient\Api\Responses;
 
-use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\DataObjects\QesStatusItem;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use Illuminate\Support\Collection;
 
-class AccountQesStatusResponse extends BaseResponse implements CertifactionResponse
+class AccountQesStatusResponse extends BaseResponse
 {
     protected Collection $qesStatusItems;
 
