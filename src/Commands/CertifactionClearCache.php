@@ -20,6 +20,6 @@ class CertifactionClearCache extends Command
             $this->info('Cache cleared.');
         }
 
-        return $status;
+        return $status ? self::SUCCESS : self::FAILURE;
     }
 }
