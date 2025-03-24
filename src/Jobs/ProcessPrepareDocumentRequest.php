@@ -3,6 +3,7 @@
 namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
+use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\Signable;
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
 use AmaizingCompany\CertifactionClient\Events\DocumentPreparationFailed;
@@ -25,7 +26,7 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
         try {
             $response = $this->request->upload()->send()->throw();
         } catch (\Throwable $e) {
-            DocumentPreparationFailed::dispatch($this->request, $e);
+            DocumentPreparationFailed::dispatch($this->request, $this->signable, $e);
 
             Log::warning($e->getMessage(), ['signable_id' => $this->signable->getKey()]);
 
@@ -36,6 +37,9 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
             return;
         }
 
+        /**
+         * @var Document $document
+         */
         $document = $this->signable->certifactionDocuments()->create([
             'external_id' => $response->getFileId(),
             'location' => $response->getFileLocation(),
