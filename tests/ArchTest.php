@@ -13,11 +13,17 @@ arch('it will not use debugging functions')
 
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Requests')
-    ->ignoring(BaseRequest::class)
     ->toBeClasses()
     ->toImplement(Request::class)
+        ->ignoring(BaseRequest::class)
     ->toExtend(BaseRequest::class)
+        ->ignoring(BaseRequest::class)
     ->toBeFinal();
+
+arch()
+    ->expect(BaseRequest::class)
+    ->toBeClass()
+    ->toBeAbstract();
 
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Responses')
