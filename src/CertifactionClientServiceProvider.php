@@ -57,28 +57,36 @@ class CertifactionClientServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind(AccountContract::class, Account::class);
-        $this->app->bind(DocumentContract::class, Document::class);
-        $this->app->bind(FileTransactionContract::class, FileTransaction::class);
-        $this->app->bind(IdentityTransactionContract::class, IdentityTransaction::class);
-        $this->app->bind(SignatureTransactionContract::class, SignatureTransaction::class);
+        $this->app->bind(AccountContract::class, fn($app) => $app->make(Account::class));
+        $this->app->bind(DocumentContract::class, fn($app) => $app->make(Document::class));
+        $this->app->bind(FileTransactionContract::class, fn($app) => $app->make(FileTransaction::class));
+        $this->app->bind(IdentityTransactionContract::class, fn($app) => $app->make(IdentityTransaction::class));
+        $this->app->bind(SignatureTransactionContract::class, fn($app) => $app->make(SignatureTransaction::class));
     }
 
     public function packageBooted(): void
     {
         $this->registerListeners();
-
-        app(AccountContract::class)->observe(AccountObserver::class);
-        app(FileTransactionContract::class)->observe(FileTransactionObserver::class);
-        app(IdentityTransactionContract::class)->observe(IdentityTransactionObserver::class);
-
-        Route::bind('signatureTransaction', function (string $value) {
-            return app(SignatureTransactionContract::class)->findOrFail(Crypt::decrypt($value));
-        });
+        $this->registerObservers();
+        $this->registerRouteBindings();
     }
 
     public function registerListeners(): void
     {
         Event::listen(UserInvitedToCertifaction::class, CreateAccount::class);
+    }
+
+    public function registerObservers(): void
+    {
+        app(AccountContract::class)::observe(AccountObserver::class);
+        app(FileTransactionContract::class)::observe(FileTransactionObserver::class);
+        app(IdentityTransactionContract::class)::observe(IdentityTransactionObserver::class);
+    }
+
+    public function registerRouteBindings(): void
+    {
+        Route::bind('signatureTransaction', function (string $value) {
+            return app(SignatureTransactionContract::class)::findOrFail(Crypt::decrypt($value));
+        });
     }
 }
