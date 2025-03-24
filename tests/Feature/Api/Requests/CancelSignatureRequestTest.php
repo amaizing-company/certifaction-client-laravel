@@ -2,6 +2,7 @@
 
 use AmaizingCompany\CertifactionClient\Api\DataObjects\Signer;
 use AmaizingCompany\CertifactionClient\Api\Requests\CancelSignatureRequest;
+use AmaizingCompany\CertifactionClient\Enums\CertifactionLocalEndpoint;
 
 pest()->group('api', 'requests');
 
@@ -64,7 +65,7 @@ it('can get correct signer params', function () {
 it('can get endpoint depending on signer is given', function () {
     expect($this->cancelSignatureRequest->getEndpoint())
         ->toBeString()
-        ->toBe($this->cancelSignatureRequest::ENDPOINT_ALL_REQUESTS)
+        ->toBe(CertifactionLocalEndpoint::SIGNATURE_REQUEST_CANCEL_ALL->value)
         ->and($this->cancelSignatureRequest->for(new Signer('test@example.com'))->getEndpoint())
-        ->toBe($this->cancelSignatureRequest::ENDPOINT_SIGNERS_REQUEST);
+        ->toBe(CertifactionLocalEndpoint::SIGNATURE_REQUEST_CANCEL_SIGNERS->value);
 });
