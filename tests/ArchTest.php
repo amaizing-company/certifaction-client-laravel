@@ -2,6 +2,7 @@
 
 use AmaizingCompany\CertifactionClient\Api\Contracts\CertifactionResponse;
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
+use AmaizingCompany\CertifactionClient\Api\Requests\BaseRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\BaseResponse;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\Response;
@@ -13,8 +14,10 @@ arch('it will not use debugging functions')
 
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Api\Requests')
+    ->ignoring('AmaizingCompany\CertifactionClient\Api\Requests\BaseRequest')
     ->toBeClasses()
     ->toImplement(Request::class)
+    ->toExtend(BaseRequest::class)
     ->toBeFinal();
 
 arch()
