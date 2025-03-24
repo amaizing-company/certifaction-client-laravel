@@ -50,7 +50,7 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
 
     public function account(): BelongsTo
     {
-        return $this->belongsTo(app(Account::class));
+        return $this->belongsTo(app(Account::class)->getMorphClass());
     }
 
     public function finish(IdentificationStatus $status, ?Carbon $lastCheck = null): bool

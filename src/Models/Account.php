@@ -57,7 +57,7 @@ class Account extends Model implements AccountContract
 
     public function identityTransactions(): HasMany
     {
-        return $this->hasMany(app(IdentityTransaction::class));
+        return $this->hasMany(app(IdentityTransaction::class)->getMorphClass());
     }
 
     public function hasPendingIdentificationRequest(): bool

@@ -40,7 +40,7 @@ class FileTransaction extends Model implements FileTransactionContract
 
     public function document(): BelongsTo
     {
-        return $this->belongsTo(app(Document::class));
+        return $this->belongsTo(app(Document::class)->getMorphClass());
     }
 
     public function markFailure(string $failureReason, ?Carbon $finishedAt = null, bool $replicate = true): bool

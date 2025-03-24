@@ -72,12 +72,12 @@ class Document extends Model implements DocumentContract
 
     public function signatureTransactions(): BelongsToMany
     {
-        return $this->belongsToMany(app(SignatureTransaction::class));
+        return $this->belongsToMany(app(SignatureTransaction::class)->getMorphClass());
     }
 
     public function fileTransactions(): HasMany
     {
-        return $this->hasMany(app(FileTransaction::class));
+        return $this->hasMany(app(FileTransaction::class)->getMorphClass());
     }
 
     public function prepare(DocumentPrepareScope $scope = DocumentPrepareScope::SIGN): void

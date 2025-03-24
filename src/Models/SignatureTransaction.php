@@ -54,7 +54,7 @@ class SignatureTransaction extends Model implements SignatureTransactionContract
 
     public function documents(): BelongsToMany
     {
-        return $this->belongsToMany(app(Document::class), DatabaseHelper::getTableName('signature_transactions_documents'));
+        return $this->belongsToMany(app(Document::class)->getMorphClass(), DatabaseHelper::getTableName('signature_transactions_documents'));
     }
 
     public function getWebhookUrl(): string
