@@ -27,9 +27,11 @@ class ProcessAccountSync implements ShouldQueue
 
         /**
          * @var Account $account
-         * @var UserItem $user
          */
         foreach ($accounts as $account) {
+            /**
+             * @var UserItem $user
+             */
             $user = $users->where('inviteEmail', $account->invite_email)->first();
 
             if (empty($user)) {
