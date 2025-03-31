@@ -3,6 +3,8 @@
 namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
+use AmaizingCompany\CertifactionClient\Enums\DocumentType;
+use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +15,7 @@ use Illuminate\Support\Carbon;
  * @property CertifactionUser $user
  * @property string $user_type
  * @property string $user_id
+ * @property string $invite_email
  * @property int $external_id
  * @property string $external_uid
  * @property string $role_id
@@ -55,6 +58,16 @@ interface Account
      * Change account status to identified.
      */
     public function markAsIdentified(): bool;
+
+    /**
+     * Request an account deletion.
+     */
+    public function requestDeletion(): void;
+
+    /**
+     * Request an account identification.
+     */
+    public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null): bool;
 
     /**
      * User model relationship.

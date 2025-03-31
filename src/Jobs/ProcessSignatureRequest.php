@@ -8,6 +8,7 @@ use AmaizingCompany\CertifactionClient\Contracts\Signable;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Events\SignatureRequestFailed;
 use AmaizingCompany\CertifactionClient\Events\SignatureRequestStarted;
+use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +17,12 @@ class ProcessSignatureRequest implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public SignatureTransaction $transaction) {}
+    public function __construct(public SignatureTransaction $transaction, public ?bool $notifySigner = null)
+    {
+        if (empty($this->notifySigner)) {
+            $this->notifySigner = CertifactionClient::getConfig('notify_signer');
+        }
+    }
 
     public function handle()
     {
@@ -35,19 +41,20 @@ class ProcessSignatureRequest implements ShouldQueue
 
         $request = SignatureRequest::make()
             ->for($this->transaction->signer->getCertifactionSignerObject())
-            ->jurisdiction($signable->jurisdiction())
-            ->signatureType($signable->legalWeight())
+            ->jurisdiction($this->transaction->jurisdiction)
+            ->signatureType($this->transaction->signature_type)
             ->digitalTwin($signable->hasDigitalTwin())
             ->pdfA($signable->isPdfA())
-            ->notifySigner($signable->shouldNotifySigner())
+            ->notifySigner($this->notifySigner)
             ->webhookUrl($signable->getWebhookUrl())
             ->additionalPageForSignature($signable->hasAdditionalPage())
             ->transactionId($this->transaction->id);
 
-        if (! $signable->hasAdditionalPage() && $signable->hasDigitalTwin()) {
+        if ($signable->hasDigitalTwin()) {
             $request
                 ->digitalTwinQrPosition($signable->qrCodePositionX(), $signable->qrCodePositionY())
-                ->digitalTwinQrPageNumber($signable->qrCodePageNumber());
+                ->digitalTwinQrPageNumber($signable->qrCodePageNumber())
+                ->digitalTwinQrHeight($signable->qrCodeHeight());
         }
 
         if (! $signable->hasAdditionalPage()) {

@@ -31,6 +31,10 @@ class ProcessWebhook implements ShouldQueue
             return;
         }
 
+        if ($response->hasAllItemsUnsigned()) {
+            return;
+        }
+
         if ($response->isCancelled()) {
             $this->transaction->markFailed('cancelled');
 

@@ -13,6 +13,13 @@ trait HasDigitalTwin
         return $this;
     }
 
+    public function digitalTwinQrHeight(int $height): static
+    {
+        $this->mergeQueryParams('qr-height', $height);
+
+        return $this;
+    }
+
     public function digitalTwinQrPageNumber(int $page): static
     {
         $this->mergeQueryParams('qr-page', $page);

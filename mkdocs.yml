@@ -1,0 +1,44 @@
+site_name: Laravel Certifaction Client
+nav:
+  - Introduction: index.md
+  - Requirements: requirements.md
+  - Installation: installation_setup.md
+  - Basics: basics.md
+  - Models: models.md
+  - Handle Users & Accounts: users_accounts.md
+  - Making Signature Requests: signature_requests.md
+  - Events: events.md
+  - Broadcasting: broadcasting.md
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+
+plugins:
+  - search
+
+extra:
+  version:
+    provider: mike
+
+repo_url: https://github.com/amaizing-company/certifaction-client-laravel
+repo_name: amaizing-company/certifaction-client-laravel
+
+markdown_extensions:
+  - toc:
+      permalink: "#"
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      extend_pygments_lang:
+        - name: php
+          lang: php
+          options:
+            startinline: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences

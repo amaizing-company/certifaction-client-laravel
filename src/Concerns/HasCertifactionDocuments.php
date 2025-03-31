@@ -3,7 +3,8 @@
 namespace AmaizingCompany\CertifactionClient\Concerns;
 
 use AmaizingCompany\CertifactionClient\Contracts\Document;
-use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
+use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
+use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -47,9 +48,11 @@ trait HasCertifactionDocuments
         return CertifactionClient::getConfig('pdf_a');
     }
 
-    public function jurisdiction(): Jurisdiction
+    public function requestPreparation(DocumentPrepareScope $scope): static
     {
-        return CertifactionClient::getConfig('jurisdiction');
+        CertifactionClient::requestDocumentPreparation($scope, $this);
+
+        return $this;
     }
 
     public function qrCodePositionX(): int
@@ -72,9 +75,11 @@ trait HasCertifactionDocuments
         return 1;
     }
 
-    public function shouldNotifySigner(): bool
+    public function requestDocumentPreparation(DocumentPrepareScope $scope, SignatureTransaction $transaction): static
     {
-        return CertifactionClient::getConfig('notify_signer');
+        CertifactionClient::requestDocumentPreparation($scope, $this, $transaction);
+
+        return $this;
     }
 
     public function signaturePositionX(): int

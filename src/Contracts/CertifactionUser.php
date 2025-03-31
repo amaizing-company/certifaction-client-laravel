@@ -3,6 +3,7 @@
 namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Api\DataObjects\Signer;
+use AmaizingCompany\CertifactionClient\Enums\SignatureType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -43,12 +44,17 @@ interface CertifactionUser
      *
      * @return $this
      */
-    public function inviteToCertifaction(string $roleId): static;
+    public function inviteToCertifaction(?string $roleId = null): static;
 
     /**
      * The certifaction user account model.
      */
     public function certifactionAccount(): HasOne;
+
+    /**
+     * Create a new signature transaction.
+     */
+    public function createSignatureTransaction(SignatureType $type): SignatureTransaction;
 
     /**
      * Related signature transactions.

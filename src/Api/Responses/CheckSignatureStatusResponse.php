@@ -79,6 +79,15 @@ class CheckSignatureStatusResponse extends BaseResponse
         return $this->envelopeItems->count() === $this->getSignedEnvelopeItems()->count();
     }
 
+    public function hasAllItemsUnsigned(): bool
+    {
+        if ($this->envelopeItems->isEmpty()) {
+            return true;
+        }
+
+        return $this->envelopeItems->count() === $this->getUnsignedEnvelopeItems()->count();
+    }
+
     public function hasUnsignedItems(): bool
     {
         return $this->getUnsignedEnvelopeItems()->count() > 0;

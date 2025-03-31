@@ -69,6 +69,9 @@ class GetOrganizationResponse extends BaseResponse
         return $this->getValueByKey('subscription_type');
     }
 
+    /**
+     * @return Collection<UserItem>
+     */
     public function getUsers(): Collection
     {
         return $this->users;

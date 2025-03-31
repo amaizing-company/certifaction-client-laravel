@@ -2,8 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Contracts;
 
-use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
-use AmaizingCompany\CertifactionClient\Enums\SignatureType;
+use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -34,11 +33,6 @@ interface Signable
     public function getFileContents(): string;
 
     /**
-     * Get user model that should act as signer.
-     */
-    public function getSigner(): CertifactionUser;
-
-    /**
      * Get the webhook url that will be called if a signature request was finished.
      */
     public function getWebhookUrl(): string;
@@ -59,14 +53,11 @@ interface Signable
     public function isPdfA(): bool;
 
     /**
-     * Determine the jurisdiction to sign the document.
+     * Request to prepare the document.
+     *
+     * @return $this
      */
-    public function jurisdiction(): Jurisdiction;
-
-    /**
-     * Determine the type of signature request for the document type.
-     */
-    public function legalWeight(): SignatureType;
+    public function requestPreparation(DocumentPrepareScope $scope): static;
 
     /**
      * The x coordinate on where the qr code for digital twin should be placed.
@@ -87,11 +78,6 @@ interface Signable
      * The page number on where the qr code for the digital twin should be placed.
      */
     public function qrCodePageNumber(): int;
-
-    /**
-     * Determine if the signer should be notified if a new signature request within this document type was created.
-     */
-    public function shouldNotifySigner(): bool;
 
     /**
      * The x coordinate on where the signature should be placed.
