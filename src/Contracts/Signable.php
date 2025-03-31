@@ -3,8 +3,6 @@
 namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
-use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
-use AmaizingCompany\CertifactionClient\Enums\SignatureType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -57,7 +55,6 @@ interface Signable
     /**
      * Request to prepare the document.
      *
-     * @param DocumentPrepareScope $scope
      * @return $this
      */
     public function requestPreparation(DocumentPrepareScope $scope): static;

@@ -61,17 +61,11 @@ interface Account
 
     /**
      * Request an account deletion.
-     *
-     * @return void
      */
     public function requestDeletion(): void;
 
     /**
      * Request an account identification.
-     *
-     * @param DocumentType $documentType
-     * @param Jurisdiction|null $jurisdiction
-     * @return bool
      */
     public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null): bool;
 

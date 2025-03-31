@@ -15,10 +15,7 @@ class UserJoinedCertifaction extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public Account $account)
-    {
-
-    }
+    public function __construct(public Account $account) {}
 
     public function broadcastOn()
     {

@@ -53,9 +53,6 @@ interface CertifactionUser
 
     /**
      * Create a new signature transaction.
-     *
-     * @param SignatureType $type
-     * @return SignatureTransaction
      */
     public function createSignatureTransaction(SignatureType $type): SignatureTransaction;
 

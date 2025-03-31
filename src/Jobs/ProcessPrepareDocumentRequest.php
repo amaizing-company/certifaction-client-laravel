@@ -54,7 +54,7 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
         if (! $response->successful()) {
             DocumentPreparationFailed::dispatch($request, $this->signable);
 
-            Log::warning("Document preparation failed.", ['signable_id' => $this->signable->getKey()]);
+            Log::warning('Document preparation failed.', ['signable_id' => $this->signable->getKey()]);
 
             return;
         }

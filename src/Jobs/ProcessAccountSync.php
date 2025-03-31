@@ -3,10 +3,10 @@
 namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\DataObjects\UserItem;
+use AmaizingCompany\CertifactionClient\Contracts\Account;
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
 use AmaizingCompany\CertifactionClient\Events\UserJoinedCertifaction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
-use AmaizingCompany\CertifactionClient\Contracts\Account;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ProcessAccountSync implements ShouldQueue

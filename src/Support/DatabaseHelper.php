@@ -7,8 +7,7 @@ class DatabaseHelper
     /**
      * Get the table name for package database tables.
      *
-     * @param string $name Table name
-     * @return string
+     * @param  string  $name  Table name
      */
     public static function getTableName(string $name): string
     {

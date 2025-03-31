@@ -5,7 +5,6 @@ namespace AmaizingCompany\CertifactionClient\Concerns;
 use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
-use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
