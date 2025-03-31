@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
  * @property CertifactionUser $user
  * @property string $user_type
  * @property string $user_id
+ * @property string $invite_email
  * @property int $external_id
  * @property string $external_uid
  * @property string $role_id

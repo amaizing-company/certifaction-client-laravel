@@ -12,6 +12,7 @@ return new class extends Migration
         Schema::create(DatabaseHelper::getTableName('accounts'), function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->ulidMorphs('user');
+            $table->string('invite_email');
             $table->unsignedBigInteger('external_id')->nullable();
             $table->string('external_uid')->nullable();
             $table->string('role_id');
