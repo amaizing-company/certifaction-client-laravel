@@ -30,3 +30,4 @@ jobs:
           branch: 1.x
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
+          push_options: '--force'
