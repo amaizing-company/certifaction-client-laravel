@@ -1,7 +1,7 @@
 # Certifaction API Client for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amaizing-company/certifaction-client-laravel.svg?style=flat-square)](https://packagist.org/packages/amaizing-company/certifaction-client-laravel)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/amaizing-company/certifaction-client-laravel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/amaizing-company/certifaction-client-laravel/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/amaizing-company/certifaction-client-laravel/run-tests.yml?branch=1.x&label=tests&style=flat-square)](https://github.com/amaizing-company/certifaction-client-laravel/actions?query=workflow%3Arun-tests+branch%3A1.x)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/amaizing-company/certifaction-client-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/amaizing-company/certifaction-client-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/amaizing-company/certifaction-client-laravel.svg?style=flat-square)](https://packagist.org/packages/amaizing-company/certifaction-client-laravel)
 
