@@ -2,6 +2,10 @@
 
 All notable changes to `certifaction-client-laravel` will be documented in this file.
 
+## 1.0.2 - 2025-04-02
+### What's changed
+- fix: Migration file name for the file_transactions table was incorrect.
+
 ## 1.0.1 - 2025-04-01
 ### What's changed
 - fix: Webhook route is no longer load from a config key, what was causing in route is set for homepage.
