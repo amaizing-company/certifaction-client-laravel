@@ -28,7 +28,7 @@ class CertifactionClient
     /**
      * Get API authentication key.
      */
-    protected static function getApiKey(): string
+    public static function getApiKey(): string
     {
         return static::getConfig('api.auth.key');
     }
