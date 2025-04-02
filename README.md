@@ -151,11 +151,11 @@ following command:
 php artisan certifaction:roles:list
 ```
 
-Thats it. For more detailed configuration options just have a look inside the [docs](https://certifaction-client-laravel.docs.amaizing.dev/).
+Thats it. For more detailed configuration options just have a look inside the [docs](https://amaizing-company.github.io/certifaction-client-laravel/).
 
 ## Usage
 
-Please view the [docs](https://certifaction-client-laravel.docs.amaizing.dev/).
+Please view the [docs](https://amaizing-company.github.io/certifaction-client-laravel/).
 
 ## Testing
 
