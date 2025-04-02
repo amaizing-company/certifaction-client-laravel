@@ -13,11 +13,11 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table
                 ->foreignUlid('signature_transaction_id')
-                ->constrained(DatabaseHelper::getTableName('signature_transactions'))
+                ->constrained(DatabaseHelper::getTableName('signature_transactions'), 'id', 'certifaction_std_st_id_foreign')
                 ->cascadeOnDelete();
             $table
                 ->foreignUlid('document_id')
-                ->constrained(DatabaseHelper::getTableName('documents'))
+                ->constrained(DatabaseHelper::getTableName('documents'), 'id', 'certifaction_std_doc_id_foreign')
                 ->cascadeOnDelete();
             $table->timestamps();
         });
