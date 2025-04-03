@@ -86,7 +86,13 @@ class CertifactionClientServiceProvider extends PackageServiceProvider
     public function registerRouteBindings(): void
     {
         Route::bind('signatureTransaction', function (string $value) {
-            return app(SignatureTransactionContract::class)::findOrFail(Crypt::decrypt($value));
+            try {
+                $id = Crypt::decrypt($value);
+            } catch (\Throwable $e) {
+                abort(404);
+            }
+
+            return app(SignatureTransactionContract::class)::query()->findOrFail($id);
         });
     }
 }
