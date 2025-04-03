@@ -108,6 +108,11 @@ return [
      * If broadcasting is expected for events set this option true.
      */
     'broadcasting' => false,
+    
+    /*
+     * Enable default package routes.
+     */
+    'default_routes' => true,
 ];
 ```
 
