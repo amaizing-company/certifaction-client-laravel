@@ -14,6 +14,7 @@ class CreateAccount
             'status' => AccountStatus::INVITED,
             'identified' => false,
             'admin' => false,
+            'role_id' => $event->roleId,
         ]);
     }
 }

@@ -15,7 +15,7 @@ class UserInvitedToCertifaction extends BaseEvent implements ShouldBroadcast
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public CertifactionUser $user) {}
+    public function __construct(public CertifactionUser $user, public string $roleId) {}
 
     public function broadcastOn()
     {
