@@ -6,7 +6,7 @@ use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 
 abstract class BaseEvent
 {
-    public function broadcastWhen(): array
+    public function broadcastWhen(): bool
     {
         return CertifactionClient::getConfig('broadcasting');
     }
