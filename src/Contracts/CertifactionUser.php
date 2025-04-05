@@ -5,8 +5,7 @@ namespace AmaizingCompany\CertifactionClient\Contracts;
 use AmaizingCompany\CertifactionClient\Api\DataObjects\Signer;
 use AmaizingCompany\CertifactionClient\Enums\SignatureType;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Carbon;
 
@@ -60,7 +59,7 @@ interface CertifactionUser
     /**
      * Related signature transactions.
      */
-    public function signatureTransactions(): HasMany;
+    public function signatureTransactions(): MorphMany;
 
     /**
      * Transformed user data to a certifaction signer object which is used to start signature requests.
