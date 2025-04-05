@@ -12,15 +12,17 @@ use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Jobs\ProcessUserInvitation;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
  * @phpstan-ignore trait.unused
  */
 trait HasCertifactionAccount
 {
-    public function certifactionAccount(): HasOne
+    public function certifactionAccount(): MorphOne
     {
-        return $this->hasOne(app(Account::class));
+        return $this->morphOne(app(Account::class), 'user');
     }
 
     public function inviteToCertifaction(?string $roleId = null): static
@@ -39,9 +41,9 @@ trait HasCertifactionAccount
             ->birthdate($this->getBirthdate());
     }
 
-    public function signatureTransactions(): HasMany
+    public function signatureTransactions(): MorphMany
     {
-        return $this->hasMany(app(SignatureTransaction::class));
+        return $this->morphMany(app(SignatureTransaction::class));
     }
 
     public function createSignatureTransaction(SignatureType $type, ?Jurisdiction $jurisdiction = null): SignatureTransaction

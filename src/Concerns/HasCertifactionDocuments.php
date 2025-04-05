@@ -7,15 +7,16 @@ use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @phpstan-ignore trait.unused
  */
 trait HasCertifactionDocuments
 {
-    public function certifactionDocuments(): HasMany
+    public function certifactionDocuments(): MorphMany
     {
-        return $this->hasMany(app(Document::class));
+        return $this->morphMany(app(Document::class));
     }
 
     public function getCertifactionPassword(): ?string
