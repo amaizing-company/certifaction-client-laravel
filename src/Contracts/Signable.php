@@ -57,7 +57,7 @@ interface Signable
      *
      * @return $this
      */
-    public function requestPreparation(DocumentPrepareScope $scope): static;
+    public function requestDocumentPreparation(DocumentPrepareScope $scope, SignatureTransaction $transaction, bool $sync = false): static;
 
     /**
      * The x coordinate on where the qr code for digital twin should be placed.

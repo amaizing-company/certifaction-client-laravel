@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed getConfig(string $key)
  * @method static string getDefaultRoleId()
  * @method static GetOrganizationResponse getOrganization(bool $refresh = false)
- * @method static bool requestAccountIdentification(Account $account, DocumentType $method, ?Jurisdiction $jurisdiction = null)
- * @method static bool requestAccountIdentificationStatusCheck(Account $account)
- * @method static void requestAccountDeletion(Account $account)
- * @method static void requestDocumentPreparation(DocumentPrepareScope $scope, Signable $signable, SignatureTransaction $transaction)
- * @method static void requestSignature(SignatureTransaction $transaction, ?bool $notifySigner = null)
+ * @method static bool requestAccountIdentification(Account $account, DocumentType $method, ?Jurisdiction $jurisdiction = null, bool $sync = false)
+ * @method static bool requestAccountIdentificationStatusCheck(Account $account, bool $sync = false)
+ * @method static void requestAccountDeletion(Account $account, bool $sync = false)
+ * @method static void requestDocumentPreparation(DocumentPrepareScope $scope, Signable $signable, SignatureTransaction $transaction, bool $sync = false)
+ * @method static void requestSignature(SignatureTransaction $transaction, ?bool $notifySigner = null, bool $sync = false)
  */
 class CertifactionClient extends Facade
 {

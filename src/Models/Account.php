@@ -79,19 +79,19 @@ class Account extends Model implements AccountContract
         return $transaction;
     }
 
-    public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null): bool
+    public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null, bool $sync = false): bool
     {
-        return CertifactionClient::requestAccountIdentification($this, $documentType, $jurisdiction);
+        return CertifactionClient::requestAccountIdentification($this, $documentType, $jurisdiction, $sync);
     }
 
-    public function requestIdentificationStatusCheck(): bool
+    public function requestIdentificationStatusCheck(bool $sync = false): bool
     {
-        return CertifactionClient::requestAccountIdentificationStatusCheck($this);
+        return CertifactionClient::requestAccountIdentificationStatusCheck($this, $sync);
     }
 
-    public function requestDeletion(): void
+    public function requestDeletion(bool $sync = false): void
     {
-        CertifactionClient::requestAccountDeletion($this);
+        CertifactionClient::requestAccountDeletion($this, $sync);
     }
 
     public function isInvited(): bool

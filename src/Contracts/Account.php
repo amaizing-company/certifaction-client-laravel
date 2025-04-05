@@ -6,8 +6,8 @@ use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -62,15 +62,15 @@ interface Account
     /**
      * Request an account deletion.
      */
-    public function requestDeletion(): void;
+    public function requestDeletion(bool $sync = false): void;
 
     /**
      * Request an account identification.
      */
-    public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null): bool;
+    public function requestIdentification(DocumentType $documentType, ?Jurisdiction $jurisdiction = null, bool $sync = false): bool;
 
     /**
      * User model relationship.
      */
-    public function user(): BelongsTo;
+    public function user(): MorphTo;
 }

@@ -95,7 +95,7 @@ class CertifactionClient
      * @param  DocumentType  $method  Document type for identification
      * @param  Jurisdiction|null  $jurisdiction  Jurisdiction for identification
      */
-    public static function requestAccountIdentification(Account $account, DocumentType $method, ?Jurisdiction $jurisdiction = null): bool
+    public static function requestAccountIdentification(Account $account, DocumentType $method, ?Jurisdiction $jurisdiction = null, bool $sync = false): bool
     {
         if ($account->hasPendingIdentificationRequest()) {
             return false;
@@ -109,7 +109,11 @@ class CertifactionClient
             'identification_method' => $method,
         ]);
 
-        ProcessAccountIdentificationRequest::dispatch($identityTransaction, $jurisdiction);
+        if ($sync) {
+            ProcessAccountIdentificationRequest::dispatchSync($identityTransaction, $jurisdiction);
+        } else {
+            ProcessAccountIdentificationRequest::dispatch($identityTransaction, $jurisdiction);
+        }
 
         return true;
     }
@@ -119,7 +123,7 @@ class CertifactionClient
      *
      * @param  Account  $account  Related account model
      */
-    public static function requestAccountIdentificationStatusCheck(Account $account): bool
+    public static function requestAccountIdentificationStatusCheck(Account $account, bool $sync = false): bool
     {
         $identityTransaction = $account->getPendingIdentityTransaction();
 
@@ -127,7 +131,11 @@ class CertifactionClient
             return false;
         }
 
-        ProcessAccountIdentificationStatusCheck::dispatch($identityTransaction);
+        if ($sync) {
+            ProcessAccountIdentificationStatusCheck::dispatchSync($identityTransaction);
+        } else {
+            ProcessAccountIdentificationStatusCheck::dispatch($identityTransaction);
+        }
 
         return true;
     }
@@ -137,24 +145,36 @@ class CertifactionClient
      *
      * @param  Account  $account  Related account model
      */
-    public static function requestAccountDeletion(Account $account): void
+    public static function requestAccountDeletion(Account $account, bool $sync = false): void
     {
-        ProcessAccountDeletion::dispatch($account);
+        if ($sync) {
+            ProcessAccountDeletion::dispatchSync($account);
+        } else {
+            ProcessAccountDeletion::dispatch($account);
+        }
     }
 
     /**
      * Request to prepare a document.
      */
-    public function requestDocumentPreparation(DocumentPrepareScope $scope, Signable $signable, Contracts\SignatureTransaction $transaction): void
+    public function requestDocumentPreparation(DocumentPrepareScope $scope, Signable $signable, Contracts\SignatureTransaction $transaction, bool $sync = false): void
     {
-        ProcessPrepareDocumentRequest::dispatch($scope, $signable, $transaction);
+        if ($sync) {
+            ProcessPrepareDocumentRequest::dispatchSync($scope, $signable, $transaction);
+        } else {
+            ProcessPrepareDocumentRequest::dispatch($scope, $signable, $transaction);
+        }
     }
 
     /**
      * Request a signature based on a signature transaction.
      */
-    public function requestSignature(SignatureTransaction $transaction, ?bool $notifySigner = null): void
+    public function requestSignature(SignatureTransaction $transaction, ?bool $notifySigner = null, bool $sync = false): void
     {
-        ProcessSignatureRequest::dispatch($transaction, $notifySigner);
+        if ($sync) {
+            ProcessSignatureRequest::dispatchSync($transaction, $notifySigner);
+        } else {
+            ProcessSignatureRequest::dispatch($transaction, $notifySigner);
+        }
     }
 }

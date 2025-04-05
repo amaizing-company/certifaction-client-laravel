@@ -49,13 +49,6 @@ trait HasCertifactionDocuments
         return CertifactionClient::getConfig('pdf_a');
     }
 
-    public function requestPreparation(DocumentPrepareScope $scope): static
-    {
-        CertifactionClient::requestDocumentPreparation($scope, $this);
-
-        return $this;
-    }
-
     public function qrCodePositionX(): int
     {
         return 0;
@@ -76,9 +69,9 @@ trait HasCertifactionDocuments
         return 1;
     }
 
-    public function requestDocumentPreparation(DocumentPrepareScope $scope, SignatureTransaction $transaction): static
+    public function requestDocumentPreparation(DocumentPrepareScope $scope, SignatureTransaction $transaction, bool $sync = false): static
     {
-        CertifactionClient::requestDocumentPreparation($scope, $this, $transaction);
+        CertifactionClient::requestDocumentPreparation($scope, $this, $transaction, $sync);
 
         return $this;
     }

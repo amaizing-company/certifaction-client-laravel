@@ -44,7 +44,7 @@ interface CertifactionUser
      *
      * @return $this
      */
-    public function inviteToCertifaction(?string $roleId = null): static;
+    public function inviteToCertifaction(?string $roleId = null, bool $sync = false): static;
 
     /**
      * The certifaction user account model.

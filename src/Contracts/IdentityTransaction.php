@@ -67,6 +67,14 @@ interface IdentityTransaction
     public function pending(string $identificationId, string $identificationUrl): bool;
 
     /**
+     * Request an account identity status check.
+     *
+     * @param bool $sync
+     * @return bool
+     */
+    public function requestStatusCheck(bool $sync = false): bool;
+
+    /**
      * Update the timestamp for last identity status checkup.
      */
     public function updateLastCheck(?Carbon $lastCheck = null): bool;
