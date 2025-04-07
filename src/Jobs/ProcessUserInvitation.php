@@ -35,7 +35,7 @@ class ProcessUserInvitation implements ShouldQueue
         }
 
         if ($response->isInvited()) {
-            UserInvitedToCertifaction::dispatch($this->user);
+            UserInvitedToCertifaction::dispatch($this->user, $this->roleId);
         }
     }
 }

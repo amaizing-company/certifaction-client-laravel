@@ -6,7 +6,6 @@ use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**

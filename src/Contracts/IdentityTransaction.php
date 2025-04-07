@@ -68,9 +68,6 @@ interface IdentityTransaction
 
     /**
      * Request an account identity status check.
-     *
-     * @param bool $sync
-     * @return bool
      */
     public function requestStatusCheck(bool $sync = false): bool;
 
