@@ -43,6 +43,7 @@ class CertifactionClientServiceProvider extends PackageServiceProvider
                 'create_certifaction_signature_transactions_table',
                 'create_certifaction_signature_transactions_documents_table',
                 'create_certifaction_file_transactions_table',
+                'add_original_transaction_id_to_certifaction_file_transactions_table',
             ])
             ->hasCommands([
                 CertifactionClearCache::class,
