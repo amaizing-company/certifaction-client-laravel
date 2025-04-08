@@ -85,6 +85,7 @@ class SignatureTransaction extends Model implements SignatureTransactionContract
 
     public function markFinished(?Carbon $finishedAt = null): bool
     {
+        $this->status = SignatureTransactionStatus::SUCCEED;
         $this->finished_at = $finishedAt ?? Carbon::now();
 
         return $this->save();
@@ -92,6 +93,7 @@ class SignatureTransaction extends Model implements SignatureTransactionContract
 
     public function markFailed(string $failureReason, ?Carbon $finishedAt = null): bool
     {
+        $this->status = SignatureTransactionStatus::FAILED;
         $this->failure_reason = $failureReason;
         $this->finished_at = $finishedAt ?? Carbon::now();
 
