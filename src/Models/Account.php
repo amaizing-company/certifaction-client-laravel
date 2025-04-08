@@ -4,18 +4,24 @@ namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Account as AccountContract;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
+use AmaizingCompany\CertifactionClient\Database\Factories\AccountFactory;
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Account extends Model implements AccountContract
 {
+    use HasFactory;
+    use HasUlids;
+
     protected $guarded = [];
 
     protected $keyType = 'string';
@@ -38,6 +44,11 @@ class Account extends Model implements AccountContract
             'admin' => 'boolean',
             'identified' => 'boolean',
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return AccountFactory::new();
     }
 
     public function getTable(): string
@@ -67,7 +78,7 @@ class Account extends Model implements AccountContract
             ->exists();
     }
 
-    public function getPendingIdentityTransaction(): IdentityTransaction
+    public function getPendingIdentityTransaction(): ?IdentityTransaction
     {
         /**
          * @var IdentityTransaction $transaction

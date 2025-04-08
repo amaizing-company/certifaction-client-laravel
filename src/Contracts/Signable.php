@@ -4,7 +4,7 @@ namespace AmaizingCompany\CertifactionClient\Contracts;
 
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @mixin Model
@@ -14,7 +14,7 @@ interface Signable
     /**
      * Relation to certifaction documents model.
      */
-    public function certifactionDocuments(): HasMany;
+    public function certifactionDocuments(): MorphMany;
 
     /**
      * Get file name.

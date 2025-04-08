@@ -3,6 +3,13 @@
 use AmaizingCompany\CertifactionClient\Api\Contracts\Request;
 use AmaizingCompany\CertifactionClient\Api\Requests\BaseRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\BaseResponse;
+use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
+use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
+use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
+use AmaizingCompany\CertifactionClient\Models\Account;
+use AmaizingCompany\CertifactionClient\Models\Document;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Facade;
@@ -68,8 +75,32 @@ arch()
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Models')
     ->toBeClasses()
-    ->toExtend(Model::class);
+    ->toExtend(Model::class)
+    ->toUse([
+        HasFactory::class,
+        HasUlids::class,
+    ]);
 
 arch()
     ->expect('AmaizingCompany\CertifactionClient\Enums')
     ->toBeEnums();
+
+arch('account model implements contract')
+    ->expect(Account::class)
+    ->toImplement(\AmaizingCompany\CertifactionClient\Contracts\Account::class);
+
+arch('document model implements contract')
+    ->expect(Document::class)
+    ->toImplement(\AmaizingCompany\CertifactionClient\Contracts\Document::class);
+
+arch('file transaction model implements contract')
+    ->expect(\AmaizingCompany\CertifactionClient\Models\FileTransaction::class)
+    ->toImplement(FileTransaction::class);
+
+arch('identification model implements contract')
+    ->expect(\AmaizingCompany\CertifactionClient\Models\IdentityTransaction::class)
+    ->toImplement(IdentityTransaction::class);
+
+arch('signature transaction model implements contract')
+    ->expect(\AmaizingCompany\CertifactionClient\Models\SignatureTransaction::class)
+    ->toImplement(SignatureTransaction::class);

@@ -4,16 +4,22 @@ namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Account;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction as IdentityTransactionContract;
+use AmaizingCompany\CertifactionClient\Database\Factories\IdentityTransactionFactory;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 class IdentityTransaction extends Model implements IdentityTransactionContract
 {
+    use HasFactory;
+    use HasUlids;
+
     protected $guarded = [];
 
     protected $keyType = 'string';
@@ -38,6 +44,11 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
             'last_check_at' => 'datetime',
             'finished_at' => 'datetime',
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return IdentityTransactionFactory::new();
     }
 
     public function getTable(): string
@@ -66,7 +77,7 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
 
     public function updateLastRequest(?Carbon $lastRequest = null): bool
     {
-        return $this->update(['last_request_at' => $lastRequest ?? Carbon::now()]);
+        return $this->update(['requested_at' => $lastRequest ?? Carbon::now()]);
     }
 
     public function pending(string $identificationId, string $identificationUrl): bool
@@ -74,7 +85,7 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
         return $this->update([
             'status' => IdentificationStatus::PENDING,
             'external_id' => $identificationId,
-            'identification_url' => $identificationUrl,
+            'identification_uri' => $identificationUrl,
         ]);
     }
 

@@ -6,10 +6,13 @@ use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
 use AmaizingCompany\CertifactionClient\Contracts\Document as DocumentContract;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
+use AmaizingCompany\CertifactionClient\Database\Factories\DocumentFactory;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,6 +21,9 @@ use Illuminate\Support\Str;
 
 class Document extends Model implements DocumentContract
 {
+    use HasFactory;
+    use HasUlids;
+
     protected $guarded = [];
 
     protected $keyType = 'string';
@@ -41,6 +47,11 @@ class Document extends Model implements DocumentContract
         ];
     }
 
+    protected static function newFactory()
+    {
+        return DocumentFactory::new();
+    }
+
     public function getTable(): string
     {
         return DatabaseHelper::getTableName('documents');
@@ -57,7 +68,15 @@ class Document extends Model implements DocumentContract
             $fileName .= '.pdf';
         }
 
-        return "$storageDir/$fileName";
+        if (Str::startsWith($fileName, DIRECTORY_SEPARATOR)) {
+            $fileName = Str::ltrim($fileName, DIRECTORY_SEPARATOR);
+        }
+
+        if (Str::endsWith($storageDir, DIRECTORY_SEPARATOR)) {
+            $storageDir = Str::rtrim($storageDir, DIRECTORY_SEPARATOR);
+        }
+
+        return "$storageDir".DIRECTORY_SEPARATOR."$fileName";
     }
 
     public function getStorageDisk(): ?string
@@ -72,7 +91,12 @@ class Document extends Model implements DocumentContract
 
     public function signatureTransactions(): BelongsToMany
     {
-        return $this->belongsToMany(app(SignatureTransaction::class)->getMorphClass());
+        return $this->belongsToMany(
+            app(SignatureTransaction::class)->getMorphClass(),
+            DatabaseHelper::getTableName('signature_transactions_documents'),
+            'document_id',
+            'signature_transaction_id'
+        )->using(SignatureTransactionDocument::class);
     }
 
     public function fileTransactions(): HasMany
