@@ -32,10 +32,20 @@ class TestCase extends Orchestra
         parent::getEnvironmentSetUp($app);
 
         config()->set('database.default', 'testing');
+        config()->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
+        config()->set('app.key', 'base64:Zm54bWdrOWczNXFjM3U3dmlqcWxld2Z5YnBjMWZpZ3M=');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_certifaction-client-laravel_table.php.stub';
-        $migration->up();
-        */
+//        $migration = include __DIR__.'/migrations/create_users_table.php';
+//        $migration->up();
+
     }
+
+//    protected function defineDatabaseMigrations()
+//    {
+//        $this->loadMigrationsFrom([__DIR__.'/../database/migrations', __DIR__ ]);
+//    }
 }
