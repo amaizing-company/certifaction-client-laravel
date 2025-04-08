@@ -42,6 +42,11 @@ class FileTransaction extends Model implements FileTransactionContract
         ];
     }
 
+    public function getTable(): string
+    {
+        return DatabaseHelper::getTableName('file_transactions');
+    }
+
     public function document(): BelongsTo
     {
         return $this->belongsTo(app(Document::class)->getMorphClass());
