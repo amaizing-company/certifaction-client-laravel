@@ -68,15 +68,15 @@ class Document extends Model implements DocumentContract
             $fileName .= '.pdf';
         }
 
-        if (Str::startsWith($fileName, '/')) {
-            $fileName = Str::ltrim($fileName, '/');
+        if (Str::startsWith($fileName, DIRECTORY_SEPARATOR)) {
+            $fileName = Str::ltrim($fileName, DIRECTORY_SEPARATOR);
         }
 
-        if (Str::endsWith($storageDir, '/')) {
-            $storageDir = Str::rtrim($storageDir, '/');
+        if (Str::endsWith($storageDir, DIRECTORY_SEPARATOR)) {
+            $storageDir = Str::rtrim($storageDir, DIRECTORY_SEPARATOR);
         }
 
-        return "$storageDir/$fileName";
+        return "$storageDir" . DIRECTORY_SEPARATOR . "$fileName";
     }
 
     public function getStorageDisk(): ?string
