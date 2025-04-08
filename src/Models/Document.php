@@ -76,7 +76,7 @@ class Document extends Model implements DocumentContract
             $storageDir = Str::rtrim($storageDir, DIRECTORY_SEPARATOR);
         }
 
-        return "$storageDir" . DIRECTORY_SEPARATOR . "$fileName";
+        return "$storageDir".DIRECTORY_SEPARATOR."$fileName";
     }
 
     public function getStorageDisk(): ?string
