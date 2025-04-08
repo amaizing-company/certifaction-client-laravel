@@ -85,7 +85,12 @@ class Document extends Model implements DocumentContract
 
     public function signatureTransactions(): BelongsToMany
     {
-        return $this->belongsToMany(app(SignatureTransaction::class)->getMorphClass());
+        return $this->belongsToMany(
+            app(SignatureTransaction::class)->getMorphClass(),
+            DatabaseHelper::getTableName('signature_transactions_documents'),
+            'document_id',
+            'signature_transaction_id'
+        )->using(SignatureTransactionDocument::class);
     }
 
     public function fileTransactions(): HasMany
