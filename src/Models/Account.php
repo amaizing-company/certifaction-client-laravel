@@ -72,7 +72,7 @@ class Account extends Model implements AccountContract
             ->exists();
     }
 
-    public function getPendingIdentityTransaction(): IdentityTransaction
+    public function getPendingIdentityTransaction(): ?IdentityTransaction
     {
         /**
          * @var IdentityTransaction $transaction
