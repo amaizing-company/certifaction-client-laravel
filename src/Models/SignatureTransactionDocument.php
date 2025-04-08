@@ -10,6 +10,7 @@ class SignatureTransactionDocument extends Pivot
     use HasUlids;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected static function boot(): void

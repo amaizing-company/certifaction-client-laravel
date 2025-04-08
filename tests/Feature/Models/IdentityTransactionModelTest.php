@@ -1,6 +1,5 @@
 <?php
 
-use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Models\Account;
 use AmaizingCompany\CertifactionClient\Models\IdentityTransaction;
@@ -9,22 +8,21 @@ use Illuminate\Support\Carbon;
 
 uses(RefreshDatabase::class);
 
-
-test ('identity transaction model can be initiated', function () {
+test('identity transaction model can be initiated', function () {
     $transaction = IdentityTransaction::factory()->create();
 
     expect($transaction)
         ->toBeInstanceOf(IdentityTransaction::class);
 });
 
-test ('identity transaction can relates to account', function () {
+test('identity transaction can relates to account', function () {
     $transaction = IdentityTransaction::factory()->create();
 
     expect($transaction->account()->first())
         ->toBeInstanceOf(Account::class);
 });
 
-test ('identity transaction can mark as finished', function () {
+test('identity transaction can mark as finished', function () {
     $transaction = IdentityTransaction::factory()->create(['status' => IdentificationStatus::PENDING]);
 
     expect($transaction->finish(IdentificationStatus::VERIFIED))
@@ -37,7 +35,7 @@ test ('identity transaction can mark as finished', function () {
         ->not()->toBeNull();
 });
 
-test ('identity transaction can update last check', function () {
+test('identity transaction can update last check', function () {
     $transaction = IdentityTransaction::factory()->create(['last_check_at' => null]);
     $lastCheck = Carbon::now();
 
@@ -76,7 +74,7 @@ test('identity transaction can mark as pending', function () {
         ->toBe('https://test.example');
 });
 
-test ('identity transaction can check if it´s finished', function () {
+test('identity transaction can check if it´s finished', function () {
     $transaction = IdentityTransaction::factory()->create(['status' => IdentificationStatus::PENDING, 'finished_at' => null]);
 
     expect($transaction->isFinished())
@@ -118,7 +116,7 @@ test('identity transaction can check if it´s verified', function () {
         ->toBeFalse();
 });
 
-test ('identity transaction can check if it´s failed', function () {
+test('identity transaction can check if it´s failed', function () {
     $transaction = IdentityTransaction::factory()->create(['status' => IdentificationStatus::PENDING]);
 
     expect($transaction->isFailed())

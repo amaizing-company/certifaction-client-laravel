@@ -24,7 +24,8 @@ use Illuminate\Support\Carbon;
 class User extends Authenticatable implements CertifactionUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasCertifactionAccount;
+    use HasCertifactionAccount, HasFactory, Notifiable;
+
     use HasUlids;
 
     /**

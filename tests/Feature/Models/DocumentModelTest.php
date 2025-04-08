@@ -11,14 +11,14 @@ use Illuminate\Support\Str;
 
 uses(RefreshDatabase::class);
 
-test ('document model can be initiated', function () {
+test('document model can be initiated', function () {
     $document = Document::factory()->create();
 
     expect($document)
         ->toBeInstanceOf(Document::class);
 });
 
-test ('document model can get storage path from signable', function () {
+test('document model can get storage path from signable', function () {
     $document = Document::factory()->create();
     $storage = Storage::fake('local');
 
@@ -29,7 +29,7 @@ test ('document model can get storage path from signable', function () {
         ->toBeTrue();
 });
 
-test ('document model can get storage disk', function () {
+test('document model can get storage disk', function () {
     $document = Document::factory()->create();
 
     expect($document->getStorageDisk())
@@ -37,14 +37,14 @@ test ('document model can get storage disk', function () {
         ->toBe('local');
 });
 
-test ('document can relate to signable', function () {
+test('document can relate to signable', function () {
     $document = Document::factory()->create();
 
     expect($document->signable()->first())
         ->toBeInstanceOf(Signable::class);
 });
 
-test ('document can relate to signature transaction', function () {
+test('document can relate to signature transaction', function () {
     $document = Document::factory()->create();
     $signatureTransaction = SignatureTransaction::factory()->create();
     $signatureTransaction->documents()->attach($document);
@@ -53,7 +53,7 @@ test ('document can relate to signature transaction', function () {
         ->toBeInstanceOf(SignatureTransaction::class);
 });
 
-test ('document can relate to file transaction', function () {
+test('document can relate to file transaction', function () {
     $document = Document::factory()->create();
     FileTransaction::factory()->create(['document_id' => $document->id]);
 
@@ -61,7 +61,7 @@ test ('document can relate to file transaction', function () {
         ->toBeInstanceOf(FileTransaction::class);
 });
 
-it ('can check document is intent', function () {
+it('can check document is intent', function () {
     foreach (DocumentStatus::cases() as $status) {
         $document = Document::factory()->create(['status' => $status]);
 
@@ -73,7 +73,7 @@ it ('can check document is intent', function () {
     }
 });
 
-it ('can check document is prepared', function () {
+it('can check document is prepared', function () {
     foreach (DocumentStatus::cases() as $status) {
         $document = Document::factory()->create(['status' => $status]);
 
@@ -85,7 +85,7 @@ it ('can check document is prepared', function () {
     }
 });
 
-it ('can check document is signed', function () {
+it('can check document is signed', function () {
     foreach (DocumentStatus::cases() as $status) {
         $document = Document::factory()->create(['status' => $status]);
 
@@ -97,7 +97,7 @@ it ('can check document is signed', function () {
     }
 });
 
-it ('can check document is signature failed', function () {
+it('can check document is signature failed', function () {
     foreach (DocumentStatus::cases() as $status) {
         $document = Document::factory()->create(['status' => $status]);
 

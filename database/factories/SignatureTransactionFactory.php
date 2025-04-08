@@ -2,7 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Database\Factories;
 
-use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Enums\SignatureTransactionStatus;
 use AmaizingCompany\CertifactionClient\Enums\SignatureType;

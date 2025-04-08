@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Storage;
  */
 class File extends Model implements Signable
 {
+    use HasCertifactionDocuments;
     use HasFactory;
     use HasUlids;
-    use HasCertifactionDocuments;
 
     protected $guarded = [];
 

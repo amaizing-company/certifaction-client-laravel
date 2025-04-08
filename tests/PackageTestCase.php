@@ -2,10 +2,6 @@
 
 namespace AmaizingCompany\CertifactionClient\Tests;
 
-use AmaizingCompany\CertifactionClient\CertifactionClientServiceProvider;
-
-use function Laravel\Prompts\password;
-
 class PackageTestCase extends TestCase
 {
     protected function setUp(): void
@@ -24,7 +20,7 @@ class PackageTestCase extends TestCase
             'create_certifaction_signature_transactions_table',
             'create_certifaction_signature_transactions_documents_table',
             'create_certifaction_file_transactions_table',
-            'add_original_transaction_id_to_certifaction_file_transactions_table'
+            'add_original_transaction_id_to_certifaction_file_transactions_table',
         ];
 
         $testMigrations = [

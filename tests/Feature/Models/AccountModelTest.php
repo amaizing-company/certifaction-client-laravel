@@ -8,15 +8,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-test ('account model can be initiated', function () {
+test('account model can be initiated', function () {
     $account = Account::factory()->create();
 
     expect($account)
         ->toBeInstanceOf(Account::class);
 });
 
-
-it ('can mark account as identified', function () {
+it('can mark account as identified', function () {
     $account = Account::factory()->create(['identified' => false]);
     $account->markAsIdentified();
 
@@ -24,7 +23,7 @@ it ('can mark account as identified', function () {
         ->toBeTrue();
 });
 
-it ('can check if account status is invited', function () {
+it('can check if account status is invited', function () {
     $account = Account::factory()->create(['status' => AccountStatus::INVITED]);
 
     expect($account->isInvited())
@@ -36,7 +35,7 @@ it ('can check if account status is invited', function () {
         ->toBeFalse();
 });
 
-it ('can check if account status is joined', function () {
+it('can check if account status is joined', function () {
     $account = Account::factory()->create(['status' => AccountStatus::JOINED]);
 
     expect($account->isJoined())
@@ -48,7 +47,7 @@ it ('can check if account status is joined', function () {
         ->toBeFalse();
 });
 
-test ('account can check for pending identity transaction', function () {
+test('account can check for pending identity transaction', function () {
 
     foreach (IdentificationStatus::cases() as $status) {
         $account = Account::factory()->create();
@@ -64,7 +63,7 @@ test ('account can check for pending identity transaction', function () {
     }
 });
 
-test ('account can get pending identity transaction', function () {
+test('account can get pending identity transaction', function () {
     foreach (IdentificationStatus::cases() as $status) {
         $account = Account::factory()->create();
         IdentityTransaction::factory()->create(['account_id' => $account->id, 'status' => $status]);

@@ -12,21 +12,21 @@ use Illuminate\Support\Str;
 
 uses(RefreshDatabase::class);
 
-test ('signature transaction model can be initiated', function () {
+test('signature transaction model can be initiated', function () {
     $transaction = SignatureTransaction::factory()->create();
 
     expect($transaction)
         ->toBeInstanceOf(SignatureTransaction::class);
 });
 
-test ('signature transaction can be related to signer', function () {
+test('signature transaction can be related to signer', function () {
     $transaction = SignatureTransaction::factory()->create();
 
     expect($transaction->signer()->first())
         ->toBeInstanceOf(User::class);
 });
 
-test ('signature transaction can be related to documents', function () {
+test('signature transaction can be related to documents', function () {
     $transaction = SignatureTransaction::factory()->create();
     $document = Document::factory()->create();
 
@@ -36,22 +36,22 @@ test ('signature transaction can be related to documents', function () {
         ->toBeInstanceOf(Document::class);
 });
 
-test ('signature transaction can get webhook url', function () {
+test('signature transaction can get webhook url', function () {
     $transaction = SignatureTransaction::factory()->create();
     $document = Document::factory()->create();
     $transaction->documents()->attach($document);
 
     expect($transaction->getWebhookUrl())
         ->toBeString()
-        ->and(Crypt::decrypt(Str::replace(app(File::class)->getWebhookUrl() . "/", '', $transaction->getWebhookUrl())))
+        ->and(Crypt::decrypt(Str::replace(app(File::class)->getWebhookUrl().'/', '', $transaction->getWebhookUrl())))
         ->toBe($transaction->id);
 });
 
-test ('signature transaction can mark as pending', function () {
+test('signature transaction can mark as pending', function () {
     $transaction = SignatureTransaction::factory()->create([
         'status' => SignatureTransactionStatus::INTENDED,
         'request_url' => null,
-        'requested_at' => null
+        'requested_at' => null,
     ]);
 
     $requestedAt = Carbon::now();
@@ -67,10 +67,10 @@ test ('signature transaction can mark as pending', function () {
         ->toBe($requestedAt->format('Y-m-d H:i:s'));
 });
 
-test ('signature transaction can mark as finished', function () {
+test('signature transaction can mark as finished', function () {
     $transaction = SignatureTransaction::factory()->create([
         'finished_at' => null,
-        'status' => SignatureTransactionStatus::PENDING
+        'status' => SignatureTransactionStatus::PENDING,
     ]);
 
     $finishedAt = Carbon::now();
@@ -83,7 +83,7 @@ test ('signature transaction can mark as finished', function () {
         ->toBe($finishedAt->format('Y-m-d H:i:s'));
 });
 
-test ('signature transaction can mark as failed', function () {
+test('signature transaction can mark as failed', function () {
     $transaction = SignatureTransaction::factory()->create([
         'status' => SignatureTransactionStatus::PENDING,
         'finished_at' => null,

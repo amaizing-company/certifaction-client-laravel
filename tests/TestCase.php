@@ -39,13 +39,13 @@ class TestCase extends Orchestra
         ]);
         config()->set('app.key', 'base64:Zm54bWdrOWczNXFjM3U3dmlqcWxld2Z5YnBjMWZpZ3M=');
 
-//        $migration = include __DIR__.'/migrations/create_users_table.php';
-//        $migration->up();
+        //        $migration = include __DIR__.'/migrations/create_users_table.php';
+        //        $migration->up();
 
     }
 
-//    protected function defineDatabaseMigrations()
-//    {
-//        $this->loadMigrationsFrom([__DIR__.'/../database/migrations', __DIR__ ]);
-//    }
+    //    protected function defineDatabaseMigrations()
+    //    {
+    //        $this->loadMigrationsFrom([__DIR__.'/../database/migrations', __DIR__ ]);
+    //    }
 }

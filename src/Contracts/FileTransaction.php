@@ -47,29 +47,21 @@ interface FileTransaction
 
     /**
      * Relation to original file transaction.
-     *
-     * @return BelongsTo
      */
     public function originalTransaction(): BelongsTo;
 
     /**
      * Check if this transaction is a child of another file transaction.
-     *
-     * @return bool
      */
     public function hasParent(): bool;
 
     /**
      * Check if this transaction has related child transactions.
-     *
-     * @return bool
      */
     public function hasChildren(): bool;
 
     /**
      * Relation to child transactions.
-     *
-     * @return HasMany
      */
     public function childTransactions(): HasMany;
 }

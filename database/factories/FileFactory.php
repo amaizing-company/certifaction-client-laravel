@@ -13,7 +13,7 @@ class FileFactory extends Factory
     public function definition(): array
     {
         $storage = Storage::fake('local');
-        $file = $this->faker->file(__DIR__ . '/../../tests/data/', $storage->path(''), false);
+        $file = $this->faker->file(__DIR__.'/../../tests/data/', $storage->path(''), false);
 
         return [
             'disk' => 'local',
