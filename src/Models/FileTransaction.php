@@ -37,8 +37,8 @@ class FileTransaction extends Model implements FileTransactionContract
     {
         return [
             'status' => FileTransactionStatus::class,
-            'finished_at' => Carbon::class,
-            'requested_at' => Carbon::class,
+            'finished_at' => 'datetime',
+            'requested_at' => 'datetime',
         ];
     }
 

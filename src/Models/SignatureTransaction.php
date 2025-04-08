@@ -42,8 +42,8 @@ class SignatureTransaction extends Model implements SignatureTransactionContract
             'signature_type' => SignatureType::class,
             'jurisdiction' => Jurisdiction::class,
             'status' => SignatureTransactionStatus::class,
-            'requested_at' => Carbon::class,
-            'finished_at' => Carbon::class,
+            'requested_at' => 'datetime',
+            'finished_at' => 'datetime',
         ];
     }
 
