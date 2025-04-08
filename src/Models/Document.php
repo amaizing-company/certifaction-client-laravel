@@ -62,6 +62,14 @@ class Document extends Model implements DocumentContract
             $fileName .= '.pdf';
         }
 
+        if (Str::startsWith($fileName, '/')) {
+            $fileName = Str::ltrim($fileName, '/');
+        }
+
+        if (Str::endsWith($storageDir, '/')) {
+            $storageDir = Str::rtrim($storageDir, '/');
+        }
+
         return "$storageDir/$fileName";
     }
 
