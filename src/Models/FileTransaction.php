@@ -5,13 +5,16 @@ namespace AmaizingCompany\CertifactionClient\Models;
 use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction as FileTransactionContract;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
+use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 class FileTransaction extends Model implements FileTransactionContract
 {
+    use HasFactory;
     use HasUlids;
 
     protected $guarded = [];
