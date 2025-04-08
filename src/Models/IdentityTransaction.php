@@ -4,6 +4,7 @@ namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Account;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction as IdentityTransactionContract;
+use AmaizingCompany\CertifactionClient\Database\Factories\IdentityTransactionFactory;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
@@ -45,6 +46,11 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
         ];
     }
 
+    protected static function newFactory()
+    {
+        return IdentityTransactionFactory::new();
+    }
+
     public function getTable(): string
     {
         return DatabaseHelper::getTableName('identity_transactions');
@@ -71,7 +77,7 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
 
     public function updateLastRequest(?Carbon $lastRequest = null): bool
     {
-        return $this->update(['last_request_at' => $lastRequest ?? Carbon::now()]);
+        return $this->update(['requested_at' => $lastRequest ?? Carbon::now()]);
     }
 
     public function pending(string $identificationId, string $identificationUrl): bool
@@ -79,7 +85,7 @@ class IdentityTransaction extends Model implements IdentityTransactionContract
         return $this->update([
             'status' => IdentificationStatus::PENDING,
             'external_id' => $identificationId,
-            'identification_url' => $identificationUrl,
+            'identification_uri' => $identificationUrl,
         ]);
     }
 

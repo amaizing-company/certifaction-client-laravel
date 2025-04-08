@@ -4,6 +4,7 @@ namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Account as AccountContract;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
+use AmaizingCompany\CertifactionClient\Database\Factories\AccountFactory;
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
 use AmaizingCompany\CertifactionClient\Enums\DocumentType;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
@@ -43,6 +44,11 @@ class Account extends Model implements AccountContract
             'admin' => 'boolean',
             'identified' => 'boolean',
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return AccountFactory::new();
     }
 
     public function getTable(): string

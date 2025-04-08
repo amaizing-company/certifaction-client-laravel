@@ -6,6 +6,7 @@ use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
 use AmaizingCompany\CertifactionClient\Contracts\Document as DocumentContract;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
+use AmaizingCompany\CertifactionClient\Database\Factories\DocumentFactory;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
@@ -44,6 +45,11 @@ class Document extends Model implements DocumentContract
             'status' => DocumentStatus::class,
             'scope' => DocumentPrepareScope::class,
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return DocumentFactory::new();
     }
 
     public function getTable(): string

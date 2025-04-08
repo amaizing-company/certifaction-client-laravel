@@ -4,6 +4,7 @@ namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction as FileTransactionContract;
+use AmaizingCompany\CertifactionClient\Database\Factories\FileTransactionFactory;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
 use AmaizingCompany\CertifactionClient\Support\DatabaseHelper;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -40,6 +41,11 @@ class FileTransaction extends Model implements FileTransactionContract
             'finished_at' => 'datetime',
             'requested_at' => 'datetime',
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return FileTransactionFactory::new();
     }
 
     public function getTable(): string

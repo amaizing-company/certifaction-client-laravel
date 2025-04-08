@@ -4,6 +4,7 @@ namespace AmaizingCompany\CertifactionClient\Models;
 
 use AmaizingCompany\CertifactionClient\Contracts\Document;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction as SignatureTransactionContract;
+use AmaizingCompany\CertifactionClient\Database\Factories\SignatureTransactionFactory;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
 use AmaizingCompany\CertifactionClient\Enums\SignatureTransactionStatus;
 use AmaizingCompany\CertifactionClient\Enums\SignatureType;
@@ -45,6 +46,11 @@ class SignatureTransaction extends Model implements SignatureTransactionContract
             'requested_at' => 'datetime',
             'finished_at' => 'datetime',
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return SignatureTransactionFactory::new();
     }
 
     public function getTable(): string
