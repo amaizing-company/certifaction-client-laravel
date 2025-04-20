@@ -8,9 +8,12 @@ use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
 use AmaizingCompany\CertifactionClient\Events\UserJoinedCertifaction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
 
 class ProcessAccountSync implements ShouldQueue
 {
+    use Queueable;
+
     public function handle(): void
     {
         $organization = CertifactionClient::getOrganization();
