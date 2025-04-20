@@ -12,7 +12,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-class DocumentPreparationFailed extends BaseEvent implements ShouldBroadcast, DocumentPreparationFailedContract
+class DocumentPreparationFailed extends BaseEvent implements DocumentPreparationFailedContract, ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

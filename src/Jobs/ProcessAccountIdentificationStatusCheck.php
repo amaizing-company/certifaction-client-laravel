@@ -39,7 +39,7 @@ class ProcessAccountIdentificationStatusCheck implements ShouldQueue
 
             Event::dispatch(app(IdentificationRequestFinished::class, [
                 'identityTransaction' => $this->identityTransaction,
-                'status' => $status
+                'status' => $status,
             ]));
         }
 

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class DocumentPrepared extends BaseEvent implements ShouldBroadcast, DocumentPreparedContract
+class DocumentPrepared extends BaseEvent implements DocumentPreparedContract, ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

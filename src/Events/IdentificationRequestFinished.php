@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class IdentificationRequestFinished extends BaseEvent implements ShouldBroadcast, IdentificationRequestFinishedContract
+class IdentificationRequestFinished extends BaseEvent implements IdentificationRequestFinishedContract, ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

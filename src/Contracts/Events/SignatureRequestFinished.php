@@ -2,7 +2,4 @@
 
 namespace AmaizingCompany\CertifactionClient\Contracts\Events;
 
-interface SignatureRequestFinished
-{
-
-}
+interface SignatureRequestFinished {}

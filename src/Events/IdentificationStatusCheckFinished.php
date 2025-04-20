@@ -10,8 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class IdentificationStatusCheckFinished extends BaseEvent implements ShouldBroadcast,
-                                                                     IdentificationStatusCheckFinishedContract
+class IdentificationStatusCheckFinished extends BaseEvent implements IdentificationStatusCheckFinishedContract, ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

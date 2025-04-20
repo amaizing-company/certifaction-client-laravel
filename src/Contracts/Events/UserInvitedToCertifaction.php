@@ -2,7 +2,4 @@
 
 namespace AmaizingCompany\CertifactionClient\Contracts\Events;
 
-interface UserInvitedToCertifaction
-{
-
-}
+interface UserInvitedToCertifaction {}

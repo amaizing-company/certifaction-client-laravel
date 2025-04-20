@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FileTransactionFailed extends BaseEvent implements ShouldBroadcast, FileTransactionFinishedContract
+class FileTransactionFailed extends BaseEvent implements FileTransactionFinishedContract, ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

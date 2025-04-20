@@ -28,7 +28,7 @@ use AmaizingCompany\CertifactionClient\Tests\Models\User;
 pest()->group('package', 'events');
 
 test('account deleted contract can be resolved to an event', function () {
-    $instance = app(\AmaizingCompany\CertifactionClient\Contracts\Events\AccountDeleted::class, ['user' => new User()]);
+    $instance = app(\AmaizingCompany\CertifactionClient\Contracts\Events\AccountDeleted::class, ['user' => new User]);
 
     expect($instance)
         ->toBeInstanceOf(AccountDeleted::class);
@@ -39,7 +39,7 @@ test('document preparation failed contract can be resolved to an event', functio
         \AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPreparationFailed::class,
         [
             'request' => new PrepareDocumentRequest('test', DocumentPrepareScope::SIGN),
-            'signable' => new File()
+            'signable' => new File,
         ]
     );
 
@@ -51,7 +51,7 @@ test('document prepared contract can be resolved to an event', function () {
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPrepared::class,
         [
-            'document' => new Document()
+            'document' => new Document,
         ]
     );
 
@@ -63,7 +63,7 @@ test('file transaction failed contract can be resolved to an event', function ()
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionFailed::class,
         [
-            'transaction' => new FileTransaction()
+            'transaction' => new FileTransaction,
         ]
     );
 
@@ -75,7 +75,7 @@ test('file transaction finished contract can be resolved to an event', function 
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionFinished::class,
         [
-            'transaction' => new FileTransaction()
+            'transaction' => new FileTransaction,
         ]
     );
 
@@ -87,7 +87,7 @@ test('file transaction started contract can be resolved to an event', function (
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionStarted::class,
         [
-            'transaction' => new FileTransaction()
+            'transaction' => new FileTransaction,
         ]
     );
 
@@ -99,7 +99,7 @@ test('identification request finished contract can be resolved to an event', fun
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationRequestFinished::class,
         [
-            'identityTransaction' => new IdentityTransaction(),
+            'identityTransaction' => new IdentityTransaction,
             'status' => IdentificationStatus::VERIFIED,
         ]
     );
@@ -112,7 +112,7 @@ test('identification request started contract can be resolved to an event', func
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationRequestStarted::class,
         [
-            'identityTransaction' => new IdentityTransaction()
+            'identityTransaction' => new IdentityTransaction,
         ]
     );
 
@@ -124,7 +124,7 @@ test('identification status check finished contract can be resolved to an event'
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationStatusCheckFinished::class,
         [
-            'identityTransaction' => new IdentityTransaction()
+            'identityTransaction' => new IdentityTransaction,
         ]
     );
 
@@ -136,7 +136,7 @@ test('signature request failed contract can be resolved to an event', function (
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFailed::class,
         [
-            'transaction' => new SignatureTransaction()
+            'transaction' => new SignatureTransaction,
         ]
     );
 
@@ -148,7 +148,7 @@ test('signature request finished contract can be resolved to an event', function
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFinished::class,
         [
-            'transaction' => new SignatureTransaction()
+            'transaction' => new SignatureTransaction,
         ]
     );
 
@@ -160,7 +160,7 @@ test('signature request started contract can be resolved to an event', function 
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestStarted::class,
         [
-            'transaction' => new SignatureTransaction()
+            'transaction' => new SignatureTransaction,
         ]
     );
 
@@ -172,7 +172,7 @@ test('user invited to certifaction contract can be resolved to an event', functi
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\UserInvitedToCertifaction::class,
         [
-            'user' => new User(),
+            'user' => new User,
             'roleId' => 'test',
         ]
     );
@@ -185,7 +185,7 @@ test('user joined certifaction contract can be resolved to an event', function (
     $instance = app(
         \AmaizingCompany\CertifactionClient\Contracts\Events\UserJoinedCertifaction::class,
         [
-            'account' => new Account(),
+            'account' => new Account,
         ]
     );
 
