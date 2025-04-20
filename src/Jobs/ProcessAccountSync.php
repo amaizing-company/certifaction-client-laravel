@@ -4,11 +4,12 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\DataObjects\UserItem;
 use AmaizingCompany\CertifactionClient\Contracts\Account;
+use AmaizingCompany\CertifactionClient\Contracts\Events\UserJoinedCertifaction;
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
-use AmaizingCompany\CertifactionClient\Events\UserJoinedCertifaction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 
 class ProcessAccountSync implements ShouldQueue
 {
@@ -49,7 +50,7 @@ class ProcessAccountSync implements ShouldQueue
                 $account->save();
 
                 if ($account->status === AccountStatus::JOINED) {
-                    UserJoinedCertifaction::dispatch($account);
+                    Event::dispatch(app(UserJoinedCertifaction::class, ['account' => $account]));
                 }
             }
         }

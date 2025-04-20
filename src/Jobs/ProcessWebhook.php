@@ -5,14 +5,15 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 use AmaizingCompany\CertifactionClient\Api\Requests\CheckSignatureStatusRequest;
 use AmaizingCompany\CertifactionClient\Api\Responses\CheckSignatureStatusResponse;
 use AmaizingCompany\CertifactionClient\Contracts\Document;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFailed;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFinished;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
-use AmaizingCompany\CertifactionClient\Events\SignatureRequestFailed;
-use AmaizingCompany\CertifactionClient\Events\SignatureRequestFinished;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 
 class ProcessWebhook implements ShouldQueue
@@ -38,7 +39,7 @@ class ProcessWebhook implements ShouldQueue
         if ($response->isCancelled()) {
             $this->transaction->markFailed('cancelled');
 
-            SignatureRequestFailed::dispatch($this->transaction);
+            Event::dispatch(app(SignatureRequestFailed::class, ['transaction' => $this->transaction]));
 
             return;
         }
@@ -48,7 +49,7 @@ class ProcessWebhook implements ShouldQueue
 
         $this->transaction->markFinished();
 
-        SignatureRequestFinished::dispatch($this->transaction);
+        Event::dispatch(app(SignatureRequestFinished::class, ['transaction' => $this->transaction]));
     }
 
     protected function handleSignedItems(CheckSignatureStatusResponse $response): void

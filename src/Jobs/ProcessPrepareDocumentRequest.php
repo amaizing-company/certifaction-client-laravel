@@ -4,14 +4,15 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
 use AmaizingCompany\CertifactionClient\Contracts\Document;
+use AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPreparationFailed;
+use AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPrepared;
 use AmaizingCompany\CertifactionClient\Contracts\Signable;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
 use AmaizingCompany\CertifactionClient\Enums\DocumentPrepareScope;
 use AmaizingCompany\CertifactionClient\Enums\DocumentStatus;
-use AmaizingCompany\CertifactionClient\Events\DocumentPreparationFailed;
-use AmaizingCompany\CertifactionClient\Events\DocumentPrepared;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 
 class ProcessPrepareDocumentRequest implements ShouldQueue
@@ -44,7 +45,11 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
         try {
             $response = $request->send()->throw();
         } catch (\Throwable $e) {
-            DocumentPreparationFailed::dispatch($request, $this->signable, $e);
+            Event::dispatch(app(DocumentPreparationFailed::class, [
+                'request' => $request,
+                'signable' => $this->signable,
+                'exception' => $e,
+            ]));
 
             Log::warning($e->getMessage(), ['signable_id' => $this->signable->getKey()]);
 
@@ -52,7 +57,10 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
         }
 
         if (! $response->successful()) {
-            DocumentPreparationFailed::dispatch($request, $this->signable);
+            Event::dispatch(app(DocumentPreparationFailed::class, [
+                'request' => $request,
+                'signable' => $this->signable,
+            ]));
 
             Log::warning('Document preparation failed.', ['signable_id' => $this->signable->getKey()]);
 
@@ -71,6 +79,6 @@ class ProcessPrepareDocumentRequest implements ShouldQueue
 
         $this->transaction->documents()->attach($document);
 
-        DocumentPrepared::dispatch($document);
+        Event::dispatch(app(DocumentPrepared::class, ['document' => $document]));
     }
 }

@@ -2,8 +2,8 @@
 
 namespace AmaizingCompany\CertifactionClient\Listeners;
 
+use AmaizingCompany\CertifactionClient\Contracts\Events\UserInvitedToCertifaction;
 use AmaizingCompany\CertifactionClient\Enums\AccountStatus;
-use AmaizingCompany\CertifactionClient\Events\UserInvitedToCertifaction;
 
 class CreateAccount
 {

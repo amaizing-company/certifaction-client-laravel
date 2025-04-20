@@ -2,6 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Events;
 
+use AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationStatusCheckFinished as IdentificationStatusCheckFinishedContract;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -9,7 +10,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class IdentificationStatusCheckFinished extends BaseEvent implements ShouldBroadcast
+class IdentificationStatusCheckFinished extends BaseEvent implements ShouldBroadcast,
+                                                                     IdentificationStatusCheckFinishedContract
 {
     use Dispatchable;
     use InteractsWithSockets;

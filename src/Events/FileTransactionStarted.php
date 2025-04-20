@@ -2,6 +2,7 @@
 
 namespace AmaizingCompany\CertifactionClient\Events;
 
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionStarted as FileTransactionStartedContract;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -9,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FileTransactionStarted extends BaseEvent implements ShouldBroadcast
+class FileTransactionStarted extends BaseEvent implements ShouldBroadcast, FileTransactionStartedContract
 {
     use Dispatchable;
     use InteractsWithSockets;

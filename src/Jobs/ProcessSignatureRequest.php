@@ -4,13 +4,14 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\DataObjects\DocumentItem;
 use AmaizingCompany\CertifactionClient\Api\Requests\SignatureRequest;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFailed;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestStarted;
 use AmaizingCompany\CertifactionClient\Contracts\Signable;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
-use AmaizingCompany\CertifactionClient\Events\SignatureRequestFailed;
-use AmaizingCompany\CertifactionClient\Events\SignatureRequestStarted;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 
 class ProcessSignatureRequest implements ShouldQueue
@@ -29,7 +30,7 @@ class ProcessSignatureRequest implements ShouldQueue
         if ($this->transaction->documents->isEmpty()) {
             Log::warning('There must be at least one document to be processed.', ['transaction_id' => $this->transaction->id]);
 
-            SignatureRequestFailed::dispatch($this->transaction);
+            Event::dispatch(app(SignatureRequestFailed::class, ['transaction' => $this->transaction]));
 
             return;
         }
@@ -75,7 +76,7 @@ class ProcessSignatureRequest implements ShouldQueue
         } catch (\Throwable $e) {
             Log::warning($e->getMessage(), ['signature_transaction_id' => $this->transaction->getKey()]);
 
-            SignatureRequestFailed::dispatch($this->transaction);
+            Event::dispatch(app(SignatureRequestFailed::class, ['transaction' => $this->transaction]));
 
             return;
         }
@@ -83,7 +84,7 @@ class ProcessSignatureRequest implements ShouldQueue
         if ($response->successful()) {
             $this->transaction->markPending($response->getRequestUrl());
 
-            SignatureRequestStarted::dispatch($this->transaction);
+            Event::dispatch(app(SignatureRequestStarted::class, ['transaction' => $this->transaction]));
         }
     }
 
