@@ -90,9 +90,9 @@ class Signer
         return empty($this->birthdate) ? null : Carbon::create($this->birthdate);
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
-        return $this->email ?? null;
+        return $this->email;
     }
 
     public function getCitizenship(): ?string
