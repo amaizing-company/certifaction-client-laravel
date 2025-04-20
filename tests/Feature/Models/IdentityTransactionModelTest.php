@@ -145,3 +145,10 @@ test('identity transaction can check if it´s intent', function () {
     expect($transaction->isIntent())
         ->toBeFalse();
 });
+
+test('identity transaction contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction::class);
+
+    expect($account)
+        ->toBeInstanceOf(IdentityTransaction::class);
+});

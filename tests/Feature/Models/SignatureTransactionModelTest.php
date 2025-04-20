@@ -102,3 +102,10 @@ test('signature transaction can mark as failed', function () {
         ->toBeString()
         ->toBe('test fail');
 });
+
+test('signature transaction contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction::class);
+
+    expect($account)
+        ->toBeInstanceOf(SignatureTransaction::class);
+});

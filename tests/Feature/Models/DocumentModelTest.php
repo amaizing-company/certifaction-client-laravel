@@ -108,3 +108,10 @@ it('can check document is signature failed', function () {
         }
     }
 });
+
+test('document contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\Document::class);
+
+    expect($account)
+        ->toBeInstanceOf(Document::class);
+});

@@ -77,3 +77,10 @@ test('account can get pending identity transaction', function () {
         }
     }
 });
+
+test('account contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\Account::class);
+
+    expect($account)
+        ->toBeInstanceOf(Account::class);
+});

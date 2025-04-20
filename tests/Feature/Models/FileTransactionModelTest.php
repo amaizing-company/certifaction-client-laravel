@@ -108,3 +108,10 @@ test('file transaction can mark as succeeded', function () {
         ->and($transaction->finished_at)
         ->not->toBeNull();
 });
+
+test('file transaction contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\FileTransaction::class);
+
+    expect($account)
+        ->toBeInstanceOf(FileTransaction::class);
+});
