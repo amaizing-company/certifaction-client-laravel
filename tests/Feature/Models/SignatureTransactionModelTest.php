@@ -10,6 +10,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('signature transaction model can be initiated', function () {
@@ -101,4 +103,11 @@ test('signature transaction can mark as failed', function () {
         ->and($transaction->failure_reason)
         ->toBeString()
         ->toBe('test fail');
+});
+
+test('signature transaction contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction::class);
+
+    expect($account)
+        ->toBeInstanceOf(SignatureTransaction::class);
 });

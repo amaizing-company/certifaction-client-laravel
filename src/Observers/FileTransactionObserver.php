@@ -2,11 +2,12 @@
 
 namespace AmaizingCompany\CertifactionClient\Observers;
 
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionFailed;
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionFinished;
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionStarted;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Enums\FileTransactionStatus;
-use AmaizingCompany\CertifactionClient\Events\FileTransactionFailed;
-use AmaizingCompany\CertifactionClient\Events\FileTransactionFinished;
-use AmaizingCompany\CertifactionClient\Events\FileTransactionStarted;
+use Illuminate\Support\Facades\Event;
 
 class FileTransactionObserver
 {
@@ -15,15 +16,15 @@ class FileTransactionObserver
         if ($transaction->status !== $transaction->getOriginal('status')) {
             switch ($transaction->status) {
                 case FileTransactionStatus::PENDING:
-                    FileTransactionStarted::dispatch($transaction);
+                    Event::dispatch(app(FileTransactionStarted::class, ['transaction' => $transaction]));
                     break;
 
                 case FileTransactionStatus::FAILURE:
-                    FileTransactionFailed::dispatch($transaction);
+                    Event::dispatch(app(FileTransactionFailed::class, ['transaction' => $transaction]));
                     break;
 
                 case FileTransactionStatus::SUCCESS:
-                    FileTransactionFinished::dispatch($transaction);
+                    Event::dispatch(app(FileTransactionFinished::class, ['transaction' => $transaction]));
                     break;
 
                 default:

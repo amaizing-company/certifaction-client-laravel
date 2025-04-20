@@ -4,11 +4,12 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\InviteUserRequest;
 use AmaizingCompany\CertifactionClient\Contracts\CertifactionUser;
-use AmaizingCompany\CertifactionClient\Events\UserInvitedToCertifaction;
+use AmaizingCompany\CertifactionClient\Contracts\Events\UserInvitedToCertifaction;
 use AmaizingCompany\CertifactionClient\Facades\CertifactionClient;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 
 class ProcessUserInvitation implements ShouldQueue
@@ -35,7 +36,7 @@ class ProcessUserInvitation implements ShouldQueue
         }
 
         if ($response->isInvited()) {
-            UserInvitedToCertifaction::dispatch($this->user, $this->roleId);
+            Event::dispatch(app(UserInvitedToCertifaction::class, ['user' => $this->user, 'roleId' => $this->roleId]));
         }
     }
 }

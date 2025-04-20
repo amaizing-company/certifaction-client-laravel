@@ -10,10 +10,37 @@ use AmaizingCompany\CertifactionClient\Commands\CertifactionServerHealth;
 use AmaizingCompany\CertifactionClient\Commands\CertifactionServerPing;
 use AmaizingCompany\CertifactionClient\Contracts\Account as AccountContract;
 use AmaizingCompany\CertifactionClient\Contracts\Document as DocumentContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\AccountDeleted as AccountDeletedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPreparationFailed as DocumentPreparationFailedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPrepared as DocumentPreparedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionFailed as FileTransactionFailedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionFinished as FileTransactionFinishedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\FileTransactionStarted as FileTransactionStartedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationRequestFinished as IdentificationRequestFinishedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationRequestStarted as IdentificationRequestStartedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationStatusCheckFinished as IdentificationStatusCheckFinishedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFailed as SignatureRequestFailedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestFinished as SignatureRequestFinishedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\SignatureRequestStarted as SignatureRequestStartedContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\UserInvitedToCertifaction as UserInvitedToCertifactionContract;
+use AmaizingCompany\CertifactionClient\Contracts\Events\UserJoinedCertifaction as UserJoinedCertifactionContract;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction as FileTransactionContract;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction as IdentityTransactionContract;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction as SignatureTransactionContract;
+use AmaizingCompany\CertifactionClient\Events\AccountDeleted;
+use AmaizingCompany\CertifactionClient\Events\DocumentPreparationFailed;
+use AmaizingCompany\CertifactionClient\Events\DocumentPrepared;
+use AmaizingCompany\CertifactionClient\Events\FileTransactionFailed;
+use AmaizingCompany\CertifactionClient\Events\FileTransactionFinished;
+use AmaizingCompany\CertifactionClient\Events\FileTransactionStarted;
+use AmaizingCompany\CertifactionClient\Events\IdentificationRequestFinished;
+use AmaizingCompany\CertifactionClient\Events\IdentificationRequestStarted;
+use AmaizingCompany\CertifactionClient\Events\IdentificationStatusCheckFinished;
+use AmaizingCompany\CertifactionClient\Events\SignatureRequestFailed;
+use AmaizingCompany\CertifactionClient\Events\SignatureRequestFinished;
+use AmaizingCompany\CertifactionClient\Events\SignatureRequestStarted;
 use AmaizingCompany\CertifactionClient\Events\UserInvitedToCertifaction;
+use AmaizingCompany\CertifactionClient\Events\UserJoinedCertifaction;
 use AmaizingCompany\CertifactionClient\Listeners\CreateAccount;
 use AmaizingCompany\CertifactionClient\Models\Account;
 use AmaizingCompany\CertifactionClient\Models\Document;
@@ -58,11 +85,28 @@ class CertifactionClientServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->bind(AccountContract::class, fn ($app) => $app->make(Account::class));
-        $this->app->bind(DocumentContract::class, fn ($app) => $app->make(Document::class));
-        $this->app->bind(FileTransactionContract::class, fn ($app) => $app->make(FileTransaction::class));
-        $this->app->bind(IdentityTransactionContract::class, fn ($app) => $app->make(IdentityTransaction::class));
-        $this->app->bind(SignatureTransactionContract::class, fn ($app) => $app->make(SignatureTransaction::class));
+        // Bind models
+        $this->app->bind(AccountContract::class, Account::class);
+        $this->app->bind(DocumentContract::class, Document::class);
+        $this->app->bind(FileTransactionContract::class, FileTransaction::class);
+        $this->app->bind(IdentityTransactionContract::class, IdentityTransaction::class);
+        $this->app->bind(SignatureTransactionContract::class, SignatureTransaction::class);
+
+        // Bind events
+        $this->app->bind(AccountDeletedContract::class, AccountDeleted::class);
+        $this->app->bind(DocumentPreparationFailedContract::class, DocumentPreparationFailed::class);
+        $this->app->bind(DocumentPreparedContract::class, DocumentPrepared::class);
+        $this->app->bind(FileTransactionFailedContract::class, FileTransactionFailed::class);
+        $this->app->bind(FileTransactionFinishedContract::class, FileTransactionFinished::class);
+        $this->app->bind(FileTransactionStartedContract::class, FileTransactionStarted::class);
+        $this->app->bind(IdentificationRequestFinishedContract::class, IdentificationRequestFinished::class);
+        $this->app->bind(IdentificationRequestStartedContract::class, IdentificationRequestStarted::class);
+        $this->app->bind(IdentificationStatusCheckFinishedContract::class, IdentificationStatusCheckFinished::class);
+        $this->app->bind(SignatureRequestFailedContract::class, SignatureRequestFailed::class);
+        $this->app->bind(SignatureRequestFinishedContract::class, SignatureRequestFinished::class);
+        $this->app->bind(SignatureRequestStartedContract::class, SignatureRequestStarted::class);
+        $this->app->bind(UserInvitedToCertifactionContract::class, UserInvitedToCertifaction::class);
+        $this->app->bind(UserJoinedCertifactionContract::class, UserJoinedCertifaction::class);
     }
 
     public function packageBooted(): void

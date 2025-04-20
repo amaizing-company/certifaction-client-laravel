@@ -3,6 +3,7 @@
 namespace AmaizingCompany\CertifactionClient\Events;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\PrepareDocumentRequest;
+use AmaizingCompany\CertifactionClient\Contracts\Events\DocumentPreparationFailed as DocumentPreparationFailedContract;
 use AmaizingCompany\CertifactionClient\Contracts\Signable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-class DocumentPreparationFailed extends BaseEvent implements ShouldBroadcast
+class DocumentPreparationFailed extends BaseEvent implements DocumentPreparationFailedContract, ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;

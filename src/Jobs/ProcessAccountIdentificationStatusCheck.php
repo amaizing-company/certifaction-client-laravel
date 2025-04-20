@@ -3,12 +3,13 @@
 namespace AmaizingCompany\CertifactionClient\Jobs;
 
 use AmaizingCompany\CertifactionClient\Api\Requests\CheckIdentificationStatusRequest;
+use AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationRequestFinished;
+use AmaizingCompany\CertifactionClient\Contracts\Events\IdentificationStatusCheckFinished;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use AmaizingCompany\CertifactionClient\Enums\IdentificationStatus;
-use AmaizingCompany\CertifactionClient\Events\IdentificationRequestFinished;
-use AmaizingCompany\CertifactionClient\Events\IdentificationStatusCheckFinished;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 
 class ProcessAccountIdentificationStatusCheck implements ShouldQueue
@@ -36,9 +37,14 @@ class ProcessAccountIdentificationStatusCheck implements ShouldQueue
                 $this->identityTransaction->account->markAsIdentified();
             }
 
-            IdentificationRequestFinished::dispatch($this->identityTransaction, $status);
+            Event::dispatch(app(IdentificationRequestFinished::class, [
+                'identityTransaction' => $this->identityTransaction,
+                'status' => $status,
+            ]));
         }
 
-        IdentificationStatusCheckFinished::dispatch($this->identityTransaction);
+        Event::dispatch(app(IdentificationStatusCheckFinished::class, [
+            'identityTransaction' => $this->identityTransaction,
+        ]));
     }
 }

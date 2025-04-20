@@ -6,16 +6,23 @@ use AmaizingCompany\CertifactionClient\Api\Responses\BaseResponse;
 use AmaizingCompany\CertifactionClient\Contracts\FileTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use AmaizingCompany\CertifactionClient\Contracts\SignatureTransaction;
+use AmaizingCompany\CertifactionClient\Events\BaseEvent;
 use AmaizingCompany\CertifactionClient\Models\Account;
 use AmaizingCompany\CertifactionClient\Models\Document;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Http\Client\Response;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Facade;
 
 arch('it will not use debugging functions')
-    ->expect(['dd', 'dump', 'ray'])
+    ->expect(['dd', 'ddd', 'die', 'dump', 'ray', 'sleep'])
     ->each->not->toBeUsed();
 
 arch()
@@ -104,3 +111,24 @@ arch('identification model implements contract')
 arch('signature transaction model implements contract')
     ->expect(\AmaizingCompany\CertifactionClient\Models\SignatureTransaction::class)
     ->toImplement(SignatureTransaction::class);
+
+arch()
+    ->expect('AmaizingCompany\CertifactionClient\Jobs')
+    ->toBeClasses()
+    ->toImplement(ShouldQueue::class)
+    ->toUse(Queueable::class)
+    ->toHaveMethod('handle');
+
+arch()
+    ->expect('AmaizingCompany\CertifactionClient\Events')
+    ->toBeClasses()
+    ->toExtend(BaseEvent::class)
+    ->ignoring(BaseEvent::class)
+    ->toImplement(ShouldBroadcast::class)
+    ->ignoring(BaseEvent::class)
+    ->toUse(Dispatchable::class)
+    ->ignoring(BaseEvent::class)
+    ->toUse(InteractsWithSockets::class)
+    ->ignoring(BaseEvent::class)
+    ->toUse(SerializesModels::class)
+    ->ignoring(BaseEvent::class);

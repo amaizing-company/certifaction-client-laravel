@@ -5,10 +5,12 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 use AmaizingCompany\CertifactionClient\Api\Requests\DeleteUserRequest;
 use AmaizingCompany\CertifactionClient\CertifactionClient;
 use AmaizingCompany\CertifactionClient\Contracts\Account;
-use AmaizingCompany\CertifactionClient\Events\AccountDeleted;
+use AmaizingCompany\CertifactionClient\Contracts\Events\AccountDeleted;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class ProcessAccountDeletion implements ShouldQueue
 {
@@ -33,7 +35,7 @@ class ProcessAccountDeletion implements ShouldQueue
 
         try {
             $response = $request->send()->throw();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Log::warning($e->getMessage(), ['account_id' => $this->account->getKey()]);
 
             return;
@@ -42,7 +44,7 @@ class ProcessAccountDeletion implements ShouldQueue
         if ($response->successful()) {
             $this->account->deleteQuietly();
 
-            AccountDeleted::dispatch($user);
+            Event::dispatch(app(AccountDeleted::class, ['user' => $user]));
         }
     }
 }

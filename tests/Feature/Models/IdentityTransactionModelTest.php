@@ -6,6 +6,8 @@ use AmaizingCompany\CertifactionClient\Models\IdentityTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('identity transaction model can be initiated', function () {
@@ -144,4 +146,11 @@ test('identity transaction can check if it´s intent', function () {
 
     expect($transaction->isIntent())
         ->toBeFalse();
+});
+
+test('identity transaction contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction::class);
+
+    expect($account)
+        ->toBeInstanceOf(IdentityTransaction::class);
 });

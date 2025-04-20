@@ -5,6 +5,8 @@ use AmaizingCompany\CertifactionClient\Models\Document;
 use AmaizingCompany\CertifactionClient\Models\FileTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('file transaction model can be initiated', function () {
@@ -107,4 +109,11 @@ test('file transaction can mark as succeeded', function () {
         ->toBe(FileTransactionStatus::SUCCESS)
         ->and($transaction->finished_at)
         ->not->toBeNull();
+});
+
+test('file transaction contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\FileTransaction::class);
+
+    expect($account)
+        ->toBeInstanceOf(FileTransaction::class);
 });

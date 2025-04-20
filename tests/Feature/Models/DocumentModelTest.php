@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('document model can be initiated', function () {
@@ -107,4 +109,11 @@ it('can check document is signature failed', function () {
             expect($document->isSignatureFailed())->toBeFalse();
         }
     }
+});
+
+test('document contract can be resolved to model class', function () {
+    $account = app(\AmaizingCompany\CertifactionClient\Contracts\Document::class);
+
+    expect($account)
+        ->toBeInstanceOf(Document::class);
 });
