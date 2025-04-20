@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('document model can be initiated', function () {

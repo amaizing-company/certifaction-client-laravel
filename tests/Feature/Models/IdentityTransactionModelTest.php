@@ -6,6 +6,8 @@ use AmaizingCompany\CertifactionClient\Models\IdentityTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('identity transaction model can be initiated', function () {

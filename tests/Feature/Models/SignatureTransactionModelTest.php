@@ -10,6 +10,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('signature transaction model can be initiated', function () {

@@ -5,6 +5,8 @@ use AmaizingCompany\CertifactionClient\Models\Document;
 use AmaizingCompany\CertifactionClient\Models\FileTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('file transaction model can be initiated', function () {

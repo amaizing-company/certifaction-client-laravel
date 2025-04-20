@@ -6,6 +6,8 @@ use AmaizingCompany\CertifactionClient\Models\Account;
 use AmaizingCompany\CertifactionClient\Models\IdentityTransaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+pest()->group('package', 'models');
+
 uses(RefreshDatabase::class);
 
 test('account model can be initiated', function () {
