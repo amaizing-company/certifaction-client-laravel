@@ -5,7 +5,7 @@ namespace AmaizingCompany\CertifactionClient\Jobs;
 use AmaizingCompany\CertifactionClient\Api\Requests\StartAccountIdentificationRequest;
 use AmaizingCompany\CertifactionClient\Contracts\IdentityTransaction;
 use AmaizingCompany\CertifactionClient\Enums\Jurisdiction;
-use AmaizingCompany\CertifactionClient\Events\IdentitifcationRequestStarted;
+use AmaizingCompany\CertifactionClient\Events\IdentificationRequestStarted;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
@@ -50,7 +50,7 @@ class ProcessAccountIdentificationRequest implements ShouldQueue
         if ($response->successful()) {
             $this->identityTransaction->pending($response->getIdentityId(), $response->getIdentificationUri());
 
-            IdentitifcationRequestStarted::dispatch($this->identityTransaction);
+            IdentificationRequestStarted::dispatch($this->identityTransaction);
         }
     }
 }
